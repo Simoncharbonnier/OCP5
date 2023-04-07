@@ -1,4 +1,4 @@
-<link rel="stylesheet" href="assets/css/post.css">
+<link rel="stylesheet" href="assets/css/posts.css">
 <link rel="stylesheet" href="assets/css/card.css">
 
 <div class="container">

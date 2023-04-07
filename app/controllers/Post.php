@@ -17,7 +17,9 @@ class Post {
    * Retrieve a post by its id and display the detail of the post
    */
   public function detail() : void {
-
+    $postModel = New Post_model();
+    $post = $postModel->getById($_GET['id'])[0];
+    include_once('app/views/post/detail.php');
   }
 
   /**

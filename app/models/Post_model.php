@@ -13,4 +13,14 @@ class Post_model extends Model {
     $query->execute();
     return $query->fetchAll();
   }
+
+  /**
+   * Get a post by id
+   */
+  public function getById($id) {
+    $sql = "SELECT * FROM Post WHERE id = $id";
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
 }
