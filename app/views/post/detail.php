@@ -10,16 +10,25 @@
       <div class="post-headline">
         <h2><?= $post['headline'] ?></h2>
       </div>
+      <?php if ($post['image']) { ?>
+        <div class="post-image">
+          <img src="assets/img/post/<?= $post['image'] ?>" alt="">
+        </div>
+      <?php } ?>
       <div class="post-content">
         <p><?= $post['content'] ?></p>
       </div>
       <div class="post-date">
-        <p>Publié le <?= $post['created_at'] ?></p>
-        <?php if ($post['created_at'] !== $post['updated_at']) { ?>
-          <p>Dernière mise à jour le <?= $post['updated_at'] ?></p>
-        <?php } ?>
+        <div class="date-updated">
+          <?php if ($post['created_at'] !== $post['updated_at']) { ?>
+              <p>Dernière mise à jour le <?= $post['updated_at'] ?></p>
+          <?php } ?>
+        </div>
+        <div class="date-created">
+          <p>Publié le <?= $post['created_at'] ?> par <?= $post['user']['first_name'] ?></p>
+          <img class="avatar" src="assets/img/user/<?= $post['user']['image'] ?>" alt="">
+        </div>
       </div>
-      <!-- <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" /> -->
     </div>
   </div>
 </div>

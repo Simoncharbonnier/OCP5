@@ -22,7 +22,7 @@
         <a class="nav-link" href="#">Inscription</a>
       </li>
       <li class="nav-item dropdown">
-        <img class="avatar" src="assets/img/photo.jpg" />
+        <img class="avatar" src="assets/img/user/photo.jpg" />
         <div class="dropdown-menu">
           <a class="dropdown-item" href="#">Profil</a>
           <a class="dropdown-item" href="#">Paramètres</a>

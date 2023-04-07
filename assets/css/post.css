@@ -1,0 +1,22 @@
+.post-image img {
+  width: 20%;
+}
+
+.post-content {
+  margin: 2rem 0;
+}
+
+.post-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.date-created {
+  display: flex;
+  align-items: center;
+}
+
+.date-created img {
+  margin-left: 1rem;
+}
