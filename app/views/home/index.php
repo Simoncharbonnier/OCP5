@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="assets/css/home.css">
+<link rel="stylesheet" href="assets/css/card.css">
 
 <div class="col-md-12 banner">
   <h1>Simon Charbonnier, le développeur qu'il vous faut !</h1>

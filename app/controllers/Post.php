@@ -1,12 +1,16 @@
 <?php
 
+require_once('app/models/Post_model.php');
+
 class Post {
 
   /**
    * Retrieve all posts and display the list of posts
    */
   public function index() : void {
-
+    $postModel = New Post_model();
+    $posts = $postModel->getAll();
+    include_once('app/views/post/index.php');
   }
 
   /**
