@@ -2,10 +2,10 @@
   <ul class="navbar-nav">
     <div class="navbar-part">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Accueil</a>
+        <a class="nav-link" href="?controller=home&action=index">Accueil</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Articles</a>
+        <a class="nav-link" href="?controller=post&action=index">Articles</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Commentaires</a>
