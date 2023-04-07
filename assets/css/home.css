@@ -90,6 +90,16 @@
   padding: 16px;
 }
 
+.card-product .card-product-footer {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+}
+
+.link-all {
+  margin-top: 2rem;
+}
+
 /* FORM */
 
 #form-contact {

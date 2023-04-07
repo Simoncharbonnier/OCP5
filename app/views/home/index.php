@@ -28,6 +28,9 @@
                 <h3>Projet 1</h3>
                 <p>Headline</p>
               </div>
+              <div class="card-product-footer">
+                <p>04/01/2003</p>
+              </div>
             </div>
           </a>
         </div>
@@ -38,6 +41,9 @@
               <div class="card-product-infos">
                 <h3>Projet 2</h3>
                 <p>Headline</p>
+              </div>
+              <div class="card-product-footer">
+                <p>04/01/2003</p>
               </div>
             </div>
           </a>
@@ -50,9 +56,15 @@
                 <h3>Projet 3</h3>
                 <p>Headline</p>
               </div>
+              <div class="card-product-footer">
+                <p>04/01/2003</p>
+              </div>
             </div>
           </a>
         </div>
+      </div>
+      <div class="link-all">
+        <a href="?controller=post&action=index">Voir tous les articles</a>
       </div>
     </div>
   </div>
