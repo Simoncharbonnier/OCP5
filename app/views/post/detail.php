@@ -25,8 +25,8 @@
           <?php } ?>
         </div>
         <div class="date-created">
-          <p>Publié le <?= $post['created_at'] ?> par <?= $post['user']['first_name'] ?></p>
-          <img class="avatar" src="assets/img/user/<?= $post['user']['image'] ?>" alt="">
+          <p>Publié le <?= $post['created_at'] ?> par <?= $post['author']['first_name'] ?></p>
+          <img class="avatar" src="assets/img/user/<?= $post['author']['image'] ?>" alt="">
         </div>
       </div>
     </div>

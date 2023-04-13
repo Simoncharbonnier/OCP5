@@ -29,7 +29,7 @@ class Post {
     }
 
     $userModel = New User_model();
-    $post['user'] = $userModel->getById($post['user_id'])[0];
+    $post['author'] = $userModel->getById($post['user_id'])[0];
 
     include_once('app/views/post/detail.php');
   }
