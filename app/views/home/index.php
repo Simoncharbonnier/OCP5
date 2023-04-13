@@ -69,7 +69,7 @@
       </div>
     </div>
   </div>
-  <form id="form-contact" class="row" action="">
+  <form id="form-contact" class="row" method="POST" action="">
     <div class="col-md-6">
       <h3>Vous souhaitez me contacter ? C'est par ici !</h3>
       <div class="row">

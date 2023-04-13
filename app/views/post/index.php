@@ -6,7 +6,7 @@
     <h1>Tous les articles</h1>
     <div class="col-md-12">
       <div class="row">
-        <?php foreach ($posts as $i => $post) { ?>
+        <?php foreach ($posts as $i => $post) : ?>
           <div class="col-md-4">
             <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
               <div class="card-product">
@@ -21,7 +21,7 @@
               </div>
             </a>
           </div>
-        <?php } ?>
+        <?php endforeach; ?>
       </div>
     </div>
   </div>

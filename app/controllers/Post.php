@@ -2,6 +2,7 @@
 
 require_once('app/models/Post_model.php');
 require_once('app/models/User_model.php');
+require_once('app/models/Comment_model.php');
 
 class Post {
 
@@ -28,8 +29,8 @@ class Post {
       $post = $post[0];
     }
 
-    $userModel = New User_model();
-    $post['author'] = $userModel->getById($post['user_id'])[0];
+    $commentModel = New Comment_model();
+    $post['comments'] = $commentModel->getByPostId($_GET['id']);
 
     include_once('app/views/post/detail.php');
   }
