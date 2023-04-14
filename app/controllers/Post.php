@@ -1,8 +1,6 @@
 <?php
 
 require_once('app/models/Post_model.php');
-require_once('app/models/User_model.php');
-require_once('app/models/Comment_model.php');
 
 class Post {
 
@@ -21,18 +19,37 @@ class Post {
    */
   public function detail() : void {
     $postModel = New Post_model();
-    $post = $postModel->getById($_GET['id']);
+    $result = $postModel->getById($_GET['id']);
 
-    if (empty($post)) {
+    if (empty($result)) {
       $this->index();
     } else {
-      $post = $post[0];
+      $post = [
+        'title' => $result[0]['title'],
+        'headline' => $result[0]['headline'],
+        'content' => $result[0]['content'],
+        'image' => $result[0]['image'],
+        'created_at' => $result[0]['created_at'],
+        'updated_at' => $result[0]['updated_at'],
+        'author' => $result[0]['post_author'],
+        'author_avatar' => $result[0]['post_author_avatar']
+      ];
+
+      $comments = [];
+
+      if ($result[0]['message'] !== NULL) {
+        foreach ($result as $comment) {
+          $comments[] = [
+            'message' => $comment['message'],
+            'created_at' => $comment['comment_created_at'],
+            'author' => $comment['comment_author'],
+            'author_avatar' => $comment['comment_author_avatar']
+          ];
+        }
+      }
+
+      include_once('app/views/post/detail.php');
     }
-
-    $commentModel = New Comment_model();
-    $post['comments'] = $commentModel->getByPostId($_GET['id']);
-
-    include_once('app/views/post/detail.php');
   }
 
   /**

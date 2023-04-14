@@ -25,8 +25,8 @@
           <?php endif; ?>
         </div>
         <div class="date-created">
-          <p>Publié le <?= $post['created_at'] ?> par <?= $post['first_name'] ?></p>
-          <img class="avatar" src="assets/img/user/<?= $post['avatar'] ?>" alt="">
+          <p>Publié le <?= $post['created_at'] ?> par <?= $post['author'] ?></p>
+          <img class="avatar" src="assets/img/user/<?= $post['author_avatar'] ?>" alt="">
         </div>
       </div>
     </div>
@@ -34,19 +34,19 @@
   <div class="row comments">
     <div class="col-md-8">
       <div class="comments-title">
-        <?php if ($post['comments']) : ?>
+        <?php if ($comments) : ?>
           <h3>Commentaires</h3>
         <?php else : ?>
           <h3>Pas encore de commentaires</h3>
         <?php endif; ?>
       </div>
       <div class="comments-list">
-        <?php foreach ($post['comments'] as $comment) : ?>
+        <?php foreach ($comments as $comment) : ?>
           <div class="comment">
-            <p><?= $comment['content'] ?></p>
+            <p><?= $comment['message'] ?></p>
             <div class="date-created">
-              <p>Publié le <?= $comment['created_at'] ?> par <?= $comment['first_name'] ?></p>
-              <img class="avatar" src="assets/img/user/<?= $comment['avatar'] ?>" alt="">
+              <p>Publié le <?= $comment['created_at'] ?> par <?= $comment['author'] ?></p>
+              <img class="avatar" src="assets/img/user/<?= $comment['author_avatar'] ?>" alt="">
             </div>
           </div>
           <hr>
