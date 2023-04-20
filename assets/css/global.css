@@ -32,6 +32,15 @@ a {
   border-radius: 25%;
 }
 
+.btn {
+  background-color: black;
+  color: whitesmoke;
+  border: none !important;
+}
+
+.btn:hover {
+  border-bottom: none !important;
+}
 
 /* HEADER */
 
@@ -60,6 +69,18 @@ a {
   align-items: center;
 }
 
+#form-add-post input, #form-add-post textarea {
+  width: 100%;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+#form-add-post input:focus-visible, #form-add-post textarea:focus-visible {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
 
 /* FOOTER */
 

@@ -36,6 +36,15 @@
   margin: 8px;
 }
 
-#form-comment textarea {
+#form-comment textarea, #form-comment input {
   width: 100%;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+#form-comment textarea:focus-visible {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
 }

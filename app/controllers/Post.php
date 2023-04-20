@@ -25,6 +25,7 @@ class Post {
       $this->index();
     } else {
       $post = [
+        'id' => $result[0]['id'],
         'title' => $result[0]['title'],
         'headline' => $result[0]['headline'],
         'content' => $result[0]['content'],
@@ -57,14 +58,26 @@ class Post {
    * As an admin
    */
   public function add() : void {
+    $data = [];
+    foreach ($_POST as $name => $value) {
+      $data[$name] = $value;
+    }
+    $data['user_id'] = 1;
+    $data['image'] = NULL;
+    $data['created_at'] = date("Y-m-d");
+    $data['updated_at'] = date("Y-m-d H:i:s");
 
+    $postModel = New Post_model();
+    $postId = $postModel->create($data);
+
+    $this->index();
   }
 
   /**
-   * Update a post by its id and redirect to detail()
+   * Edit a post by its id and redirect to detail()
    * As an admin
    */
-  public function update() : void {
+  public function edit() : void {
 
   }
 
@@ -73,6 +86,11 @@ class Post {
    * As an admin
    */
   public function delete() : void {
+    if ($_GET['id']) {
+      $postModel = New Post_model();
+      $postModel->delete($_GET['id']);
+    }
 
+    $this->index();
   }
 }

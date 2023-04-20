@@ -4,8 +4,15 @@
 <div class="container">
   <div class="row post">
     <div class="col-md-12">
-      <div class="post-title">
-        <h1><?= $post['title'] ?></h1>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="post-title">
+            <h1><?= $post['title'] ?></h1>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <a class="btn" href="?controller=post&action=delete&id=<?= $post['id'] ?>">Supprimer cet article</a>
+        </div>
       </div>
       <div class="post-headline">
         <h2><?= $post['headline'] ?></h2>

@@ -10,8 +10,9 @@ class User_model extends Model {
   public function getById($id) {
     $sql = "SELECT User.first_name, User.last_name, User.mail, User.avatar
             FROM User
-            WHERE id = $id";
+            WHERE id = :user_id";
     $query = $this->db->prepare($sql);
+    $query->bindParam(':user_id', $id);
     $query->execute();
     return $query->fetchAll();
   }
