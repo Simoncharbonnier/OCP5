@@ -2,7 +2,6 @@
 
 require_once('app/models/Comment_model.php');
 require_once('app/models/Post_model.php');
-require_once('app/controllers/Post.php');
 
 class Comment {
 
@@ -11,7 +10,10 @@ class Comment {
    * As an admin
    */
   public function index() : void {
+    $commentModel = New Comment_model();
+    $comments = $commentModel->getAll();
 
+    include_once('app/views/comment/index.php');
   }
 
   /**
@@ -52,8 +54,31 @@ class Comment {
    * Update a comment by its id and redirect to index()
    * As an admin
    */
-  public function update() : void {
+  public function edit() : void {
+    try {
+      $commentId = $_GET['id'];
+      $commentModel = New Comment_model();
+      $comment = $commentModel->getById($commentId);
 
+      if (!empty($comment)) {
+        $data = [];
+
+        if ($comment[0]['valid']) {
+          $data['valid'] = 0;
+        } else {
+          $data['valid'] = 1;
+        }
+        $data['id'] = $commentId;
+
+        $commentModel->update($data);
+      } else {
+        throw new Exception("Le commentaire n'existe pas.");
+      }
+    } catch(Exception $e) {
+      $message = $e->getMessage();
+    }
+
+    header("Location: http://localhost/P5/?controller=comment&action=index");
   }
 
   /**
@@ -61,6 +86,23 @@ class Comment {
    * As an admin
    */
   public function delete() : void {
+    try {
+      if ($_GET['id']) {
+        $commentModel = New Comment_model();
+        $comment = $commentModel->getById($_GET['id']);
 
+        if (!empty($comment)) {
+          $commentModel->delete($_GET['id']);
+        } else {
+          throw new Exception("Le commentaire n'existe pas.");
+        }
+      } else {
+        throw new Exception("Quel commentaire voulez-vous supprimer ?");
+      }
+    } catch(Exception $e) {
+      $message = $e->getMessage();
+    }
+
+    header("Location: http://localhost/P5/?controller=comment&action=index");
   }
 }
