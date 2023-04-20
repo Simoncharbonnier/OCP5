@@ -1,0 +1,14 @@
+/* POSTS */
+
+.posts {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.posts h1 {
+  margin-bottom: 2rem;
+}
+
+.posts .col-md-4 {
+  padding: 1rem 1rem;
+}

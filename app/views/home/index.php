@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="assets/css/home.css">
+<link rel="stylesheet" href="assets/css/card.css">
 
 <div class="col-md-12 banner">
   <h1>Simon Charbonnier, le développeur qu'il vous faut !</h1>
@@ -8,7 +9,7 @@
     <div class="col-md-9">
       <div class="presentation-header">
         <h2>Qui suis-je ?</h2>
-        <a href="assets/CV.pdf" target="_blank">Voir mon CV</a>
+        <a href="assets/CV.pdf" target="_blank" class="btn">Voir mon CV</a>
       </div>
       <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam quidem ipsum ullam perferendis, voluptatum provident natus, delectus numquam maxime molestias soluta atque autem alias deleniti explicabo ipsam sint aspernatur quaerat dolores eum unde cum eligendi dicta. Soluta, quos at quaerat maxime veniam neque similique quibusdam ipsum quam provident, optio dolorem. Beatae omnis temporibus assumenda ipsa nemo, laboriosam cupiditate deleniti soluta earum qui laborum ducimus. Tempora consectetur dolore reprehenderit maiores sint deleniti tempore! Sit placeat animi, unde atque vel repellat doloribus velit, accusamus exercitationem sed tenetur. Quis ratione autem exercitationem delectus, quae magnam quod placeat consequatur iusto! Mollitia sequi non tempora?</p>
     </div>
@@ -64,11 +65,11 @@
         </div>
       </div>
       <div class="link-all">
-        <a href="?controller=post&action=index">Voir tous les articles</a>
+        <a href="?controller=post&action=index" class="btn">Voir tous les articles</a>
       </div>
     </div>
   </div>
-  <form id="form-contact" class="row" action="">
+  <form id="form-contact" class="row" method="POST" action="">
     <div class="col-md-6">
       <h3>Vous souhaitez me contacter ? C'est par ici !</h3>
       <div class="row">

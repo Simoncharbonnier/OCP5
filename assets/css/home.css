@@ -20,10 +20,6 @@
   align-items: center;
 }
 
-.presentation-header a:hover {
-  text-decoration: underline;
-}
-
 .presentation h2 {
   margin-bottom: 1rem;
 }
@@ -38,11 +34,9 @@
   border-radius: 5%;
 }
 
-/* PROJETS */
+/* POSTS */
 
 .posts {
-  display: flex;
-  justify-content: center;
   text-align: center;
   padding: 2rem 0;
   border-bottom: 1px solid lightgrey;
@@ -50,50 +44,6 @@
 
 .posts h2 {
   margin-bottom: 2rem;
-}
-
-.card-product {
-  overflow: hidden;
-  height: 400px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  position: relative;
-  bottom: 0;
-  transition: bottom 0.2s;
-}
-
-.card-product:hover {
-  bottom: 10px;
-}
-
-.card-product img {
-  height: 50%;
-  width: 100%;
-  object-fit: cover;
-}
-
-.card-product h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.card-product p {
-  font-size: 14px;
-  line-height: 1.4;
-  opacity: .7;
-  margin-bottom: 0;
-  margin-top: 8px;
-}
-
-.card-product .card-product-infos {
-  padding: 16px;
-}
-
-.card-product .card-product-footer {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
 }
 
 .link-all {
@@ -122,10 +72,4 @@
   border: none;
   border-bottom: 1px solid black;
   outline: none;
-}
-
-#form-contact .btn-submit {
-  background-color: black;
-  color: whitesmoke;
-  border: none;
 }

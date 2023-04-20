@@ -1,0 +1,105 @@
+.post .post-title h1:last-child, .post .post-headline h2:last-child, .post .post-content p:last-child {
+  display: none;
+}
+
+.post .form-submit {
+  display: none;
+}
+
+.post #btn-edit-post-cancel {
+  display: none;
+}
+
+.post.editing .post-title h1:first-child, .post.editing .post-headline h2:first-child, .post.editing .post-content p:first-child {
+  display: none;
+}
+
+.post.editing .post-title h1:last-child, .post.editing .post-headline h2:last-child, .post.editing .post-content p:last-child {
+  display: block;
+}
+
+.post.editing .form-submit {
+  display: block;
+}
+
+.post.editing #btn-edit-post {
+  display: none;
+}
+
+.post.editing #btn-edit-post-cancel {
+  display: block;
+}
+
+#form-edit-post h1 input, #form-edit-post h2 input {
+  font-weight: 500;
+}
+
+#form-edit-post input, textarea {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+#form-edit-post input:focus-visible, #form-edit-post textarea:focus-visible {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.post .buttons-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.post-image img {
+  width: 20%;
+}
+
+.post-content {
+  margin: 2rem 0;
+}
+
+.post-date {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.date-created {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.date-created img {
+  margin-left: 1rem;
+}
+
+.comments {
+  margin-top: 3rem;
+}
+
+.comments h3 {
+  margin-bottom: 1rem;
+}
+
+.comment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px;
+}
+
+#form-comment textarea, #form-comment input {
+  width: 100%;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 1px solid black;
+}
+
+#form-comment textarea:focus-visible {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
