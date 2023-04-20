@@ -1,27 +1,27 @@
 <div class="navbar">
   <ul class="navbar-nav">
     <div class="navbar-part">
-      <li class="nav-item active">
+      <li class="nav-item" controller="home" action="index">
         <a class="nav-link" href="?controller=home&action=index">Accueil</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" controller="post" action="index">
         <a class="nav-link" href="?controller=post&action=index">Articles</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#modal-add-post">Ajouter</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" controller="comment" action="index">
         <a class="nav-link" href="#">Commentaires</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" controller="user" action="index">
         <a class="nav-link" href="#">Utilisateurs</a>
       </li>
     </div>
     <div class="navbar-part">
-      <li class="nav-item">
+      <li class="nav-item" controller="user" action="login">
         <a class="nav-link" href="#">Connexion</a>
       </li>
-      <li class="nav-item">
+      <li class="nav-item" controller="user" action="signup">
         <a class="nav-link" href="#">Inscription</a>
       </li>
       <li class="nav-item dropdown">

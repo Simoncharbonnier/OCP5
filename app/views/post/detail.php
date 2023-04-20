@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="assets/css/post.css">
 <link rel="stylesheet" href="assets/css/card.css">
+<script src="assets/js/post.js"></script>
 
 <div class="container">
   <div class="row post">
@@ -95,5 +96,3 @@
     </div>
   </div>
 </div>
-
-<script src="assets/js/post.js"></script>

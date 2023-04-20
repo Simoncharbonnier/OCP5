@@ -55,6 +55,10 @@ a {
   padding: 8px;
 }
 
+.navbar .nav-item.active {
+  font-weight: 600;
+}
+
 .navbar-nav {
   flex-direction: row;
   justify-content: space-between;
