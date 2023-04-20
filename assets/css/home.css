@@ -20,10 +20,6 @@
   align-items: center;
 }
 
-.presentation-header a:hover {
-  text-decoration: underline;
-}
-
 .presentation h2 {
   margin-bottom: 1rem;
 }
@@ -76,10 +72,4 @@
   border: none;
   border-bottom: 1px solid black;
   outline: none;
-}
-
-#form-contact .btn-submit {
-  background-color: black;
-  color: whitesmoke;
-  border: none;
 }
