@@ -56,9 +56,8 @@ class Post {
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
+      $this->index();
     }
-
-    $this->index();
   }
 
   /**
@@ -85,9 +84,8 @@ class Post {
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
+      $this->index();
     }
-
-    $this->index();
   }
 
   /**
