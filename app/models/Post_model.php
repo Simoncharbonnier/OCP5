@@ -8,8 +8,7 @@ class Post_model extends Model {
    * Get all posts
    */
   public function getAll() {
-    $sql = "SELECT *
-            FROM Post";
+    $sql = "SELECT * FROM Post";
     $query = $this->db->prepare($sql);
     $query->execute();
     return $query->fetchAll();
@@ -38,11 +37,11 @@ class Post_model extends Model {
    * Create a post
    */
   public function create(array $data) {
-      $sql = "INSERT INTO Post (user_id, title, headline, content, image, created_at, updated_at)
-              VALUES (:user_id, :title, :headline, :content, :image, :created_at, :updated_at)";
-      $query = $this->db->prepare($sql);
-      $query->execute($data);
-      return $this->db->lastInsertId();
+    $sql = "INSERT INTO Post (user_id, title, headline, content, image, created_at, updated_at)
+            VALUES (:user_id, :title, :headline, :content, :image, :created_at, :updated_at)";
+    $query = $this->db->prepare($sql);
+    $query->execute($data);
+    return $this->db->lastInsertId();
   }
 
   /**

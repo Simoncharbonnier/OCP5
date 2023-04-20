@@ -42,6 +42,10 @@ a {
   border-bottom: none !important;
 }
 
+.d-none {
+  display: none !important;
+}
+
 /* HEADER */
 
 .navbar {
