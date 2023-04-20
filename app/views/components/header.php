@@ -45,8 +45,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
-          <input type="text" name="title" placeholder="Titre">
-          <input type="text" name="headline" placeholder="Chapô">
+          <input type="text" name="title" placeholder="Titre" autocomplete="off">
+          <input type="text" name="headline" placeholder="Chapô" autocomplete="off">
           <textarea name="content" rows="7" placeholder="Contenu"></textarea>
           <input type="file" name="image">
         </div>

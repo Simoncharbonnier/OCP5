@@ -49,7 +49,10 @@ class Post_model extends Model {
    * Update a post
    */
   public function update(array $data) {
-
+    $sql = "UPDATE Post SET title = :title, headline = :headline, content = :content, image = :image, updated_at = :updated_at
+            WHERE id = :id";
+    $query = $this->db->prepare($sql);
+    return $query->execute($data);
   }
 
   /**
