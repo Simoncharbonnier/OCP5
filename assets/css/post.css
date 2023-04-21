@@ -10,7 +10,7 @@
   display: none;
 }
 
-.post.editing .post-title h1:first-child, .post.editing .post-headline h2:first-child, .post.editing .post-content p:first-child {
+.post.editing .post-title h1:first-child, .post.editing .post-headline h2:first-child, .post.editing .post-content p:first-child, .post.editing #btn-delete-post {
   display: none;
 }
 

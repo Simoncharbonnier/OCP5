@@ -28,8 +28,14 @@ a {
 }
 
 .avatar {
-  width: 50px;
+  width: 40px;
   border-radius: 25%;
+}
+
+.icon-edit, .icon-delete {
+  width: 25px;
+  cursor: pointer;
+  margin: 8px;
 }
 
 .btn {

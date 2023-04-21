@@ -24,9 +24,9 @@ class Post_model extends Model {
                     U.first_name comment_author, U.avatar comment_author_avatar
             FROM Post
             JOIN User ON User.id = Post.user_id
-            LEFT JOIN Comment ON Comment.post_id = Post.id
+            LEFT JOIN Comment ON Comment.post_id = Post.id AND Comment.valid = 1
             LEFT JOIN User U ON U.id = Comment.user_id
-            WHERE Post.id = :post_id AND (Comment.valid = 1 OR Comment.valid IS NULL)";
+            WHERE Post.id = :post_id";
     $query = $this->db->prepare($sql);
     $query->bindParam(':post_id', $id);
     $query->execute();

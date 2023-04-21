@@ -15,3 +15,23 @@
 .comments .btn-underline:hover {
   text-decoration: underline;
 }
+
+.comment {
+  padding: 8px;
+}
+
+.comment .btn-valid-delete-comment, .comment .btn-cancel-delete-comment {
+  display: none;
+}
+
+.comment.deleting .btn-delete-comment, .comment.deleting .btn-edit-comment {
+  display: none;
+}
+
+.comment.deleting .btn-valid-delete-comment, .comment.deleting .btn-cancel-delete-comment {
+  display: block;
+}
+
+.deleting {
+  background-color: #ffcccc;
+}

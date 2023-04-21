@@ -7,16 +7,16 @@
     <form id="form-edit-post" method="POST" action="?controller=post&action=edit&id=<?= $post['id'] ?>">
       <div class="col-md-12">
         <div class="row">
-          <div class="col-md-10">
+          <div class="col-md-11">
             <div class="post-title">
               <h1><?= $post['title'] ?></h1>
               <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off"></h1>
             </div>
           </div>
-          <div class="col-md-2 buttons-container">
+          <div class="col-md-1 buttons-container">
             <div class="btn" id="btn-edit-post-cancel">Annuler</div>
-            <div class="btn" id="btn-edit-post">Modifier</div>
-            <a class="btn" id="btn-delete-post" href="?controller=post&action=delete&id=<?= $post['id'] ?>">Supprimer</a>
+            <img class="icon-edit" id="btn-edit-post" src="assets/img/icons/edit.svg">
+            <img class="icon-delete" id="btn-delete-post" src="assets/img/icons/delete.svg" data-bs-toggle="modal" data-bs-target="#modal-delete-post">
           </div>
         </div>
         <div class="row">
@@ -93,6 +93,25 @@
         <textarea name="message" rows="7" placeholder="Commentaire"></textarea>
         <input type="submit" class="btn btn-submit" value="Partager">
       </form>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modal-delete-post" tabindex="-1" aria-labelledby="modal-delete-post-label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-delete-post-label">Suppression d'un article</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-center">
+        <p>Êtes-vous certain de vouloir supprimer l'article suivant ?</p>
+        <p><b><?= $post['title'] ?></b></p>
+      </div>
+      <div class="modal-footer">
+        <p class="btn" data-bs-dismiss="modal">Annuler</p>
+        <a class="btn" href="?controller=post&action=delete&id=<?= $post['id'] ?>">Supprimer</a>
+      </div>
     </div>
   </div>
 </div>
