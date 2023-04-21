@@ -1,0 +1,17 @@
+.comments .comment-part {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comments .message {
+  justify-content: flex-start;
+}
+
+.comments .date-created img {
+  margin-left: 1rem;
+}
+
+.comments .btn-underline:hover {
+  text-decoration: underline;
+}

@@ -11,7 +11,7 @@
         <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#modal-add-post">Ajouter</a>
       </li>
       <li class="nav-item" controller="comment" action="index">
-        <a class="nav-link" href="#">Commentaires</a>
+        <a class="nav-link" href="?controller=comment&action=index">Commentaires</a>
       </li>
       <li class="nav-item" controller="user" action="index">
         <a class="nav-link" href="#">Utilisateurs</a>

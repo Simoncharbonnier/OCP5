@@ -56,7 +56,7 @@ class Post {
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
-      $this->index();
+      header("Location: http://localhost/P5/?controller=post&action=index");
     }
   }
 
@@ -78,13 +78,14 @@ class Post {
 
         $postModel = New Post_model();
         $postId = $postModel->create($data);
-        $this->detail($postId);
+
+        header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
       } else {
         throw new Exception("Des champs sont manquants.");
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
-      $this->index();
+      header("Location: http://localhost/P5/?controller=post&action=index");
     }
   }
 
@@ -94,8 +95,9 @@ class Post {
    */
   public function edit() : void {
     try {
+      $postId = $_GET['id'];
       $postModel = New Post_model();
-      $post = $postModel->getById($_GET['id']);
+      $post = $postModel->getById($postId);
 
       if (!empty($post)) {
         $data = [];
@@ -106,9 +108,11 @@ class Post {
           }
           $data['image'] = NULL;
           $data['updated_at'] = date("Y-m-d H:i:s");
-          $data['id'] = $_GET['id'];
+          $data['id'] = $postId;
 
           $postModel->update($data);
+
+          header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
         } else {
           throw new Exception("Des champs sont manquants.");
         }
@@ -117,9 +121,8 @@ class Post {
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=post&action=index");
     }
-
-    $this->detail($_GET['id']);
   }
 
   /**
@@ -144,6 +147,6 @@ class Post {
       $message = $e->getMessage();
     }
 
-    $this->index();
+    header("Location: http://localhost/P5/?controller=post&action=index");
   }
 }

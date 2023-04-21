@@ -16,7 +16,7 @@
           <div class="col-md-2 buttons-container">
             <div class="btn" id="btn-edit-post-cancel">Annuler</div>
             <div class="btn" id="btn-edit-post">Modifier</div>
-            <a class="btn" href="?controller=post&action=delete&id=<?= $post['id'] ?>">Supprimer</a>
+            <a class="btn" id="btn-delete-post" href="?controller=post&action=delete&id=<?= $post['id'] ?>">Supprimer</a>
           </div>
         </div>
         <div class="row">
@@ -89,8 +89,8 @@
     </div>
     <div class="col-md-4">
       <h3>Quel est votre avis ?</h3>
-      <form id="form-comment" method="POST" action="?controller=comment&action=create">
-        <textarea name="comment" rows="7" placeholder="Commentaire"></textarea>
+      <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">
+        <textarea name="message" rows="7" placeholder="Commentaire"></textarea>
         <input type="submit" class="btn btn-submit" value="Partager">
       </form>
     </div>
