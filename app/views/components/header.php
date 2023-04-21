@@ -47,7 +47,7 @@
         <div class="modal-body text-center">
           <input type="text" name="title" placeholder="Titre" autocomplete="off">
           <input type="text" name="headline" placeholder="Chapô" autocomplete="off">
-          <textarea name="content" rows="7" placeholder="Contenu"></textarea>
+          <textarea name="content" rows="7" placeholder="Contenu" autocomplete="off"></textarea>
           <input type="file" name="image">
         </div>
         <div class="modal-footer">

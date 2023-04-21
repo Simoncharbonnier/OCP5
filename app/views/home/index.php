@@ -85,7 +85,7 @@
       </div>
       <div class="row">
         <div class="col-md-12">
-          <textarea name="message" rows="7" placeholder="Message"></textarea>
+          <textarea name="message" rows="7" placeholder="Message" autocomplete="off"></textarea>
         </div>
       </div>
       <input type="submit" class="btn btn-submit">

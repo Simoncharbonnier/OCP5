@@ -39,6 +39,8 @@ a {
 }
 
 .btn:hover {
+  background-color: black;
+  color: whitesmoke;
   border-bottom: none !important;
 }
 

@@ -15,13 +15,24 @@ class Home {
   public function mail() : void {
     try {
       if ((isset($_POST['first_name']) && !empty($_POST['first_name'])) && (isset($_POST['last_name']) && !empty($_POST['last_name'])) && (isset($_POST['mail']) && !empty($_POST['mail'])) && (isset($_POST['message']) && !empty($_POST['message']))) {
-        $header = "De la part de " . $_POST['last_name'] . " " . $_POST['first_name'] . " :";
-        $body = "<br>" . $_POST['message'] . "<br>";
-        $footer = "Tu peux lui répondre à cette adresse : " . $_POST['mail'];
+        $to = 'simoncharbonnier@orange.fr';
+        $subject = 'Blog contact';
 
-        $message = $header . $body . $footer;
-        $result = mail('simoncharbonnier@orange.fr', 'BLOG CONTACT', $message);
-        var_dump($result);
+        $message = file_get_contents('app/views/mail/index.html');
+        $replace = ['first_name' => $_POST['first_name'], 'last_name' => $_POST['last_name'],
+                          'mail' => $_POST['mail'], 'messageHere' => $_POST['message']];
+        foreach ($replace as $string => $value) {
+          $message = str_replace($string, $value, $message);
+        }
+
+        $headers = [
+          'MIME-Version: 1.0',
+          'Content-type:text/html;charset=UTF-8'
+        ];
+
+        mail($to, $subject, $message, implode("\r\n", $headers));
+
+        header("Location: http://localhost/P5/?controller=home&action=index");
       } else {
         throw new Exception("Il manque une ou plusieurs informations.");
       }
