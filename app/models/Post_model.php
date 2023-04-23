@@ -34,6 +34,18 @@ class Post_model extends Model {
   }
 
   /**
+   * Get a post by title
+   */
+  public function getByTitle($title, $id = 0) {
+    $sql = "SELECT * FROM Post WHERE Post.title = :title AND Post.id != :id";
+    $query = $this->db->prepare($sql);
+    $query->bindParam(':title', $title);
+    $query->bindParam(':id', $id);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
+  /**
    * Create a post
    */
   public function create(array $data) {

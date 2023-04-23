@@ -32,7 +32,7 @@ a {
   border-radius: 25%;
 }
 
-.icon-edit, .icon-delete {
+.icon-edit, .icon-delete, .icon-cross {
   width: 25px;
   cursor: pointer;
   margin: 8px;

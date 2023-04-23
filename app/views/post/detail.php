@@ -4,7 +4,7 @@
 
 <div class="container">
   <div class="row post">
-    <form id="form-edit-post" method="POST" action="?controller=post&action=edit&id=<?= $post['id'] ?>">
+    <form enctype="multipart/form-data" id="form-edit-post" method="POST" action="?controller=post&action=edit&id=<?= $post['id'] ?>">
       <div class="col-md-12">
         <div class="row">
           <div class="col-md-11">
@@ -27,15 +27,18 @@
             </div>
           </div>
         </div>
-        <?php if ($post['image']) : ?>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="post-image">
-                <img src="assets/img/post/<?= $post['image'] ?>" alt="">
-              </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="post-image">
+              <img id="btn-img-delete" class="icon-cross d-none" src="assets/img/icons/cross.svg">
+              <img id="post-img" src="<?= $post['image'] ? 'assets/img/post/' . $post['image'] : '' ?>">
+              <div id="btn-img-add" class="btn d-none">Ajouter</div>
+              <div id="btn-img-cancel" class="btn d-none">Annuler</div>
+              <input type="file" name="image" accept="image/*" id="image-input" hidden>
+              <input type="text" name="image-changed" id="image-changed-input" value="false" hidden>
             </div>
           </div>
-        <?php endif; ?>
+        </div>
         <div class="row">
           <div class="col-md-12">
             <div class="post-content">

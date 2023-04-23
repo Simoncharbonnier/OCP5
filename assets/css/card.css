@@ -43,3 +43,7 @@
   bottom: 1rem;
   right: 1rem;
 }
+
+.card-product .no-image {
+  padding-top: 40%;
+}

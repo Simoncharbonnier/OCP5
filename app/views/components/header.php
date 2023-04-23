@@ -39,7 +39,7 @@
 <div class="modal fade modal-lg" id="modal-add-post" tabindex="-1" aria-labelledby="modal-add-post-label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form id="form-add-post" method="POST" action="?controller=post&action=add">
+      <form enctype="multipart/form-data" id="form-add-post" method="POST" action="?controller=post&action=add">
         <div class="modal-header">
           <h5 class="modal-title" id="modal-add-post-label">Ajouter un article</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -48,7 +48,7 @@
           <input type="text" name="title" placeholder="Titre" autocomplete="off">
           <input type="text" name="headline" placeholder="Chapô" autocomplete="off">
           <textarea name="content" rows="7" placeholder="Contenu" autocomplete="off"></textarea>
-          <input type="file" name="image">
+          <input type="file" name="image" accept="image/*">
         </div>
         <div class="modal-footer">
           <input type="submit" class="btn btn-submit" value="Ajouter">

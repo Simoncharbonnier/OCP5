@@ -10,8 +10,10 @@
           <div class="col-md-4">
             <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
               <div class="card-product">
-                <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-                <div class="card-product-infos">
+                <?php if ($post['image']) : ?>
+                  <img src="assets/img/post/<?= $post['image'] ?>" alt="">
+                <?php endif; ?>
+                <div class="card-product-infos <?= $post['image'] ? '' : 'no-image' ?>">
                   <h3><?= $post['title'] ?></h3>
                   <p><?= $post['headline'] ?></p>
                 </div>

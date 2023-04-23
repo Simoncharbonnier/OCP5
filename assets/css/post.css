@@ -52,8 +52,29 @@
   justify-content: space-between;
 }
 
-.post-image img {
-  width: 20%;
+.post-image {
+  position: relative;
+}
+
+.post-image .icon-cross {
+  z-index: 5;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+}
+
+#post-img {
+  max-height: 200px;
+  max-width: 100%;
+}
+
+.editing .post-image img {
+  cursor: pointer;
+}
+
+.editing #post-img:hover {
+  opacity: .7;
 }
 
 .post-content {
