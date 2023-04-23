@@ -55,6 +55,7 @@
 #form-contact {
   padding: 2rem 0;
   text-align: center;
+  justify-content: center;
 }
 
 #form-contact h3 {

@@ -36,7 +36,7 @@
   </ul>
 </div>
 
-<div class="modal fade modal-lg" id="modal-add-post" tabindex="-1" aria-labelledby="modal-add-post-label" aria-hidden="true">
+<div class="modal fade modal-xl" id="modal-add-post" tabindex="-1" aria-labelledby="modal-add-post-label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <form enctype="multipart/form-data" id="form-add-post" method="POST" action="?controller=post&action=add">
@@ -45,9 +45,9 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body text-center">
-          <input type="text" name="title" placeholder="Titre" autocomplete="off">
-          <input type="text" name="headline" placeholder="Chapô" autocomplete="off">
-          <textarea name="content" rows="7" placeholder="Contenu" autocomplete="off"></textarea>
+          <h1><input type="text" name="title" placeholder="Le titre de votre futur article préféré" autocomplete="off"></h1>
+          <h2><input type="text" name="headline" placeholder="Vous pouvez écrire son chapô juste ici !" autocomplete="off"></h2>
+          <p><textarea name="content" rows="7" placeholder="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam quidem ipsum ullam perferendis, voluptatum provident natus, delectus numquam maxime molestias soluta atque autem alias deleniti explicabo ipsam sint aspernatur quaerat dolores eum unde cum eligendi dicta. Soluta, quos at quaerat maxime veniam neque similique quibusdam ipsum quam provident, optio dolorem. Beatae omnis temporibus assumenda ipsa nemo, laboriosam cupiditate deleniti soluta earum qui laborum ducimus. Tempora consectetur dolore reprehenderit maiores sint deleniti tempore! Sit placeat animi, unde atque vel repellat doloribus velit, accusamus exercitationem sed tenetur. Quis ratione autem exercitationem delectus, quae magnam quod placeat consequatur iusto! Mollitia sequi non tempora?" autocomplete="off"></textarea></p>
           <input type="file" name="image" accept="image/*">
         </div>
         <div class="modal-footer">

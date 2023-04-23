@@ -28,7 +28,6 @@
             <a class="btn btn-valid-delete-comment" href="?controller=comment&action=delete&id=<?= $comment['id'] ?>">Valider</a>
           </div>
         </div>
-        <hr>
       <?php endforeach; ?>
     </div>
   </div>

@@ -20,6 +20,14 @@
   padding: 8px;
 }
 
+.comment:not(:last-child) {
+  border-bottom: 1px solid lightgrey;
+}
+
+.comment .icon-delete {
+  width: 20px;
+}
+
 .comment .btn-valid-delete-comment, .comment .btn-cancel-delete-comment {
   display: none;
 }

@@ -109,7 +109,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 8px;
+  padding: 8px;
+}
+
+.comment:not(:last-child) {
+  border-bottom: 1px solid lightgrey;
 }
 
 #form-comment textarea, #form-comment input {

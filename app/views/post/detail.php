@@ -86,7 +86,6 @@
               <img class="avatar" src="assets/img/user/<?= $comment['author_avatar'] ?>" alt="">
             </div>
           </div>
-          <hr>
         <?php endforeach; ?>
       </div>
     </div>

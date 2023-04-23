@@ -70,7 +70,7 @@
     </div>
   </div>
   <form id="form-contact" class="row" method="POST" action="?controller=home&action=mail">
-    <div class="col-md-6">
+    <div class="col-md-8">
       <h3>Vous souhaitez me contacter ? C'est par ici !</h3>
       <div class="row">
         <div class="col-md-4">
