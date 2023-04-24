@@ -14,7 +14,7 @@ class Comment_model extends Model {
             FROM Comment
             JOIN User ON User.id = Comment.user_id
             JOIN Post ON Post.id = Comment.post_id
-            ORDER BY valid";
+            ORDER BY valid AND post_id";
     $query = $this->db->prepare($sql);
     $query->execute();
     return $query->fetchAll();
