@@ -11,8 +11,6 @@
     <script src="assets/js/global.js"></script>
   </head>
   <body>
-    <?php include_once('app/views/components/header.php'); ?>
     <?php $instance->$action(); ?>
-    <?php include_once('app/views/components/footer.php'); ?>
   </body>
 </html>

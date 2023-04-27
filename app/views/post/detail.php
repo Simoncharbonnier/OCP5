@@ -2,6 +2,8 @@
 <link rel="stylesheet" href="assets/css/card.css">
 <script src="assets/js/post.js"></script>
 
+<?php include_once('app/views/components/header.php'); ?>
+
 <div class="container">
   <div class="row post">
     <form enctype="multipart/form-data" id="form-edit-post" method="POST" action="?controller=post&action=edit&id=<?= $post['id'] ?>">
@@ -117,3 +119,5 @@
     </div>
   </div>
 </div>
+
+<?php include_once('app/views/components/footer.php'); ?>

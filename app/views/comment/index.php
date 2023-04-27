@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="assets/css/comments.css">
 <script src="assets/js/comments.js"></script>
 
+<?php include_once('app/views/components/header.php'); ?>
+
 <div class="container">
   <div class="row comments">
     <h1>Tous les commentaires</h1>
@@ -32,3 +34,5 @@
     </div>
   </div>
 </div>
+
+<?php include_once('app/views/components/footer.php'); ?>

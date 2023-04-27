@@ -1,6 +1,8 @@
 <link rel="stylesheet" href="assets/css/posts.css">
 <link rel="stylesheet" href="assets/css/card.css">
 
+<?php include_once('app/views/components/header.php'); ?>
+
 <div class="container">
   <div class="row posts">
     <h1>Tous les articles</h1>
@@ -28,3 +30,5 @@
     </div>
   </div>
 </div>
+
+<?php include_once('app/views/components/footer.php'); ?>
