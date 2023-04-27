@@ -1,3 +1,5 @@
+// Handle image for a post (add/edit/delete)
+
 document.addEventListener('DOMContentLoaded', () => {
   const post = document.querySelector('.post');
 
@@ -77,9 +79,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
     imgChangedInput.setAttribute('value', 'true');
   });
-
-  function click(target) {
-    const event = new MouseEvent("click");
-    target.dispatchEvent(event);
-  };
 })

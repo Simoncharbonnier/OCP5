@@ -34,7 +34,7 @@
             <div class="post-image">
               <img id="btn-img-delete" class="icon-cross d-none" src="assets/img/icons/cross.svg">
               <img id="post-img" src="<?= $post['image'] ? 'assets/img/post/' . $post['image'] : '' ?>">
-              <div id="btn-img-add" class="btn d-none">Ajouter</div>
+              <div id="btn-img-add" class="btn d-none">Ajouter une image</div>
               <div id="btn-img-cancel" class="btn d-none">Annuler</div>
               <input type="file" name="image" accept="image/*" id="image-input" hidden>
               <input type="text" name="image-changed" id="image-changed-input" value="false" hidden>

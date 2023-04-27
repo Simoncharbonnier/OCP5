@@ -99,6 +99,16 @@ a {
   outline: none;
 }
 
+#form-add-post img {
+  max-height: 250px;
+  max-width: 100%;
+  cursor: pointer;
+}
+
+#form-add-post img:hover {
+  opacity: .7;
+}
+
 /* FOOTER */
 
 .footer {
