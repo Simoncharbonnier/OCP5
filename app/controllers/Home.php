@@ -33,6 +33,7 @@ class Home {
         mail($to, $subject, $message, implode("\r\n", $headers));
 
         header("Location: http://localhost/P5/?controller=home&action=index");
+        exit;
       } else {
         throw new Exception("Il manque une ou plusieurs informations.");
       }

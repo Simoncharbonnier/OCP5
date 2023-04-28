@@ -38,6 +38,7 @@ class Comment {
           $commentModel->create($data);
 
           header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+          exit;
         } else {
           throw new Exception("Il n'y a pas de message.");
         }
@@ -47,6 +48,7 @@ class Comment {
     } catch(Exception $e) {
       $message = $e->getMessage();
       header("Location: http://localhost/P5/?controller=post&action=index");
+      exit;
     }
   }
 
@@ -79,6 +81,7 @@ class Comment {
     }
 
     header("Location: http://localhost/P5/?controller=comment&action=index");
+    exit;
   }
 
   /**
@@ -104,5 +107,6 @@ class Comment {
     }
 
     header("Location: http://localhost/P5/?controller=comment&action=index");
+    exit;
   }
 }

@@ -57,6 +57,7 @@ class Post {
     } catch(Exception $e) {
       $message = $e->getMessage();
       header("Location: http://localhost/P5/?controller=post&action=index");
+      exit;
     }
   }
 
@@ -81,16 +82,24 @@ class Post {
           $data['updated_at'] = date("Y-m-d H:i:s");
 
           if (!empty($_FILES['image']['name'])) {
-            $fileName = 'post_' . $_POST['title'] . '.png';
-            $currentPath = $_FILES['image']['tmp_name'];
+            $allowed = array('image/jpeg', 'image/png');
+            $type = $_FILES['image']['type'];
 
-            $data['image'] = $this->uploadImage($currentPath, $fileName);
+            if (in_array($type, $allowed)) {
+              $fileName = 'post_' . $_POST['title'] . '.png';
+              $currentPath = $_FILES['image']['tmp_name'];
+
+              $data['image'] = $this->uploadImage($currentPath, $fileName);
+            } else {
+              $data['image'] = NULL;
+            }
           } else {
             $data['image'] = NULL;
           }
 
           $postId = $postModel->create($data);
           header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+          exit;
         } else {
           throw new Exception("Un article avec ce titre existe déjà.");
         }
@@ -100,6 +109,7 @@ class Post {
     } catch(Exception $e) {
       $message = $e->getMessage();
       header("Location: http://localhost/P5/?controller=post&action=index");
+      exit;
     }
   }
 
@@ -138,9 +148,16 @@ class Post {
 
             if ($_POST['image-changed'] === 'true') {
               if (!empty($_FILES['image']['name'])) {
-                $currentPath = $_FILES['image']['tmp_name'];
+                $allowed = array('image/png', 'image/jpeg');
+                $type = $_FILES['image']['type'];
+                if (in_array($type, $allowed)) {
+                  $currentPath = $_FILES['image']['tmp_name'];
 
-                $data['image'] = $this->uploadImage($currentPath, $imgFileName);
+                  $data['image'] = $this->uploadImage($currentPath, $imgFileName);
+                } else {
+                  $data['image'] = NULL;
+                  $this->deleteImage($imgFileName);
+                }
               } else {
                 $data['image'] = NULL;
                 $this->deleteImage($imgFileName);
@@ -151,6 +168,7 @@ class Post {
 
             $postModel->update($data);
             header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+            exit;
           } else {
             throw new Exception("Un article avec ce titre existe déjà.");
           }
@@ -164,6 +182,7 @@ class Post {
       $message = $e->getMessage();
       var_dump($message);die;
       header("Location: http://localhost/P5/?controller=post&action=index");
+      exit;
     }
   }
 
@@ -192,6 +211,7 @@ class Post {
     }
 
     header("Location: http://localhost/P5/?controller=post&action=index");
+    exit;
   }
 
   private function uploadImage($currentPath, $newFileName) {
