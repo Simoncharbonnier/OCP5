@@ -15,11 +15,13 @@
               <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off"></h1>
             </div>
           </div>
-          <div class="col-md-1 buttons-container">
-            <div class="btn" id="btn-edit-post-cancel">Annuler</div>
-            <img class="icon-edit" id="btn-edit-post" src="assets/img/icons/edit.svg">
-            <img class="icon-delete" id="btn-delete-post" src="assets/img/icons/delete.svg" data-bs-toggle="modal" data-bs-target="#modal-delete-post">
-          </div>
+          <?php if ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) : ?>
+            <div class="col-md-1 buttons-container">
+              <div class="btn" id="btn-edit-post-cancel">Annuler</div>
+              <img class="icon-edit" id="btn-edit-post" src="assets/img/icons/edit.svg">
+              <img class="icon-delete" id="btn-delete-post" src="assets/img/icons/delete.svg" data-bs-toggle="modal" data-bs-target="#modal-delete-post">
+            </div>
+          <?php endif; ?>
         </div>
         <div class="row">
           <div class="col-md-12">
@@ -94,7 +96,7 @@
     <div class="col-md-4">
       <h3>Quel est votre avis ?</h3>
       <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">
-        <textarea name="message" rows="7" placeholder="Commentaire"></textarea>
+        <textarea name="message" rows="7" placeholder="Commentaire" autocomplete="off"></textarea>
         <input type="submit" class="btn btn-submit" value="Partager">
       </form>
     </div>
