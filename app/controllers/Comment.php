@@ -1,19 +1,29 @@
 <?php
 
+require_once('app/controllers/Controller.php');
+
 require_once('app/models/Comment_model.php');
 require_once('app/models/Post_model.php');
 
-class Comment {
+class Comment extends Controller {
 
   /**
    * Retrieve all comments and display the list of comments
    * As an admin
    */
   public function index() : void {
-    $commentModel = New Comment_model();
-    $comments = $commentModel->getAll();
+    try {
+      $this->isAdmin();
 
-    include_once('app/views/comment/index.php');
+      $commentModel = New Comment_model();
+      $comments = $commentModel->getAll();
+
+      include_once('app/views/comment/index.php');
+    } catch(Exception $e) {
+      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=home&action=index");
+      exit;
+    }
   }
 
   /**
@@ -58,6 +68,8 @@ class Comment {
    */
   public function edit() : void {
     try {
+      $this->isAdmin();
+
       $commentId = $_GET['id'];
       $commentModel = New Comment_model();
       $comment = $commentModel->getById($commentId);
@@ -90,6 +102,8 @@ class Comment {
    */
   public function delete() : void {
     try {
+      $this->isAdmin();
+
       if ($_GET['id']) {
         $commentModel = New Comment_model();
         $comment = $commentModel->getById($_GET['id']);

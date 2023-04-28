@@ -13,7 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll('.nav-item').forEach(item => {
     if (found && item.getAttribute('controller') === found[1] && item.getAttribute('action') === found[2]) {
-      item.classList.add('active');
+      if (found[2] === 'login') {
+        const regexForm = /&form=(\w+)/;
+        const foundForm = url.match(regexForm);
+        if (item.getAttribute('form') === foundForm[1]) {
+          item.classList.add('active');
+        }
+      } else {
+        item.classList.add('active');
+      }
     } else if (found === null && item.getAttribute('controller') === 'home' && item.getAttribute('action') === 'index') {
       item.classList.add('active');
     }

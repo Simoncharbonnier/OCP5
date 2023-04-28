@@ -1,17 +1,25 @@
 <?php
 
+require_once('app/controllers/Controller.php');
+
 require_once('app/models/Post_model.php');
 
-class Post {
+class Post extends Controller {
 
   /**
    * Retrieve all posts and display the list of posts
    */
   public function index() : void {
-    $postModel = New Post_model();
-    $posts = $postModel->getAll();
+    try {
+      $postModel = New Post_model();
+      $posts = $postModel->getAll();
 
-    include_once('app/views/post/index.php');
+      include_once('app/views/post/index.php');
+    } catch(Exception $e) {
+      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=home&action=index");
+      exit;
+    }
   }
 
   /**
@@ -67,6 +75,8 @@ class Post {
    */
   public function add() : void {
     try {
+      $this->isAdmin();
+
       $data = [];
 
       if (!empty($_POST) && (isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['headline']) && !empty($_POST['headline'])) && (isset($_POST['content']) && !empty($_POST['content']))) {
@@ -119,6 +129,8 @@ class Post {
    */
   public function edit() : void {
     try {
+      $this->isAdmin();
+
       $data = [];
       $postId = $_GET['id'];
       $postModel = New Post_model();
@@ -180,7 +192,6 @@ class Post {
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
-      var_dump($message);die;
       header("Location: http://localhost/P5/?controller=post&action=index");
       exit;
     }
@@ -192,6 +203,8 @@ class Post {
    */
   public function delete() : void {
     try {
+      $this->isAdmin();
+
       if ($_GET['id']) {
         $postModel = New Post_model();
         $post = $postModel->getById($_GET['id']);

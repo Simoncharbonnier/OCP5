@@ -31,4 +31,13 @@ if (file_exists('app/controllers/' . $controllerClassName . '.php')) {
   $action = 'error404';
 }
 
+if (!isset($_SESSION)) {
+  session_start();
+  if (!isset($_SESSION['is_logged'])) {
+    $_SESSION['is_logged'] = false;
+  }
+}
+
+var_dump($_SESSION);
+
 include_once('app/views/layout/index.php');
