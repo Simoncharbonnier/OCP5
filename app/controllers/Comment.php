@@ -31,29 +31,33 @@ class Comment extends Controller {
    */
   public function add() : void {
     try {
-      $postId = $_GET['id'];
-      $postModel = New Post_model();
-      $post = $postModel->getById($postId);
+      if ($_GET['id']) {
+        $postId = $_GET['id'];
+        $postModel = New Post_model();
+        $post = $postModel->getById($postId);
 
-      if (!empty($post)) {
-        $data = [];
+        if (!empty($post)) {
+          $data = [];
 
-        if (!empty($_POST) && (isset($_POST['message']) && !empty($_POST['message']))) {
-          $data['message'] = $_POST['message'];
-          $data['user_id'] = 1;
-          $data['post_id'] = $postId;
-          $data['created_at'] = date("Y-m-d");
+          if (!empty($_POST) && (isset($_POST['message']) && !empty($_POST['message']))) {
+            $data['message'] = $_POST['message'];
+            $data['user_id'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 1;
+            $data['post_id'] = $postId;
+            $data['created_at'] = date("Y-m-d");
 
-          $commentModel = New Comment_model();
-          $commentModel->create($data);
+            $commentModel = New Comment_model();
+            $commentModel->create($data);
 
-          header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
-          exit;
+            header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+            exit;
+          } else {
+            throw new Exception("Il n'y a pas de message.");
+          }
         } else {
-          throw new Exception("Il n'y a pas de message.");
+          throw new Exception("Ce post n'existe pas.");
         }
       } else {
-        throw new Exception("Ce post n'existe pas.");
+        throw new Exception("A quel post voulez-vous ajouter un commentaire ?");
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
@@ -70,23 +74,27 @@ class Comment extends Controller {
     try {
       $this->isAdmin();
 
-      $commentId = $_GET['id'];
-      $commentModel = New Comment_model();
-      $comment = $commentModel->getById($commentId);
+      if ($_GET['id']) {
+        $commentId = $_GET['id'];
+        $commentModel = New Comment_model();
+        $comment = $commentModel->getById($commentId);
 
-      if (!empty($comment)) {
-        $data = [];
+        if (!empty($comment)) {
+          $data = [];
 
-        if ($comment[0]['valid']) {
-          $data['valid'] = 0;
+          if ($comment[0]['valid']) {
+            $data['valid'] = 0;
+          } else {
+            $data['valid'] = 1;
+          }
+          $data['id'] = $commentId;
+
+          $commentModel->update($data);
         } else {
-          $data['valid'] = 1;
+          throw new Exception("Le commentaire n'existe pas.");
         }
-        $data['id'] = $commentId;
-
-        $commentModel->update($data);
       } else {
-        throw new Exception("Le commentaire n'existe pas.");
+        throw new Exception("Quel commentaire voulez-vous modifier ?");
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
@@ -100,16 +108,18 @@ class Comment extends Controller {
    * Delete a comment by its id and redirect to index()
    * As an admin
    */
-  public function delete() : void {
+  public function delete($commentId = NULL) : void {
     try {
       $this->isAdmin();
 
-      if ($_GET['id']) {
+      $commentId = $commentId ? $commentId : $_GET['id'];
+
+      if ($commentId) {
         $commentModel = New Comment_model();
-        $comment = $commentModel->getById($_GET['id']);
+        $comment = $commentModel->getById($commentId);
 
         if (!empty($comment)) {
-          $commentModel->delete($_GET['id']);
+          $commentModel->delete($commentId);
         } else {
           throw new Exception("Le commentaire n'existe pas.");
         }

@@ -14,6 +14,17 @@ class Post_model extends Model {
     return $query->fetchAll();
   }
 
+    /**
+   * Get posts by user
+   */
+  public function getByUser($id) {
+    $sql = "SELECT * FROM Post WHERE user_id = :user_id";
+    $query = $this->db->prepare($sql);
+    $query->bindParam(':user_id', $id);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
   /**
    * Get a post by id with its comments
    */
@@ -73,6 +84,16 @@ class Post_model extends Model {
     $sql = "DELETE FROM Post WHERE id = :post_id";
     $query = $this->db->prepare($sql);
     $query->bindParam(':post_id', $id);
+    return $query->execute();
+  }
+
+  /**
+   * Delete posts by user
+   */
+  public function deleteByUser($id) {
+    $sql = "DELETE FROM Post WHERE user_id = :user_id";
+    $query = $this->db->prepare($sql);
+    $query->bindParam(':user_id', $id);
     return $query->execute();
   }
 }

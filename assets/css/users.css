@@ -1,0 +1,45 @@
+.users {
+  text-align: center;
+}
+
+.users .user-part {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.users h1 {
+  padding-bottom: 1rem;
+}
+
+.user {
+  padding: 8px;
+}
+
+.user .btn-underline:hover {
+  text-decoration: underline;
+}
+
+.user:not(:last-child) {
+  border-bottom: 1px solid lightgrey;
+}
+
+.user .icon-delete {
+  width: 20px;
+}
+
+.user .btn-valid-delete-user, .user .btn-cancel-delete-user {
+  display: none;
+}
+
+.user.deleting .btn-delete-user, .user.deleting .btn-edit-user {
+  display: none;
+}
+
+.user.deleting .btn-valid-delete-user, .user.deleting .btn-cancel-delete-user {
+  display: block;
+}
+
+.deleting {
+  background-color: #ffcccc;
+}

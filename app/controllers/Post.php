@@ -25,42 +25,44 @@ class Post extends Controller {
   /**
    * Retrieve a post by its id and display the detail of the post
    */
-  public function detail($id = NULL) : void {
+  public function detail() : void {
     try {
-      $id = $id !== NULL ? $id : $_GET['id'];
+      if ($_GET['id']) {
+        $postId = $_GET['id'];
+        $postModel = New Post_model();
+        $result = $postModel->getById($id);
 
-      $postModel = New Post_model();
-      $result = $postModel->getById($id);
+        if (!empty($result)) {
+          $post = [
+            'id' => $result[0]['id'],
+            'title' => $result[0]['title'],
+            'headline' => $result[0]['headline'],
+            'content' => $result[0]['content'],
+            'image' => $result[0]['image'],
+            'created_at' => $result[0]['created_at'],
+            'updated_at' => $result[0]['updated_at'],
+            'author' => $result[0]['post_author'],
+            'author_avatar' => $result[0]['post_author_avatar']
+          ];
 
-      if (!empty($result)) {
-        $post = [
-          'id' => $result[0]['id'],
-          'title' => $result[0]['title'],
-          'headline' => $result[0]['headline'],
-          'content' => $result[0]['content'],
-          'image' => $result[0]['image'],
-          'created_at' => $result[0]['created_at'],
-          'updated_at' => $result[0]['updated_at'],
-          'author' => $result[0]['post_author'],
-          'author_avatar' => $result[0]['post_author_avatar']
-        ];
-
-        $comments = [];
-
-        if ($result[0]['message'] !== NULL) {
-          foreach ($result as $comment) {
-            $comments[] = [
-              'message' => $comment['message'],
-              'created_at' => $comment['comment_created_at'],
-              'author' => $comment['comment_author'],
-              'author_avatar' => $comment['comment_author_avatar']
-            ];
+          $comments = [];
+          if ($result[0]['message'] !== NULL) {
+            foreach ($result as $comment) {
+              $comments[] = [
+                'message' => $comment['message'],
+                'created_at' => $comment['comment_created_at'],
+                'author' => $comment['comment_author'],
+                'author_avatar' => $comment['comment_author_avatar']
+              ];
+            }
           }
-        }
 
-        include_once('app/views/post/detail.php');
+          include_once('app/views/post/detail.php');
+        } else {
+          throw new Exception("L'article n'existe pas.");
+        }
       } else {
-        throw new Exception("Le post n'existe pas.");
+        throw new Exception("Quel article voulez-vous voir ?");
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
@@ -77,17 +79,16 @@ class Post extends Controller {
     try {
       $this->isAdmin();
 
-      $data = [];
-
       if (!empty($_POST) && (isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['headline']) && !empty($_POST['headline'])) && (isset($_POST['content']) && !empty($_POST['content']))) {
         $postModel = New Post_model();
-        $postWithTitle = $postModel->getByTitle($_POST['title']);
+        $sameTitle = $postModel->getByTitle($_POST['title']);
 
-        if (empty($postWithTitle)) {
+        if (empty($sameTitle)) {
+          $data = [];
           foreach ($_POST as $name => $value) {
             $data[$name] = $value;
           }
-          $data['user_id'] = 1;
+          $data['user_id'] = $_SESSION['user_id'];
           $data['created_at'] = date("Y-m-d");
           $data['updated_at'] = date("Y-m-d H:i:s");
 
@@ -118,6 +119,7 @@ class Post extends Controller {
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
+      var_dump($message);die;
       header("Location: http://localhost/P5/?controller=post&action=index");
       exit;
     }
@@ -131,64 +133,68 @@ class Post extends Controller {
     try {
       $this->isAdmin();
 
-      $data = [];
-      $postId = $_GET['id'];
-      $postModel = New Post_model();
-      $post = $postModel->getById($postId);
+      if ($_GET['id']) {
+        $postId = $_GET['id'];
+        $postModel = New Post_model();
+        $post = $postModel->getById($postId);
 
-      if (!empty($post)) {
-        $post = $post[0];
+        if (!empty($post)) {
+          $post = $post[0];
 
-        if (!empty($_POST) && (isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['headline']) && !empty($_POST['headline'])) && (isset($_POST['content']) && !empty($_POST['content']))) {
-          $postModel = New Post_model();
-          $postWithTitle = $postModel->getByTitle($_POST['title'], $postId);
+          if (!empty($_POST) && (isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['headline']) && !empty($_POST['headline'])) && (isset($_POST['content']) && !empty($_POST['content']))) {
+            $postModel = New Post_model();
+            $sameTitle = $postModel->getByTitle($_POST['title'], $postId);
 
-          if (empty($postWithTitle)) {
-            foreach ($_POST as $name => $value) {
-              if ($name !== 'image-changed') {
-                $data[$name] = $value;
+            if (empty($sameTitle)) {
+              $data = [];
+              foreach ($_POST as $name => $value) {
+                if ($name !== 'image-changed') {
+                  $data[$name] = $value;
+                }
               }
-            }
-            $data['updated_at'] = date("Y-m-d H:i:s");
-            $data['id'] = $postId;
+              $data['updated_at'] = date("Y-m-d H:i:s");
+              $data['id'] = $postId;
 
-            $imgFileName = 'post_' . $_POST['title'] . '.png';
+              $imgFileName = 'post_' . $_POST['title'] . '.png';
 
-            if ($post['title'] !== $_POST['title'] && $post['image']) {
-              $this->renameImage($post['image'], $imgFileName);
-            }
+              if ($post['title'] !== $_POST['title'] && $post['image']) {
+                $this->renameImage($post['image'], $imgFileName);
+              }
 
-            if ($_POST['image-changed'] === 'true') {
-              if (!empty($_FILES['image']['name'])) {
-                $allowed = array('image/png', 'image/jpeg');
-                $type = $_FILES['image']['type'];
-                if (in_array($type, $allowed)) {
-                  $currentPath = $_FILES['image']['tmp_name'];
+              if ($_POST['image-changed'] === 'true') {
+                if (!empty($_FILES['image']['name'])) {
+                  $allowed = array('image/png', 'image/jpeg');
+                  $type = $_FILES['image']['type'];
+                  if (in_array($type, $allowed)) {
+                    $currentPath = $_FILES['image']['tmp_name'];
 
-                  $data['image'] = $this->uploadImage($currentPath, $imgFileName);
+                    $data['image'] = $this->uploadImage($currentPath, $imgFileName);
+                  } else {
+                    $data['image'] = NULL;
+                    $this->deleteImage($imgFileName);
+                  }
                 } else {
                   $data['image'] = NULL;
                   $this->deleteImage($imgFileName);
                 }
               } else {
-                $data['image'] = NULL;
-                $this->deleteImage($imgFileName);
+                $data['image'] = isset($oldPath) ? $imgFileName : $post['image'];
               }
-            } else {
-              $data['image'] = isset($oldPath) ? $imgFileName : $post['image'];
-            }
 
-            $postModel->update($data);
-            header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
-            exit;
+              $postModel->update($data);
+              header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+              exit;
+            } else {
+              throw new Exception("Un article avec ce titre existe déjà.");
+            }
           } else {
-            throw new Exception("Un article avec ce titre existe déjà.");
+            throw new Exception("Des champs sont manquants.");
           }
         } else {
-          throw new Exception("Des champs sont manquants.");
+          throw new Exception("Le post n'existe pas.");
         }
       } else {
-        throw new Exception("Le post n'existe pas.");
+        throw new Exception("Quel post voulez-vous modifier ?");
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
@@ -201,18 +207,20 @@ class Post extends Controller {
    * Delete a post by its id and redirect to index()
    * As an admin
    */
-  public function delete() : void {
+  public function delete($postId = NULL) : void {
     try {
       $this->isAdmin();
 
-      if ($_GET['id']) {
+      $postId = $postId ? $postId : $_GET['id'];
+
+      if ($postId) {
         $postModel = New Post_model();
-        $post = $postModel->getById($_GET['id']);
+        $post = $postModel->getById($postId);
 
         if (!empty($post)) {
           $this->deleteImage($post[0]['image']);
 
-          $postModel->delete($_GET['id']);
+          $postModel->delete($postId);
         } else {
           throw new Exception("Le post n'existe pas.");
         }

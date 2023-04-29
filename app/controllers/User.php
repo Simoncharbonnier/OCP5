@@ -1,8 +1,12 @@
 <?php
 
 require_once('app/controllers/Controller.php');
+require_once('app/controllers/Comment.php');
+require_once('app/controllers/Post.php');
 
 require_once('app/models/User_model.php');
+require_once('app/models/Comment_model.php');
+require_once('app/models/Post_model.php');
 
 class User extends Controller {
 
@@ -58,6 +62,7 @@ class User extends Controller {
             $passwordHash = $user['password'];
             if (password_verify($_POST['password'], $passwordHash)) {
               $_SESSION['is_logged'] = true;
+              $_SESSION['user_id'] = $user['id'];
               $_SESSION['user_mail'] = $user['mail'];
               $_SESSION['user_avatar'] = $user['avatar'];
               $_SESSION['user_admin'] = $user['admin'];
@@ -87,18 +92,14 @@ class User extends Controller {
    */
   public function logout() : void {
     try {
-      if (isset($_SESSION) && $_SESSION['is_logged'] === true) {
-        session_unset();
-        session_destroy();
-      }
-
-      header("Location: http://localhost/P5/?controller=home&action=index");
-      exit;
+      $this->isLogged();
+      session_unset();
+      session_destroy();
     } catch(Exception $e) {
       $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=home&action=index");
-      exit;
     }
+    header("Location: http://localhost/P5/?controller=home&action=index");
+    exit;
   }
 
   /**
@@ -125,15 +126,19 @@ class User extends Controller {
    */
   public function detail() : void {
     try {
-      $userModel = New User_model();
-      $result = $userModel->getById($_GET['id']);
+      if ($_GET['id']) {
+        $userModel = New User_model();
+        $result = $userModel->getById($_GET['id']);
 
-      if (!empty($result)) {
-        $user = $result[0];
+        if (!empty($result)) {
+          $user = $result[0];
 
-        include_once('app/views/user/detail.php');
+          include_once('app/views/user/detail.php');
+        } else {
+          throw new Exception("L'utilisateur n'existe pas.");
+        }
       } else {
-        throw new Exception("L'utilisateur n'existe pas.");
+        throw new Exception("Quel utilisateur voulez-vous voir ?");
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
@@ -148,7 +153,79 @@ class User extends Controller {
    */
   public function edit() : void {
     try {
-      // As an admin or the user himself
+      $this->isLogged();
+
+      if ($_GET['id']) {
+        $userModel = New User_model();
+        $user = $userModel->getById($_GET['id']);
+        if (!empty($user)) {
+          $user = $user[0];
+
+          if ($_SESSION['user_mail'] === $user['mail']) {
+            if (!empty($_POST) && (isset($_POST['first_name']) && !empty($_POST['first_name'])) && (isset($_POST['last_name']) && !empty($_POST['last_name'])) && (isset($_POST['mail']) && !empty($_POST['mail'])) && (isset($_POST['password']) && !empty($_POST['password'])) && (isset($_POST['avatar']) && !empty($_POST['avatar']))) {
+              if (isset($_POST['confirm']) && $_POST['password'] === $_POST['confirm']) {
+                unset($_POST['confirm']);
+                $sameMail = $userModel->getByMail($_POST['mail']);
+
+                if (empty($sameMail) || ($sameMail[0]['id'] !== $user['id'])) {
+                  $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
+                  foreach ($_POST as $name => $value) {
+                    if ($name !== 'admin') {
+                      $data[$name] = $value;
+                    }
+                  }
+                  $data['password'] = $passwordHash;
+
+                  if ($_POST['avatar'] !== $user['avatar']) {
+                    if ($_POST['avatar'] !== 'default.jpg') {
+                      $allowed = array('image/png', 'image/jpeg');
+                      $type = $_FILES['image']['type'];
+                      if (in_array($type, $allowed)) {
+                        $currentPath = $_FILES['image']['tmp_name'];
+
+                        $data['avatar'] = $this->uploadAvatar($currentPath, 'user_' . $user['id'] . '.jpg');
+                      }
+                    } else {
+                      $this->deleteAvatar($user['avatar']);
+                    }
+                  }
+
+                  $userModel->update($data);
+
+                  $_SESSION['user_mail'] = $_POST['mail'];
+                  $_SESSION['user_avatar'] = $_POST['avatar'];
+
+                  header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $user['id']);
+                  exit;
+                } else {
+                  throw new Exception("Un utilisateur utilise déjà cette adresse mail.");
+                }
+              } else {
+                throw new Exception("Veuillez confirmer le mot de passe.");
+              }
+            } else {
+              throw new Exception("Il manque des informations.");
+            }
+          } else if ($_SESSION['user_admin'] === 1) {
+            if (!empty($_POST) && (isset($_POST['admin']) && !empty($_POST['admin']))) {
+              $data['admin'] = $_POST['admin'];
+
+              $userModel->updateAdmin($data);
+
+              header("Location: http://localhost/P5/?controller=user&action=index");
+              exit;
+            } else {
+              throw new Exception("Il manque des informations.");
+            }
+          } else {
+            throw new Exception("Vous n'avez pas les permissions.");
+          }
+        } else {
+          throw new Exception("L'utilisateur n'existe pas.");
+        }
+      } else {
+        throw new Exception("Quel utilisateur voulez-vous modifier ?");
+      }
     } catch(Exception $e) {
       $message = $e->getMessage();
       header("Location: http://localhost/P5/?controller=home&action=index");
@@ -162,15 +239,47 @@ class User extends Controller {
    */
   public function delete() : void {
     try {
-      // As an admin or the user himself
       if ($_GET['id']) {
         $userModel = New User_model();
-        $user = $userModel->getById($_GET['id']);
+        $result = $userModel->getById($_GET['id']);
 
-        if (!empty($user)) {
-          // Delete comments & articles by user
+        if (!empty($result)) {
+          $user = $result[0];
+          if ($_SESSION['is_logged'] === true && ($_SESSION['user_admin'] === 1 || $_SESSION['user_mail'] === $user['mail'])) {
+            if (!$user['admin']) {
+              $commentModel = New Comment_model();
+              $comments = $commentModel->getByUser($_GET['id']);
 
-          $userModel->delete($_GET['id']);
+              foreach ($comments as $comment) {
+                $commentModel->delete($comment['id']);
+              }
+
+              $postModel = New Post_model();
+              $posts = $postModel->getByUser($_GET['id']);
+
+              foreach ($posts as $post) {
+                $postModel->delete($post['id']);
+                if ($post['image']) {
+                  $this->deleteImage($post['image']);
+                }
+              }
+
+              if ($user['avatar'] !== 'default.jpg') {
+                $this->deleteAvatar($user['avatar']);
+              }
+
+              $userModel->delete($_GET['id']);
+
+              if ($_SESSION['user_mail'] === $user['mail']) {
+                session_unset();
+                session_destroy();
+              }
+            } else {
+              throw new Exception("L'utilisateur est un administrateur.");
+            }
+          } else {
+            throw new Exception("Vous n'avez pas les permissions.");
+          }
         } else {
           throw new Exception("L'utilisateur n'existe pas.");
         }
@@ -181,7 +290,33 @@ class User extends Controller {
       $message = $e->getMessage();
     }
 
-    header("Location: http://localhost/P5/?controller=post&action=index");
+    header("Location: http://localhost/P5/?controller=user&action=index");
     exit;
+  }
+
+  private function uploadAvatar($currentPath, $newFileName) {
+    $newPath = '/opt/lampp/htdocs/P5/assets/img/user/' . $newFileName;
+
+    if (move_uploaded_file($currentPath, $newPath)) {
+      return $newFileName;
+    } else {
+      return 'default.jpg';
+    }
+  }
+
+  private function deleteAvatar($fileName) {
+    $path = '/opt/lampp/htdocs/P5/assets/img/user/' . $fileName;
+
+    if (file_exists($path)) {
+      unlink($path);
+    }
+  }
+
+  private function deleteImage($fileName) {
+    $path = '/opt/lampp/htdocs/P5/assets/img/post/' . $fileName;
+
+    if (file_exists($path)) {
+      unlink($path);
+    }
   }
 }

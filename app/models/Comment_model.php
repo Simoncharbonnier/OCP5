@@ -31,6 +31,17 @@ class Comment_model extends Model {
     return $query->fetchAll();
   }
 
+    /**
+   * Get comments by user
+   */
+  public function getByUser($id) {
+    $sql = "SELECT * FROM Comment WHERE user_id = :user_id";
+    $query = $this->db->prepare($sql);
+    $query->bindParam(':user_id', $id);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
   /**
    * Create a comment
    */
@@ -57,6 +68,16 @@ class Comment_model extends Model {
     $sql = "DELETE FROM Comment WHERE id = :id";
     $query = $this->db->prepare($sql);
     $query->bindParam(':id', $id);
+    return $query->execute();
+  }
+
+  /**
+   * Delete comments by user
+   */
+  public function deleteByUser($id) {
+    $sql = "DELETE FROM Comment WHERE user_id = :user_id";
+    $query = $this->db->prepare($sql);
+    $query->bindParam(':user_id', $id);
     return $query->execute();
   }
 }

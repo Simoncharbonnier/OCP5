@@ -32,7 +32,7 @@
           <a class="nav-link" href="?controller=user&action=logout">Déconnexion</a>
         </li>
         <li class="nav-item" controller="user" action="detail">
-          <a class="nav-link" href="?controller=user&action=detail">Profil</a>
+          <a class="nav-link" href="?controller=user&action=detail&id=<?= $_SESSION['user_id'] ?>">Profil</a>
         </li>
         <li class="nav-item">
           <img class="avatar" src="assets/img/user/<?= $_SESSION['user_avatar'] ?>" />
