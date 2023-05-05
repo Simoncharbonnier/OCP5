@@ -3,6 +3,7 @@
 require_once('app/controllers/Controller.php');
 
 require_once('app/models/Post_model.php');
+require_once('app/models/Comment_model.php');
 
 class Post extends Controller {
 
@@ -30,7 +31,7 @@ class Post extends Controller {
       if ($_GET['id']) {
         $postId = $_GET['id'];
         $postModel = New Post_model();
-        $result = $postModel->getById($id);
+        $result = $postModel->getById($postId);
 
         if (!empty($result)) {
           $post = [
@@ -218,7 +219,17 @@ class Post extends Controller {
         $post = $postModel->getById($postId);
 
         if (!empty($post)) {
-          $this->deleteImage($post[0]['image']);
+          $post = $post[0];
+
+          $commentModel = New Comment_model();
+          $comments = $commentModel->getByPost($post['id']);
+          foreach ($comments as $comment) {
+            $commentModel->delete($comment['id']);
+          }
+
+          if ($post['image']) {
+            $this->deleteImage($post['image']);
+          }
 
           $postModel->delete($postId);
         } else {

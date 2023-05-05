@@ -34,30 +34,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalAddPostBtnImgAdd = document.getElementById('modal-add-post-btn-img');
   const modalAddPostBtnImgCancel = document.getElementById('modal-add-post-btn-img-cancel');
 
-  modalAddPostImg.addEventListener('click', function(e) {
-    click(modalAddPostImgInput);
-  });
+  if (modalAddPostImg) {
+    modalAddPostImg.addEventListener('click', function(e) {
+      click(modalAddPostImgInput);
+    });
 
-  modalAddPostBtnImgAdd.addEventListener('click', function(e) {
-    click(modalAddPostImgInput);
-  });
+    modalAddPostBtnImgAdd.addEventListener('click', function(e) {
+      click(modalAddPostImgInput);
+    });
 
-  modalAddPostBtnImgCancel.addEventListener('click', function(e) {
-    modalAddPostImg.src = '';
-    modalAddPostBtnImgCancel.classList.add('d-none');
-    modalAddPostBtnImgAdd.classList.remove('d-none');
-    modalAddPostImgInput.value = '';
-  });
+    modalAddPostBtnImgCancel.addEventListener('click', function(e) {
+      modalAddPostImg.src = '';
+      modalAddPostBtnImgCancel.classList.add('d-none');
+      modalAddPostBtnImgAdd.classList.remove('d-none');
+      modalAddPostImgInput.value = '';
+    });
 
-  modalAddPostImgInput.addEventListener('change', function(e) {
-    const file = modalAddPostImgInput.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      modalAddPostImg.src = reader.result;
-    }
+    modalAddPostImgInput.addEventListener('change', function(e) {
+      const file = modalAddPostImgInput.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        modalAddPostImg.src = reader.result;
+      }
 
-    modalAddPostBtnImgAdd.classList.add('d-none');
-    modalAddPostBtnImgCancel.classList.remove('d-none');
-  });
+      modalAddPostBtnImgAdd.classList.add('d-none');
+      modalAddPostBtnImgCancel.classList.remove('d-none');
+    });
+  }
 });

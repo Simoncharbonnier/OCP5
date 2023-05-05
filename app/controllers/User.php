@@ -128,10 +128,27 @@ class User extends Controller {
     try {
       if ($_GET['id']) {
         $userModel = New User_model();
-        $result = $userModel->getById($_GET['id']);
+        $result = $userModel->getById($_GET['id'], true);
 
         if (!empty($result)) {
           $user = $result[0];
+
+          if ($user['admin']) {
+            $postModel = New Post_model();
+            $posts = $postModel->getByUser($user['id']);
+          }
+
+          $commentModel = New Comment_model();
+          $result = $commentModel->getByUser($user['id']);
+          $comments = [];
+          foreach ($result as $comment) {
+            if ($comment['valid']) {
+              $post = $postModel->getById($comment['post_id'])[0];
+              $comment['post_title'] = $post['title'];
+              $comment['post_id'] = $post['id'];
+              $comments[] = $comment;
+            }
+          }
 
           include_once('app/views/user/detail.php');
         } else {
@@ -162,58 +179,42 @@ class User extends Controller {
           $user = $user[0];
 
           if ($_SESSION['user_mail'] === $user['mail']) {
-            if (!empty($_POST) && (isset($_POST['first_name']) && !empty($_POST['first_name'])) && (isset($_POST['last_name']) && !empty($_POST['last_name'])) && (isset($_POST['mail']) && !empty($_POST['mail'])) && (isset($_POST['password']) && !empty($_POST['password'])) && (isset($_POST['avatar']) && !empty($_POST['avatar']))) {
-              if (isset($_POST['confirm']) && $_POST['password'] === $_POST['confirm']) {
+            if (!empty($_POST) && (isset($_POST['first_name']) && !empty($_POST['first_name'])) && (isset($_POST['last_name']) && !empty($_POST['last_name'])) && (isset($_POST['password']) && !empty($_POST['password'])) && (isset($_POST['confirm']) && !empty($_POST['confirm'])) && (isset($_POST['avatar']) && !empty($_POST['avatar']))) {
+              if ($_POST['password'] === $_POST['confirm']) {
                 unset($_POST['confirm']);
-                $sameMail = $userModel->getByMail($_POST['mail']);
 
-                if (empty($sameMail) || ($sameMail[0]['id'] !== $user['id'])) {
-                  $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
-                  foreach ($_POST as $name => $value) {
-                    if ($name !== 'admin') {
-                      $data[$name] = $value;
-                    }
+                foreach ($_POST as $name => $value) {
+                  if ($name !== 'admin') {
+                    $data[$name] = $value;
                   }
-                  $data['password'] = $passwordHash;
-
-                  if ($_POST['avatar'] !== $user['avatar']) {
-                    if ($_POST['avatar'] !== 'default.jpg') {
-                      $allowed = array('image/png', 'image/jpeg');
-                      $type = $_FILES['image']['type'];
-                      if (in_array($type, $allowed)) {
-                        $currentPath = $_FILES['image']['tmp_name'];
-
-                        $data['avatar'] = $this->uploadAvatar($currentPath, 'user_' . $user['id'] . '.jpg');
-                      }
-                    } else {
-                      $this->deleteAvatar($user['avatar']);
-                    }
-                  }
-
-                  $userModel->update($data);
-
-                  $_SESSION['user_mail'] = $_POST['mail'];
-                  $_SESSION['user_avatar'] = $_POST['avatar'];
-
-                  header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $user['id']);
-                  exit;
-                } else {
-                  throw new Exception("Un utilisateur utilise déjà cette adresse mail.");
                 }
+                $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
+                $data['password'] = $passwordHash;
+                $data['id'] = $user['id'];
+
+                if ($_POST['avatar'] !== $user['avatar']) {
+                  if ($_POST['avatar'] !== 'default.jpg') {
+                    $allowed = array('image/png', 'image/jpeg');
+                    $type = $_FILES['image']['type'];
+                    if (in_array($type, $allowed)) {
+                      $currentPath = $_FILES['image']['tmp_name'];
+
+                      $data['avatar'] = $this->uploadAvatar($currentPath, 'user_' . $user['id'] . '.jpg');
+                    }
+                  } else {
+                    $this->deleteAvatar($user['avatar']);
+                  }
+                }
+
+                $userModel->update($data);
+
+                $_SESSION['user_avatar'] = $data['avatar'];
+
+                header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $user['id']);
+                exit;
               } else {
                 throw new Exception("Veuillez confirmer le mot de passe.");
               }
-            } else {
-              throw new Exception("Il manque des informations.");
-            }
-          } else if ($_SESSION['user_admin'] === 1) {
-            if (!empty($_POST) && (isset($_POST['admin']) && !empty($_POST['admin']))) {
-              $data['admin'] = $_POST['admin'];
-
-              $userModel->updateAdmin($data);
-
-              header("Location: http://localhost/P5/?controller=user&action=index");
-              exit;
             } else {
               throw new Exception("Il manque des informations.");
             }
@@ -228,6 +229,7 @@ class User extends Controller {
       }
     } catch(Exception $e) {
       $message = $e->getMessage();
+      var_dump($message);die;
       header("Location: http://localhost/P5/?controller=home&action=index");
       exit;
     }

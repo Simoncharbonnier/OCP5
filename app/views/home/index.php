@@ -82,7 +82,7 @@
           <input type="text" name="last_name" placeholder="Nom" autocomplete="off">
         </div>
         <div class="col-md-4">
-          <input type="text" name="mail" placeholder="Email" autocomplete="off">
+          <input type="email" name="mail" placeholder="Email" autocomplete="off">
         </div>
       </div>
       <div class="row">

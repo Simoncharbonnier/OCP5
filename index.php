@@ -38,6 +38,4 @@ if (!isset($_SESSION)) {
   }
 }
 
-var_dump($_SESSION);
-
 include_once('app/views/layout/index.php');

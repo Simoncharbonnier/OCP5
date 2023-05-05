@@ -51,7 +51,7 @@ class User_model extends Model {
    * Update a user
    */
   public function update(array $data) {
-    $sql = "UPDATE User SET first_name = :first_name, last_name = :last_name, mail = :mail, password = :password, avatar = :avatar
+    $sql = "UPDATE User SET first_name = :first_name, last_name = :last_name, password = :password, avatar = :avatar
             WHERE id = :id";
     $query = $this->db->prepare($sql);
     return $query->execute($data);
