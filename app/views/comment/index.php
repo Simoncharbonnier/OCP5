@@ -16,7 +16,7 @@
             <p><?= $comment['message'] ?></p>
           </div>
           <div class="col-md-3 comment-part date-created">
-            <p>Publié le <?= $comment['created_at'] ?> par <?= $comment['author'] ?></p>
+            <p>Publié le <?= $comment['created_at'] ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= $comment['author'] ?></a></p>
             <img class="avatar" src="assets/img/user/<?= $comment['author_avatar'] ?>" alt="">
           </div>
           <div class="col-md-1 comment-part">

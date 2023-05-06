@@ -52,6 +52,10 @@ a {
   border-bottom: none !important;
 }
 
+.btn-underline:hover {
+  text-decoration: underline;
+}
+
 .d-none {
   display: none !important;
 }

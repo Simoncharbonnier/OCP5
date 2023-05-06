@@ -9,7 +9,7 @@ class Comment_model extends Model {
    */
   public function getAll() {
     $sql = "SELECT Comment.id, Comment.message, Comment.created_at, Comment.valid,
-                    User.first_name author, User.avatar author_avatar,
+                    User.id author_id, User.first_name author, User.avatar author_avatar,
                     Post.id post_id, Post.title post_title
             FROM Comment
             JOIN User ON User.id = Comment.user_id

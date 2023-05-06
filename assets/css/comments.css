@@ -20,10 +20,6 @@
   margin-left: 1rem;
 }
 
-.comments .btn-underline:hover {
-  text-decoration: underline;
-}
-
 .comment {
   padding: 8px;
 }

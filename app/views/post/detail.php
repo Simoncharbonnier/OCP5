@@ -12,7 +12,7 @@
           <div class="col-md-11">
             <div class="post-title">
               <h1><?= $post['title'] ?></h1>
-              <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off"></h1>
+              <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off" required></h1>
             </div>
           </div>
           <?php if ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) : ?>
@@ -27,7 +27,7 @@
           <div class="col-md-12">
             <div class="post-headline">
               <h2><?= $post['headline'] ?></h2>
-              <h2><input type="text" name="headline" value="<?= $post['headline'] ?>" autocomplete="off"></h2>
+              <h2><input type="text" name="headline" value="<?= $post['headline'] ?>" autocomplete="off" required></h2>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
           <div class="col-md-12">
             <div class="post-content">
               <p><?= $post['content'] ?></p>
-              <p><textarea name="content" rows="7"><?= $post['content'] ?></textarea></p>
+              <p><textarea name="content" rows="7" required><?= $post['content'] ?></textarea></p>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
           </div>
           <div class="col-md-4">
             <div class="date-created">
-              <p>Publié le <?= $post['created_at'] ?> par <?= $post['author'] ?></p>
+              <p>Publié le <?= $post['created_at'] ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $post['author_id'] ?>"><?= $post['author'] ?></a></p>
               <img class="avatar" src="assets/img/user/<?= $post['author_avatar'] ?>" alt="">
             </div>
           </div>
@@ -86,7 +86,7 @@
           <div class="comment">
             <p><?= $comment['message'] ?></p>
             <div class="date-created">
-              <p>Publié le <?= $comment['created_at'] ?> par <?= $comment['author'] ?></p>
+              <p>Publié le <?= $comment['created_at'] ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= $comment['author'] ?></a></p>
               <img class="avatar" src="assets/img/user/<?= $comment['author_avatar'] ?>" alt="">
             </div>
           </div>
@@ -96,7 +96,7 @@
     <div class="col-md-4">
       <h3>Quel est votre avis ?</h3>
       <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">
-        <textarea name="message" rows="7" placeholder="Commentaire" autocomplete="off"></textarea>
+        <textarea name="message" rows="7" placeholder="Commentaire" autocomplete="off" required></textarea>
         <input type="submit" class="btn btn-submit" value="Partager">
       </form>
     </div>

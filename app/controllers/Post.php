@@ -42,6 +42,7 @@ class Post extends Controller {
             'image' => $result[0]['image'],
             'created_at' => $result[0]['created_at'],
             'updated_at' => $result[0]['updated_at'],
+            'author_id' => $result[0]['post_author_id'],
             'author' => $result[0]['post_author'],
             'author_avatar' => $result[0]['post_author_avatar']
           ];
@@ -52,6 +53,7 @@ class Post extends Controller {
               $comments[] = [
                 'message' => $comment['message'],
                 'created_at' => $comment['comment_created_at'],
+                'author_id' => $comment['comment_author_id'],
                 'author' => $comment['comment_author'],
                 'author_avatar' => $comment['comment_author_avatar']
               ];
