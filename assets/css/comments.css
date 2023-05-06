@@ -1,7 +1,15 @@
+.comments {
+  text-align: center;
+}
+
 .comments .comment-part {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.comments h1 {
+  padding-bottom: 1rem;
 }
 
 .comments .message {
@@ -10,10 +18,6 @@
 
 .comments .date-created img {
   margin-left: 1rem;
-}
-
-.comments .btn-underline:hover {
-  text-decoration: underline;
 }
 
 .comment {

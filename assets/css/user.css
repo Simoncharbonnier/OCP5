@@ -1,0 +1,88 @@
+.user .card {
+  padding: 2rem;
+  margin: 1rem 0;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+.user .center {
+  justify-content: center;
+}
+
+.user .headers {
+  opacity: .5;
+}
+
+.user .margin-bottom {
+  margin-bottom: 1rem;
+}
+
+.user .text-underline:hover {
+  text-decoration: underline;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user h1 {
+  margin-bottom: 2rem;
+}
+
+.user form .input p:last-child {
+  display: none;
+}
+
+form.editing .input p:first-child {
+  display: none;
+}
+
+form.editing .input p:last-child {
+  display: block;
+}
+
+.editing .avatar {
+  cursor: pointer;
+}
+
+input {
+  width: 80%;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+}
+
+input[type=submit] {
+  width: auto;
+}
+
+input:focus-visible {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.password-row {
+  display: none;
+  margin-top: 1rem;
+}
+
+.editing .password-row {
+  display: flex;
+}
+
+.icon-delete {
+  width: 20px;
+  display: none;
+}
+
+form.editing .icon-delete {
+  display: block;
+}
+
+.user .avatar {
+  width: auto;
+  height: 50px;
+}

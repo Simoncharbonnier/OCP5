@@ -1,0 +1,27 @@
+.container.login .row {
+  justify-content: center;
+}
+
+.login form {
+  margin-top: 5vh;
+  padding: 2rem;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 3px;
+}
+
+.login input {
+  width: 100%;
+  margin: 1rem 0;
+  border: none;
+}
+
+.login input:focus-visible {
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.login .link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -13,7 +13,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   document.querySelectorAll('.nav-item').forEach(item => {
     if (found && item.getAttribute('controller') === found[1] && item.getAttribute('action') === found[2]) {
-      item.classList.add('active');
+      if (found[2] === 'login') {
+        const regexForm = /&form=(\w+)/;
+        const foundForm = url.match(regexForm);
+        if (item.getAttribute('form') === foundForm[1]) {
+          item.classList.add('active');
+        }
+      } else {
+        item.classList.add('active');
+      }
     } else if (found === null && item.getAttribute('controller') === 'home' && item.getAttribute('action') === 'index') {
       item.classList.add('active');
     }
@@ -26,30 +34,32 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalAddPostBtnImgAdd = document.getElementById('modal-add-post-btn-img');
   const modalAddPostBtnImgCancel = document.getElementById('modal-add-post-btn-img-cancel');
 
-  modalAddPostImg.addEventListener('click', function(e) {
-    click(modalAddPostImgInput);
-  });
+  if (modalAddPostImg) {
+    modalAddPostImg.addEventListener('click', function(e) {
+      click(modalAddPostImgInput);
+    });
 
-  modalAddPostBtnImgAdd.addEventListener('click', function(e) {
-    click(modalAddPostImgInput);
-  });
+    modalAddPostBtnImgAdd.addEventListener('click', function(e) {
+      click(modalAddPostImgInput);
+    });
 
-  modalAddPostBtnImgCancel.addEventListener('click', function(e) {
-    modalAddPostImg.src = '';
-    modalAddPostBtnImgCancel.classList.add('d-none');
-    modalAddPostBtnImgAdd.classList.remove('d-none');
-    modalAddPostImgInput.value = '';
-  });
+    modalAddPostBtnImgCancel.addEventListener('click', function(e) {
+      modalAddPostImg.src = '';
+      modalAddPostBtnImgCancel.classList.add('d-none');
+      modalAddPostBtnImgAdd.classList.remove('d-none');
+      modalAddPostImgInput.value = '';
+    });
 
-  modalAddPostImgInput.addEventListener('change', function(e) {
-    const file = modalAddPostImgInput.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = function() {
-      modalAddPostImg.src = reader.result;
-    }
+    modalAddPostImgInput.addEventListener('change', function(e) {
+      const file = modalAddPostImgInput.files[0];
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onloadend = function() {
+        modalAddPostImg.src = reader.result;
+      }
 
-    modalAddPostBtnImgAdd.classList.add('d-none');
-    modalAddPostBtnImgCancel.classList.remove('d-none');
-  });
+      modalAddPostBtnImgAdd.classList.add('d-none');
+      modalAddPostBtnImgCancel.classList.remove('d-none');
+    });
+  }
 });

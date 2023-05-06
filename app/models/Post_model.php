@@ -14,14 +14,25 @@ class Post_model extends Model {
     return $query->fetchAll();
   }
 
+    /**
+   * Get posts by user
+   */
+  public function getByUser($id) {
+    $sql = "SELECT * FROM Post WHERE user_id = :user_id";
+    $query = $this->db->prepare($sql);
+    $query->bindParam(':user_id', $id);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
   /**
    * Get a post by id with its comments
    */
   public function getById($id) {
     $sql = "SELECT Post.id, Post.title, Post.headline, Post.content, Post.image, Post.created_at, Post.updated_at,
-                    User.first_name post_author, User.avatar post_author_avatar,
+                    User.id post_author_id, User.first_name post_author, User.avatar post_author_avatar,
                     Comment.message, Comment.created_at comment_created_at,
-                    U.first_name comment_author, U.avatar comment_author_avatar
+                    U.id comment_author_id, U.first_name comment_author, U.avatar comment_author_avatar
             FROM Post
             JOIN User ON User.id = Post.user_id
             LEFT JOIN Comment ON Comment.post_id = Post.id AND Comment.valid = 1
@@ -73,6 +84,16 @@ class Post_model extends Model {
     $sql = "DELETE FROM Post WHERE id = :post_id";
     $query = $this->db->prepare($sql);
     $query->bindParam(':post_id', $id);
+    return $query->execute();
+  }
+
+  /**
+   * Delete posts by user
+   */
+  public function deleteByUser($id) {
+    $sql = "DELETE FROM Post WHERE user_id = :user_id";
+    $query = $this->db->prepare($sql);
+    $query->bindParam(':user_id', $id);
     return $query->execute();
   }
 }

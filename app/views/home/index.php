@@ -76,18 +76,18 @@
       <h3>Vous souhaitez me contacter ? C'est par ici !</h3>
       <div class="row">
         <div class="col-md-4">
-          <input type="text" name="first_name" placeholder="Prénom" autocomplete="off">
+          <input type="text" name="first_name" placeholder="Prénom" autocomplete="off" required>
         </div>
         <div class="col-md-4">
-          <input type="text" name="last_name" placeholder="Nom" autocomplete="off">
+          <input type="text" name="last_name" placeholder="Nom" autocomplete="off" required>
         </div>
         <div class="col-md-4">
-          <input type="text" name="mail" placeholder="Email" autocomplete="off">
+          <input type="email" name="mail" placeholder="Email" autocomplete="off" required>
         </div>
       </div>
       <div class="row">
         <div class="col-md-12">
-          <textarea name="message" rows="7" placeholder="Message" autocomplete="off"></textarea>
+          <textarea name="message" rows="7" placeholder="Message" autocomplete="off" required></textarea>
         </div>
       </div>
       <input type="submit" class="btn btn-submit">
