@@ -14,7 +14,7 @@ class Post_model extends Model {
     return $query->fetchAll();
   }
 
-    /**
+  /**
    * Get posts by user
    */
   public function getByUser($id) {
@@ -26,7 +26,7 @@ class Post_model extends Model {
   }
 
   /**
-   * Get a post by id with its comments
+   * Get a post by id with its comments and author
    */
   public function getById($id) {
     $sql = "SELECT Post.id, Post.title, Post.headline, Post.content, Post.image, Post.created_at, Post.updated_at,

@@ -60,6 +60,24 @@ a {
   display: none !important;
 }
 
+.notif {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.success {
+  background-color: #d0ffb8;
+  color: #39721c;
+}
+
+.error {
+  background-color: #ffcccc;
+  color: #812626;
+}
+
 /* HEADER */
 
 .navbar {

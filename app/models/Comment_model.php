@@ -31,7 +31,7 @@ class Comment_model extends Model {
     return $query->fetchAll();
   }
 
-    /**
+  /**
    * Get comments by user
    */
   public function getByUser($id) {
@@ -42,7 +42,7 @@ class Comment_model extends Model {
     return $query->fetchAll();
   }
 
-    /**
+  /**
    * Get comments by post
    */
   public function getByPost($id) {

@@ -10,7 +10,7 @@ class Home {
   }
 
   /**
-   * Send a mail
+   * Send a mail and redirect to the home page
    */
   public function mail() : void {
     try {
@@ -32,13 +32,14 @@ class Home {
 
         mail($to, $subject, $message, implode("\r\n", $headers));
 
-        header("Location: http://localhost/P5/?controller=home&action=index");
+        header("Location: http://localhost/P5/?controller=home&action=index&success=success_mail_sent");
         exit;
       } else {
-        throw new Exception("Il manque une ou plusieurs informations.");
+        throw new Exception("missing_param");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
+      exit;
     }
   }
 }

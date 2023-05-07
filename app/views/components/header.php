@@ -70,3 +70,5 @@
     </div>
   </div>
 <?php endif; ?>
+
+<?php include_once('app/views/components/notif.php'); ?>

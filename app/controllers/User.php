@@ -11,7 +11,7 @@ require_once('app/models/Post_model.php');
 class User extends Controller {
 
   /**
-   * Add a user and redirect to user->login()
+   * Add a user and redirect to the login page
    */
   public function signup() : void {
     try {
@@ -29,26 +29,25 @@ class User extends Controller {
             $data['password'] = $passwordHash;
 
             $userModel->create($data);
-            header("Location: http://localhost/P5/?controller=user&action=login&form=login");
+            header("Location: http://localhost/P5/?controller=user&action=login&form=login&success=success_user_add");
             exit;
           } else {
-            throw new Exception("Un utilisateur utilise déjà cette adresse mail.");
+            throw new Exception("user_exist");
           }
         } else {
-          throw new Exception("Veuillez confirmer le mot de passe.");
+          throw new Exception("password_confirm");
         }
       } else {
-        throw new Exception("Il manque des informations.");
+        throw new Exception("missing_param");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=user&action=login&form=signup");
+      header("Location: http://localhost/P5/?controller=user&action=login&form=signup&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Verify the credentials and redirect to home->index()
+   * Verify the credentials and redirect to the home page
    */
   public function login() : void {
     try {
@@ -69,37 +68,37 @@ class User extends Controller {
               header("Location: http://localhost/P5/?controller=home&action=index");
               exit;
             } else {
-              throw new Exception("Mot de passe incorrect.");
+              throw new Exception("password_inval");
             }
           } else {
-            throw new Exception("Mail incorrect.");
+            throw new Exception("email_inval");
           }
         } else {
-          throw new Exception("Identifiants manquants.");
+          throw new Exception("missing_param");
         }
       } else {
         include_once('app/views/user/login.php');
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=user&action=login&form=login");
+      header("Location: http://localhost/P5/?controller=user&action=login&form=login&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Logout a user
+   * Logout a user and redirect to the home page
    */
   public function logout() : void {
     try {
       $this->isLogged();
       session_unset();
       session_destroy();
+      header("Location: http://localhost/P5/?controller=home&action=index");
+      exit;
     } catch(Exception $e) {
-      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
+      exit;
     }
-    header("Location: http://localhost/P5/?controller=home&action=index");
-    exit;
   }
 
   /**
@@ -113,16 +112,19 @@ class User extends Controller {
       $userModel = New User_model();
       $users = $userModel->getAll();
 
+      if (empty($users)) {
+        throw new Exception("no_users");
+      }
+
       include_once('app/views/user/index.php');
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=home&action=index");
+      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Retrieve a user by its id and display the detail of the user
+   * Retrieve a user by its id and display user detail
    */
   public function detail() : void {
     try {
@@ -152,21 +154,20 @@ class User extends Controller {
 
           include_once('app/views/user/detail.php');
         } else {
-          throw new Exception("L'utilisateur n'existe pas.");
+          throw new Exception("no_user");
         }
       } else {
-        throw new Exception("Quel utilisateur voulez-vous voir ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=home&action=index");
+      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Update a user by its id and redirect to detail() or index()
-   * As an admin or the user himself
+   * Update a user by its id and redirect to user detail
+   * As the user himself
    */
   public function edit() : void {
     try {
@@ -210,34 +211,32 @@ class User extends Controller {
 
                 $_SESSION['user_avatar'] = $data['avatar'];
 
-                header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $user['id']);
+                header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $user['id'] . "&success=success_user_edit");
                 exit;
               } else {
-                throw new Exception("Veuillez confirmer le mot de passe.");
+                throw new Exception("password_confirm");
               }
             } else {
-              throw new Exception("Il manque des informations.");
+              throw new Exception("missing_param");
             }
           } else {
-            throw new Exception("Vous n'avez pas les permissions.");
+            throw new Exception("no_perms");
           }
         } else {
-          throw new Exception("L'utilisateur n'existe pas.");
+          throw new Exception("no_user");
         }
       } else {
-        throw new Exception("Quel utilisateur voulez-vous modifier ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      var_dump($message);die;
-      header("Location: http://localhost/P5/?controller=home&action=index");
+      header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $_GET['id'] . "&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Delete a user by its id and redirect to index()
-   * As an admin or the user himself
+   * Delete a user by its id and redirect to users index
+   * As an admin
    */
   public function delete() : void {
     try {
@@ -276,24 +275,25 @@ class User extends Controller {
                 session_unset();
                 session_destroy();
               }
+
+              header("Location: http://localhost/P5/?controller=user&action=index&success=success_user_delete");
+              exit;
             } else {
-              throw new Exception("L'utilisateur est un administrateur.");
+              throw new Exception("user_admin");
             }
           } else {
-            throw new Exception("Vous n'avez pas les permissions.");
+            throw new Exception("no_perms");
           }
         } else {
-          throw new Exception("L'utilisateur n'existe pas.");
+          throw new Exception("no_user");
         }
       } else {
-        throw new Exception("Quel utilisateur voulez-vous supprimer ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=user&action=index&error=" . $e->getMessage());
+      exit;
     }
-
-    header("Location: http://localhost/P5/?controller=user&action=index");
-    exit;
   }
 
   private function uploadAvatar($currentPath, $newFileName) {

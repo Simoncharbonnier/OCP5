@@ -10,7 +10,7 @@
         <h1>Connexion</h1>
         <div class="row">
           <div class="col-md-12">
-            <input type="text" name="mail" placeholder="Email" autocomplete="off" required>
+            <input type="email" name="mail" placeholder="Email" autocomplete="off" required>
           </div>
           <div class="col-md-12">
             <input type="password" name="password" placeholder="Mot de passe" autocomplete="off" required>
@@ -31,7 +31,7 @@
             <input type="text" name="last_name" placeholder="Nom" autocomplete="off" required>
           </div>
           <div class="col-md-12">
-            <input type="text" name="mail" placeholder="Email" autocomplete="off" required>
+            <input type="email" name="mail" placeholder="Email" autocomplete="off" required>
           </div>
           <div class="col-md-6">
             <input type="password" name="password" placeholder="Mot de passe" autocomplete="off" required>

@@ -8,7 +8,7 @@ require_once('app/models/Post_model.php');
 class Comment extends Controller {
 
   /**
-   * Retrieve all comments and display the list of comments
+   * Retrieve all comments and display comments index
    * As an admin
    */
   public function index() : void {
@@ -18,16 +18,19 @@ class Comment extends Controller {
       $commentModel = New Comment_model();
       $comments = $commentModel->getAll();
 
+      if (empty($comments)) {
+        throw new Exception("no_comments");
+      }
+
       include_once('app/views/comment/index.php');
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=home&action=index");
+      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Add a comment and redirect to post->detail()
+   * Add a comment and redirect to post detail
    */
   public function add() : void {
     try {
@@ -48,26 +51,25 @@ class Comment extends Controller {
             $commentModel = New Comment_model();
             $commentModel->create($data);
 
-            header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+            header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId . "&success=success_comment_add");
             exit;
           } else {
-            throw new Exception("Il n'y a pas de message.");
+            throw new Exception("missing_param");
           }
         } else {
-          throw new Exception("Ce post n'existe pas.");
+          throw new Exception("no_post");
         }
       } else {
-        throw new Exception("A quel post voulez-vous ajouter un commentaire ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=post&action=index");
+      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Update a comment by its id and redirect to index()
+   * Update a comment by its id and redirect to comments index
    * As an admin
    */
   public function edit() : void {
@@ -90,22 +92,23 @@ class Comment extends Controller {
           $data['id'] = $commentId;
 
           $commentModel->update($data);
+
+          header("Location: http://localhost/P5/?controller=comment&action=index&success=success_comment_edit");
+          exit;
         } else {
-          throw new Exception("Le commentaire n'existe pas.");
+          throw new Exception("no_comment");
         }
       } else {
-        throw new Exception("Quel commentaire voulez-vous modifier ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=comment&action=index&error=" . $e->getMessage());
+      exit;
     }
-
-    header("Location: http://localhost/P5/?controller=comment&action=index");
-    exit;
   }
 
   /**
-   * Delete a comment by its id and redirect to index()
+   * Delete a comment by its id and redirect to comments index
    * As an admin
    */
   public function delete($commentId = NULL) : void {
@@ -120,17 +123,17 @@ class Comment extends Controller {
 
         if (!empty($comment)) {
           $commentModel->delete($commentId);
+          header("Location: http://localhost/P5/?controller=comment&action=index&success=success_comment_delete");
+          exit;
         } else {
-          throw new Exception("Le commentaire n'existe pas.");
+          throw new Exception("no_comment");
         }
       } else {
-        throw new Exception("Quel commentaire voulez-vous supprimer ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=comment&action=index&error=" . $e->getMessage());
+      exit;
     }
-
-    header("Location: http://localhost/P5/?controller=comment&action=index");
-    exit;
   }
 }

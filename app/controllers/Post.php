@@ -8,23 +8,26 @@ require_once('app/models/Comment_model.php');
 class Post extends Controller {
 
   /**
-   * Retrieve all posts and display the list of posts
+   * Retrieve all posts and display posts index
    */
   public function index() : void {
     try {
       $postModel = New Post_model();
       $posts = $postModel->getAll();
 
+      if (empty($posts)) {
+        throw new Exception("no_posts");
+      }
+
       include_once('app/views/post/index.php');
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=home&action=index");
+      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Retrieve a post by its id and display the detail of the post
+   * Retrieve a post by its id and display post detail
    */
   public function detail() : void {
     try {
@@ -62,20 +65,19 @@ class Post extends Controller {
 
           include_once('app/views/post/detail.php');
         } else {
-          throw new Exception("L'article n'existe pas.");
+          throw new Exception("no_post");
         }
       } else {
-        throw new Exception("Quel article voulez-vous voir ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=post&action=index");
+      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Add a post and redirect to detail()
+   * Add a post and redirect to post detail
    * As an admin
    */
   public function add() : void {
@@ -112,24 +114,22 @@ class Post extends Controller {
           }
 
           $postId = $postModel->create($data);
-          header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+          header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId . "&success=success_post_add");
           exit;
         } else {
-          throw new Exception("Un article avec ce titre existe déjà.");
+          throw new Exception("post_exist");
         }
       } else {
-        throw new Exception("Des champs sont manquants.");
+        throw new Exception("missing_param");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      var_dump($message);die;
-      header("Location: http://localhost/P5/?controller=post&action=index");
+      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Edit a post by its id and redirect to detail()
+   * Edit a post by its id and redirect to post detail
    * As an admin
    */
   public function edit() : void {
@@ -185,29 +185,28 @@ class Post extends Controller {
               }
 
               $postModel->update($data);
-              header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId);
+              header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId . "&success=success_post_edit");
               exit;
             } else {
-              throw new Exception("Un article avec ce titre existe déjà.");
+              throw new Exception("post_exist");
             }
           } else {
-            throw new Exception("Des champs sont manquants.");
+            throw new Exception("missing_param");
           }
         } else {
-          throw new Exception("Le post n'existe pas.");
+          throw new Exception("no_post");
         }
       } else {
-        throw new Exception("Quel post voulez-vous modifier ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
-      header("Location: http://localhost/P5/?controller=post&action=index");
+      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   /**
-   * Delete a post by its id and redirect to index()
+   * Delete a post by its id and redirect to post index
    * As an admin
    */
   public function delete($postId = NULL) : void {
@@ -234,18 +233,18 @@ class Post extends Controller {
           }
 
           $postModel->delete($postId);
+          header("Location: http://localhost/P5/?controller=post&action=index&success=success_post_delete");
+          exit;
         } else {
-          throw new Exception("Le post n'existe pas.");
+          throw new Exception("no_post");
         }
       } else {
-        throw new Exception("Quel post voulez-vous supprimer ?");
+        throw new Exception("inval");
       }
     } catch(Exception $e) {
-      $message = $e->getMessage();
+      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
+      exit;
     }
-
-    header("Location: http://localhost/P5/?controller=post&action=index");
-    exit;
   }
 
   private function uploadImage($currentPath, $newFileName) {

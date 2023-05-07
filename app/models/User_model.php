@@ -4,7 +4,7 @@ require_once('app/models/Model.php');
 
 class User_model extends Model {
 
-    /**
+  /**
    * Get all users
    */
   public function getAll() {
