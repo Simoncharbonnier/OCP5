@@ -21,7 +21,7 @@ class Post extends Controller {
 
       include_once('app/views/post/index.php');
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -71,7 +71,7 @@ class Post extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -114,7 +114,7 @@ class Post extends Controller {
           }
 
           $postId = $postModel->create($data);
-          header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId . "&success=success_post_add");
+          header("Location: " . PATH . "?controller=post&action=detail&id=" . $postId . "&success=success_post_add");
           exit;
         } else {
           throw new Exception("post_exist");
@@ -123,7 +123,7 @@ class Post extends Controller {
         throw new Exception("missing_param");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -185,7 +185,7 @@ class Post extends Controller {
               }
 
               $postModel->update($data);
-              header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId . "&success=success_post_edit");
+              header("Location: " . PATH . "?controller=post&action=detail&id=" . $postId . "&success=success_post_edit");
               exit;
             } else {
               throw new Exception("post_exist");
@@ -200,7 +200,7 @@ class Post extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -233,7 +233,7 @@ class Post extends Controller {
           }
 
           $postModel->delete($postId);
-          header("Location: http://localhost/P5/?controller=post&action=index&success=success_post_delete");
+          header("Location: " . PATH . "?controller=post&action=index&success=success_post_delete");
           exit;
         } else {
           throw new Exception("no_post");
@@ -242,13 +242,13 @@ class Post extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   private function uploadImage($currentPath, $newFileName) {
-    $newPath = '/opt/lampp/htdocs/P5/assets/img/post/' . $newFileName;
+    $newPath = IMAGE_PATH . "post/" . $newFileName;
 
     if (move_uploaded_file($currentPath, $newPath)) {
       return $newFileName;
@@ -258,7 +258,7 @@ class Post extends Controller {
   }
 
   private function deleteImage($fileName) {
-    $path = '/opt/lampp/htdocs/P5/assets/img/post/' . $fileName;
+    $path = IMAGE_PATH . "post/"  . $fileName;
 
     if (file_exists($path)) {
       unlink($path);
@@ -266,10 +266,8 @@ class Post extends Controller {
   }
 
   private function renameImage($oldFileName, $newFileName) {
-    $path = '/opt/lampp/htdocs/P5/assets/img/post/';
-
-    if (file_exists($path . $oldFileName)) {
-      rename($path . $oldFileName, $path . $newFileName);
+    if (file_exists(IMAGE_PATH . "post/" . $oldFileName)) {
+      rename(IMAGE_PATH . "post/" . $oldFileName, IMAGE_PATH . "post/" . $newFileName);
     }
   }
 }

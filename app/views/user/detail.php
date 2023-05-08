@@ -124,7 +124,7 @@
               </div>
             <?php endforeach; ?>
           <?php else : ?>
-            <p>Aucun commentaire</p>
+            <p>Aucun commentaire validé</p>
           <?php endif; ?>
         </div>
       </div>

@@ -24,7 +24,7 @@ class Comment extends Controller {
 
       include_once('app/views/comment/index.php');
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -51,7 +51,7 @@ class Comment extends Controller {
             $commentModel = New Comment_model();
             $commentModel->create($data);
 
-            header("Location: http://localhost/P5/?controller=post&action=detail&id=" . $postId . "&success=success_comment_add");
+            header("Location: " . PATH . "?controller=post&action=detail&id=" . $postId . "&success=success_comment_add");
             exit;
           } else {
             throw new Exception("missing_param");
@@ -63,7 +63,7 @@ class Comment extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=post&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=post&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -93,7 +93,7 @@ class Comment extends Controller {
 
           $commentModel->update($data);
 
-          header("Location: http://localhost/P5/?controller=comment&action=index&success=success_comment_edit");
+          header("Location: " . PATH . "?controller=comment&action=index&success=success_comment_edit");
           exit;
         } else {
           throw new Exception("no_comment");
@@ -102,7 +102,7 @@ class Comment extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=comment&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=comment&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -123,7 +123,7 @@ class Comment extends Controller {
 
         if (!empty($comment)) {
           $commentModel->delete($commentId);
-          header("Location: http://localhost/P5/?controller=comment&action=index&success=success_comment_delete");
+          header("Location: " . PATH . "?controller=comment&action=index&success=success_comment_delete");
           exit;
         } else {
           throw new Exception("no_comment");
@@ -132,7 +132,7 @@ class Comment extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=comment&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=comment&action=index&error=" . $e->getMessage());
       exit;
     }
   }

@@ -46,7 +46,7 @@ class Comment_model extends Model {
    * Get comments by post
    */
   public function getByPost($id) {
-    $sql = "SELECT * FROM Comment WHERE post_id = :post_id";
+    $sql = "SELECT * FROM Comment WHERE post_id = :post_id ORDER BY created_at DESC";
     $query = $this->db->prepare($sql);
     $query->bindParam(':post_id', $id);
     $query->execute();

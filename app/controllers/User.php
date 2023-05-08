@@ -29,7 +29,7 @@ class User extends Controller {
             $data['password'] = $passwordHash;
 
             $userModel->create($data);
-            header("Location: http://localhost/P5/?controller=user&action=login&form=login&success=success_user_add");
+            header("Location: " . PATH . "?controller=user&action=login&form=login&success=success_user_add");
             exit;
           } else {
             throw new Exception("user_exist");
@@ -41,7 +41,7 @@ class User extends Controller {
         throw new Exception("missing_param");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=user&action=login&form=signup&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=user&action=login&form=signup&error=" . $e->getMessage());
       exit;
     }
   }
@@ -65,7 +65,7 @@ class User extends Controller {
               $_SESSION['user_mail'] = $user['mail'];
               $_SESSION['user_avatar'] = $user['avatar'];
               $_SESSION['user_admin'] = $user['admin'];
-              header("Location: http://localhost/P5/?controller=home&action=index");
+              header("Location: " . PATH . "?controller=home&action=index");
               exit;
             } else {
               throw new Exception("password_inval");
@@ -80,7 +80,7 @@ class User extends Controller {
         include_once('app/views/user/login.php');
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=user&action=login&form=login&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=user&action=login&form=login&error=" . $e->getMessage());
       exit;
     }
   }
@@ -93,10 +93,10 @@ class User extends Controller {
       $this->isLogged();
       session_unset();
       session_destroy();
-      header("Location: http://localhost/P5/?controller=home&action=index");
+      header("Location: " . PATH . "?controller=home&action=index");
       exit;
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -118,7 +118,7 @@ class User extends Controller {
 
       include_once('app/views/user/index.php');
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -160,7 +160,7 @@ class User extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=home&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
       exit;
     }
   }
@@ -211,7 +211,7 @@ class User extends Controller {
 
                 $_SESSION['user_avatar'] = $data['avatar'];
 
-                header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $user['id'] . "&success=success_user_edit");
+                header("Location: " . PATH . "?controller=user&action=detail&id=" . $user['id'] . "&success=success_user_edit");
                 exit;
               } else {
                 throw new Exception("password_confirm");
@@ -229,7 +229,7 @@ class User extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=user&action=detail&id=" . $_GET['id'] . "&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=user&action=detail&id=" . $_GET['id'] . "&error=" . $e->getMessage());
       exit;
     }
   }
@@ -276,7 +276,7 @@ class User extends Controller {
                 session_destroy();
               }
 
-              header("Location: http://localhost/P5/?controller=user&action=index&success=success_user_delete");
+              header("Location: " . PATH . "?controller=user&action=index&success=success_user_delete");
               exit;
             } else {
               throw new Exception("user_admin");
@@ -291,13 +291,13 @@ class User extends Controller {
         throw new Exception("inval");
       }
     } catch(Exception $e) {
-      header("Location: http://localhost/P5/?controller=user&action=index&error=" . $e->getMessage());
+      header("Location: " . PATH . "?controller=user&action=index&error=" . $e->getMessage());
       exit;
     }
   }
 
   private function uploadAvatar($currentPath, $newFileName) {
-    $newPath = '/opt/lampp/htdocs/P5/assets/img/user/' . $newFileName;
+    $newPath = IMAGE_PATH . "user/" . $newFileName;
 
     if (move_uploaded_file($currentPath, $newPath)) {
       return $newFileName;
@@ -307,7 +307,7 @@ class User extends Controller {
   }
 
   private function deleteAvatar($fileName) {
-    $path = '/opt/lampp/htdocs/P5/assets/img/user/' . $fileName;
+    $path = IMAGE_PATH . "user/"  . $fileName;
 
     if (file_exists($path)) {
       unlink($path);
@@ -315,7 +315,7 @@ class User extends Controller {
   }
 
   private function deleteImage($fileName) {
-    $path = '/opt/lampp/htdocs/P5/assets/img/post/' . $fileName;
+    $path = IMAGE_PATH . "post/"  . $fileName;
 
     if (file_exists($path)) {
       unlink($path);
