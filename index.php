@@ -23,14 +23,12 @@ if (file_exists('app/controllers/' . $controllerClassName . '.php')) {
   }
 
   if (!method_exists($instance, $action)) {
-    require_once('app/controllers/Error.php');
-    $instance = new ErrorClass();
-    $action = 'error404';
+    header("Location: " . PATH . "?controller=home&action=index&error=inval");
+    exit;
   }
 } else {
-  require_once('app/controllers/Error.php');
-  $instance = new ErrorClass();
-  $action = 'error404';
+  header("Location: " . PATH . "?controller=home&action=index&error=inval");
+  exit;
 }
 
 if (!isset($_SESSION)) {
