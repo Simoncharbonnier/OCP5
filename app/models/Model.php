@@ -6,9 +6,9 @@ class Model {
 
   public function __construct() {
     try {
-      $this->db = new PDO('mysql:host=localhost;dbname=OCP5;charset=utf8',
-        'root',
-        '',
+      $this->db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8',
+        DB_USER,
+        DB_PASSWORD,
         [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
     }
     catch(Exception $e) {
