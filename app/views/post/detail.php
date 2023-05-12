@@ -60,7 +60,7 @@
             </div>
           </div>
           <div class="col-md-4 form-submit">
-            <input type="submit" class="btn" value="Valider">
+            <input type="submit" class="btn long-width" value="Valider">
           </div>
           <div class="col-md-4">
             <div class="date-created">
@@ -98,7 +98,7 @@
         <h3>Quel est votre avis ?</h3>
         <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">
           <textarea name="message" rows="7" placeholder="Commentaire" autocomplete="off" required></textarea>
-          <input type="submit" class="btn btn-submit" value="Partager">
+          <input type="submit" class="btn btn-submit long-width" value="Partager">
         </form>
       <?php else : ?>
         <p>Vous devez vous connecter pour pouvoir commenter cet article.</p>

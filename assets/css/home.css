@@ -61,16 +61,3 @@
 #form-contact h3 {
   margin-bottom: 1rem;
 }
-
-#form-contact input, #form-contact textarea {
-  width: 100%;
-  margin: 8px 0;
-  border: none;
-  border-bottom: 1px solid black;
-}
-
-#form-contact input:focus-visible, #form-contact textarea:focus-visible {
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
-}

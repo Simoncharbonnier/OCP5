@@ -1,6 +1,6 @@
 /* CARDS */
 
-.card-product {
+.card {
   overflow: hidden;
   height: 400px;
   background: white;
@@ -11,23 +11,23 @@
   border-radius: 3px;
 }
 
-.card-product:hover {
+.card:hover {
   bottom: 10px;
 }
 
-.card-product img {
+.card img {
   height: 50%;
   width: 100%;
   object-fit: cover;
 }
 
-.card-product h3 {
+.card h3 {
   font-size: 18px;
   font-weight: bold;
   margin: 0;
 }
 
-.card-product p {
+.card p {
   font-size: 14px;
   line-height: 1.4;
   opacity: .7;
@@ -35,16 +35,18 @@
   margin-top: 8px;
 }
 
-.card-product .card-product-infos {
+.card .card-infos {
   padding: 16px;
 }
 
-.card-product .card-product-footer {
+.card .card-footer {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
+  background-color: inherit;
+  border: none;
 }
 
-.card-product .no-image {
+.card .no-image {
   padding-top: 40%;
 }

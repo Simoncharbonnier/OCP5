@@ -34,18 +34,6 @@
   font-weight: 500;
 }
 
-#form-edit-post input, textarea {
-  width: 100%;
-  border: none;
-  border-bottom: 1px solid black;
-}
-
-#form-edit-post input:focus-visible, #form-edit-post textarea:focus-visible {
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
-}
-
 .post .buttons-container {
   display: flex;
   align-items: center;
@@ -114,17 +102,4 @@
 
 .comment:not(:last-child) {
   border-bottom: 1px solid lightgrey;
-}
-
-#form-comment textarea, #form-comment input {
-  width: 100%;
-  margin: 8px 0;
-  border: none;
-  border-bottom: 1px solid black;
-}
-
-#form-comment textarea:focus-visible {
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
 }

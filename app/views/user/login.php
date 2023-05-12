@@ -10,40 +10,40 @@
         <h1>Connexion</h1>
         <div class="row">
           <div class="col-md-12">
-            <input type="email" name="mail" placeholder="Email" autocomplete="off" required>
+            <input type="email" name="mail" class="no-border-bottom" placeholder="Email" autocomplete="off" required>
           </div>
           <div class="col-md-12">
-            <input type="password" name="password" placeholder="Mot de passe" autocomplete="off" required>
+            <input type="password" name="password" class="no-border-bottom" placeholder="Mot de passe" autocomplete="off" required>
           </div>
           <div class="col-md-12">
             <input type="submit" class="btn" value="Se connecter">
           </div>
         </div>
-        <a href="?controller=user&action=login&form=signup" class="link">S'inscrire</a>
+        <a href="?controller=user&action=login&form=signup" class="btn-underline">S'inscrire</a>
       </form>
       <form id="form-signup" class="text-center d-none" action="?controller=user&action=signup" method="POST">
         <h1>Inscription</h1>
         <div class="row">
           <div class="col-md-6">
-            <input type="text" name="first_name" placeholder="Prénom" autocomplete="off" required>
+            <input type="text" name="first_name" class="no-border-bottom" placeholder="Prénom" autocomplete="off" required>
           </div>
           <div class="col-md-6">
-            <input type="text" name="last_name" placeholder="Nom" autocomplete="off" required>
+            <input type="text" name="last_name" class="no-border-bottom" placeholder="Nom" autocomplete="off" required>
           </div>
           <div class="col-md-12">
-            <input type="email" name="mail" placeholder="Email" autocomplete="off" required>
+            <input type="email" name="mail" class="no-border-bottom" placeholder="Email" autocomplete="off" required>
           </div>
           <div class="col-md-6">
-            <input type="password" name="password" placeholder="Mot de passe" autocomplete="off" required>
+            <input type="password" name="password" class="no-border-bottom" placeholder="Mot de passe" autocomplete="off" required>
           </div>
           <div class="col-md-6">
-            <input type="password" name="confirm" placeholder="Confirmation" autocomplete="off" required>
+            <input type="password" name="confirm" class="no-border-bottom" placeholder="Confirmation" autocomplete="off" required>
           </div>
           <div class="col-md-12">
             <input type="submit" class="btn" value="S'inscrire">
           </div>
         </div>
-        <a href="?controller=user&action=login&form=login" class="link">Se connecter</a>
+        <a href="?controller=user&action=login&form=login" class="btn-underline">Se connecter</a>
       </form>
     </div>
   </div>

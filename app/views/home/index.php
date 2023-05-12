@@ -27,15 +27,15 @@
           <?php foreach ($posts as $post) : ?>
             <div class="col-md-4">
               <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
-                <div class="card-product">
+                <div class="card">
                   <?php if ($post['image']) : ?>
                     <img src="assets/img/post/<?= $post['image'] ?>" alt="">
                   <?php endif; ?>
-                  <div class="card-product-infos <?= $post['image'] ? '' : 'no-image' ?>">
+                  <div class="card-infos <?= $post['image'] ? '' : 'no-image' ?>">
                     <h3><?= $post['title'] ?></h3>
                     <p><?= $post['headline'] ?></p>
                   </div>
-                  <div class="card-product-footer">
+                  <div class="card-footer">
                     <p><?= $this->formatDate($post['updated_at']) ?></p>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
           <textarea name="message" rows="7" placeholder="Message" autocomplete="off" required></textarea>
         </div>
       </div>
-      <input type="submit" class="btn btn-submit">
+      <input type="submit" class="btn btn-submit long-width">
     </div>
   </form>
 </div>

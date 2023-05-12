@@ -9,19 +9,6 @@
   border-radius: 3px;
 }
 
-.login input {
-  width: 100%;
-  margin: 1rem 0;
-  border: none;
-}
-
-.login input:focus-visible {
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
-}
-
-.login .link:hover {
-  cursor: pointer;
-  text-decoration: underline;
+form input {
+  margin: 1rem 0 !important;
 }

@@ -8,18 +8,6 @@ body {
   padding: 1rem 0;
 }
 
-h1 {
-
-}
-
-h2 {
-
-}
-
-h3 {
-
-}
-
 p {
   margin: 0 0 0 0;
 }
@@ -27,6 +15,10 @@ p {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.d-none {
+  display: none !important;
 }
 
 .avatar {
@@ -43,48 +35,45 @@ a {
 .btn {
   background-color: black;
   color: whitesmoke;
-  border: none !important;
+  border: 1px solid black;
+  padding: 5px 15px;
+  border-radius: 5px;
+  transition: all .4s ease-out;
 }
 
 .btn:hover {
-  background-color: black;
-  color: whitesmoke;
-  border-bottom: none !important;
+  border: 1px solid black;
+  background-color: white;
+  color: black;
 }
 
 .btn-underline:hover {
+  cursor: pointer;
   text-decoration: underline;
 }
 
-.d-none {
-  display: none !important;
-}
-
-.notif {
+form input[type=text], form input[type=email], form input[type=password], form textarea {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 0;
+  margin: 8px 0;
+  border: none;
+  border-bottom: 1px solid black;
 }
 
-.notif-icon-cross {
-  width: 15px;
-  cursor: pointer;
-  position: absolute;
-  right: 26px;
-  opacity: .8;
+form input[type=text]:focus-visible, form input[type=email]:focus-visible, form input[type=password]:focus-visible, form textarea:focus-visible {
+  border: none;
+  border-bottom: 1px solid black !important;
+  outline: none;
 }
 
-.success {
-  background-color: #d0ffb8;
-  color: #39721c;
+form input[type=submit].long-width {
+  width: 100%;
 }
 
-.error {
-  background-color: #ffcccc;
-  color: #812626;
+form .no-border-bottom {
+  border-bottom: 1px solid transparent !important;
 }
+
+
 
 /* HEADER */
 
@@ -117,19 +106,6 @@ a {
   align-items: center;
 }
 
-#form-add-post input, #form-add-post textarea {
-  width: 100%;
-  margin: 8px 0;
-  border: none;
-  border-bottom: 1px solid transparent;
-}
-
-#form-add-post input:focus-visible, #form-add-post textarea:focus-visible {
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
-}
-
 #form-add-post img {
   max-height: 250px;
   max-width: 100%;
@@ -139,6 +115,34 @@ a {
 #form-add-post img:hover {
   opacity: .7;
 }
+
+.notif {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.notif .icon-cross {
+  width: 15px;
+  cursor: pointer;
+  position: absolute;
+  right: 26px;
+  opacity: .8;
+}
+
+.notif.success {
+  background-color: #d0ffb8;
+  color: #39721c;
+}
+
+.notif.error {
+  background-color: #ffcccc;
+  color: #812626;
+}
+
+
 
 /* FOOTER */
 

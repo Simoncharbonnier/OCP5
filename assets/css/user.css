@@ -47,21 +47,13 @@ form.editing .input p:last-child {
   cursor: pointer;
 }
 
-input {
-  width: 80%;
-  border: none;
-  border-bottom: 1px solid black;
+#form-edit-user input {
+  width: 80% !important;
   text-align: center;
 }
 
 input[type=submit] {
   width: auto;
-}
-
-input:focus-visible {
-  border: none;
-  border-bottom: 1px solid black;
-  outline: none;
 }
 
 .password-row {
