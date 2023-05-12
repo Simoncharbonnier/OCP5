@@ -47,7 +47,7 @@ class Comment extends Controller {
 
           if (!empty($_POST) && (isset($_POST['message']) && !empty($_POST['message']))) {
             $data['message'] = $_POST['message'];
-            $data['user_id'] = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 1;
+            $data['user_id'] = $_SESSION['user_id'];
             $data['post_id'] = $postId;
             $data['created_at'] = date("Y-m-d");
 

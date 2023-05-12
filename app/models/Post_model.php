@@ -28,7 +28,7 @@ class Post_model extends Model {
    * Get posts by user
    */
   public function getByUser($id) {
-    $sql = "SELECT * FROM Post WHERE user_id = :user_id";
+    $sql = "SELECT * FROM Post WHERE user_id = :user_id ORDER BY created_at DESC";
     $query = $this->db->prepare($sql);
     $query->bindParam(':user_id', $id);
     $query->execute();

@@ -14,7 +14,7 @@ class Comment_model extends Model {
             FROM Comment
             JOIN User ON User.id = Comment.user_id
             JOIN Post ON Post.id = Comment.post_id
-            ORDER BY valid AND post_id";
+            ORDER BY valid AND Comment.created_at DESC";
     $query = $this->db->prepare($sql);
     $query->execute();
     return $query->fetchAll();
@@ -35,7 +35,7 @@ class Comment_model extends Model {
    * Get comments by user
    */
   public function getByUser($id) {
-    $sql = "SELECT * FROM Comment WHERE user_id = :user_id";
+    $sql = "SELECT * FROM Comment WHERE user_id = :user_id ORDER BY created_at DESC";
     $query = $this->db->prepare($sql);
     $query->bindParam(':user_id', $id);
     $query->execute();

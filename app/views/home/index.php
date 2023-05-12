@@ -22,7 +22,7 @@
   <?php if ($posts) : ?>
     <div class="row posts">
       <div class="col-md-12">
-        <h2>Quelles sont mes récentes réalisations ?</h2>
+        <h2>Voici les dernières actualités à mon sujet !</h2>
         <div class="row">
           <?php foreach ($posts as $post) : ?>
             <div class="col-md-4">

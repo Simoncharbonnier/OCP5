@@ -101,7 +101,7 @@
           <input type="submit" class="btn btn-submit long-width" value="Partager">
         </form>
       <?php else : ?>
-        <p>Vous devez vous connecter pour pouvoir commenter cet article.</p>
+        <p><i>Vous devez vous connecter pour pouvoir commenter cet article.</i></p>
       <?php endif; ?>
     </div>
   </div>
