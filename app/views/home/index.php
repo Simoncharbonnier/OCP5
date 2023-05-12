@@ -13,7 +13,18 @@
         <h2>Qui suis-je ?</h2>
         <a href="assets/CV.pdf" target="_blank" class="btn">Voir mon CV</a>
       </div>
-      <p class="text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam quidem ipsum ullam perferendis, voluptatum provident natus, delectus numquam maxime molestias soluta atque autem alias deleniti explicabo ipsam sint aspernatur quaerat dolores eum unde cum eligendi dicta. Soluta, quos at quaerat maxime veniam neque similique quibusdam ipsum quam provident, optio dolorem. Beatae omnis temporibus assumenda ipsa nemo, laboriosam cupiditate deleniti soluta earum qui laborum ducimus. Tempora consectetur dolore reprehenderit maiores sint deleniti tempore! Sit placeat animi, unde atque vel repellat doloribus velit, accusamus exercitationem sed tenetur. Quis ratione autem exercitationem delectus, quae magnam quod placeat consequatur iusto! Mollitia sequi non tempora?</p>
+      <p class="text">
+        Bonsoir, je m'appelle Simon Charbonnier, j'ai 20 ans et je suis développeur web.
+        <br>
+        Je suis passionné, notamment par le backend, rigoureux, organisé et j'aime le travail bien fait. Mon objectif est d'acquérir
+        de l'expérience, découvrir de nouvelles technologies et développer mes compétences (j'ai beaucoup à faire côté front).
+        <br>
+        Intéressé par toutes sortes de projets, seul, en équipe, sites web (WordPress aussi), APIs, peu importe, n'hésitez pas
+        à me contacter si vous avez besoin d'un développeur, ou simplement si vous souhaitez échanger sur quelque sujet que ce soit,
+        ça ne vous coûte rien !
+        <br>
+        Sinon j'aime aussi beaucoup le sport, j'en ai fait toute ma vie jusque là, les jeux vidéos, les voyages, les animaux...
+      </p>
     </div>
     <div class="col-md-3 img-wrapper">
       <img src="assets/img/photo.jpg" alt="">

@@ -83,9 +83,11 @@
       </div>
       <div class="comments-list">
         <?php foreach ($comments as $comment) : ?>
-          <div class="comment">
-            <p><?= $comment['message'] ?></p>
-            <div class="date-created">
+          <div class="comment row">
+            <div class="col-md-8">
+              <p><?= htmlspecialchars($comment['message']) ?></p>
+            </div>
+            <div class="col-md-4 date-created">
               <p>Publié le <?= $this->formatDate($comment['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= $comment['author'] ?></a></p>
               <img class="avatar" src="assets/img/user/<?= $comment['author_avatar'] ?>" alt="">
             </div>

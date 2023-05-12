@@ -103,3 +103,7 @@
 .comment:not(:last-child) {
   border-bottom: 1px solid lightgrey;
 }
+
+.comment .date-created {
+  font-size: 15px;
+}

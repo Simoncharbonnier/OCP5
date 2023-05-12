@@ -145,6 +145,7 @@ class User extends Controller {
           $comments = [];
           foreach ($result as $comment) {
             if ($comment['valid']) {
+              $postModel = New Post_model();
               $post = $postModel->getById($comment['post_id'])[0];
               $comment['post_title'] = $post['title'];
               $comment['post_id'] = $post['id'];

@@ -13,7 +13,7 @@
             <a class="btn-underline" href="?controller=post&action=detail&id=<?= $comment['post_id'] ?>"><?= $comment['post_title'] ?></a>
           </div>
           <div class="col-md-6 comment-part message">
-            <p><?= $comment['message'] ?></p>
+            <p><?= htmlspecialchars($comment['message']) ?></p>
           </div>
           <div class="col-md-3 comment-part date-created">
             <p>Publié le <?= $this->formatDate($comment['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= $comment['author'] ?></a></p>

@@ -116,7 +116,7 @@
                   <a class="text-underline" href="?controller=post&action=detail&id=<?= $comment['post_id'] ?>"><?= $comment['post_title'] ?></a>
                 </div>
                 <div class="col-md-6 flex-center">
-                  <p><?= $comment['message'] ?></p>
+                  <p><?= htmlspecialchars($comment['message']) ?></p>
                 </div>
                 <div class="col-md-3 flex-center">
                   <p><?= $this->formatDate($comment['created_at']) ?></p>
