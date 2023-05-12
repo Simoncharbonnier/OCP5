@@ -19,58 +19,36 @@
       <img src="assets/img/photo.jpg" alt="">
     </div>
   </div>
-  <div class="row posts">
-    <div class="col-md-12">
-      <h2>Quelles sont mes principales réalisations ?</h2>
-      <div class="row">
-        <div class="col-md-4">
-          <a href="">
-            <div class="card-product">
-              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-              <div class="card-product-infos">
-                <h3>Projet 1</h3>
-                <p>Headline</p>
-              </div>
-              <div class="card-product-footer">
-                <p>04/01/2003</p>
-              </div>
+  <?php if ($posts) : ?>
+    <div class="row posts">
+      <div class="col-md-12">
+        <h2>Quelles sont mes principales réalisations ?</h2>
+        <div class="row">
+          <?php foreach ($posts as $post) : ?>
+            <div class="col-md-4">
+              <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
+                <div class="card-product">
+                  <?php if ($post['image']) : ?>
+                    <img src="assets/img/post/<?= $post['image'] ?>" alt="">
+                  <?php endif; ?>
+                  <div class="card-product-infos <?= $post['image'] ? '' : 'no-image' ?>">
+                    <h3><?= $post['title'] ?></h3>
+                    <p><?= $post['headline'] ?></p>
+                  </div>
+                  <div class="card-product-footer">
+                    <p><?= $post['updated_at'] ?></p>
+                  </div>
+                </div>
+              </a>
             </div>
-          </a>
+          <?php endforeach; ?>
         </div>
-        <div class="col-md-4">
-          <a href="">
-            <div class="card-product">
-              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-              <div class="card-product-infos">
-                <h3>Projet 2</h3>
-                <p>Headline</p>
-              </div>
-              <div class="card-product-footer">
-                <p>04/01/2003</p>
-              </div>
-            </div>
-          </a>
+        <div class="link-all">
+          <a href="?controller=post&action=index" class="btn">Voir tous les articles</a>
         </div>
-        <div class="col-md-4">
-          <a href="">
-            <div class="card-product">
-              <img src="https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/skateboard.jpg" />
-              <div class="card-product-infos">
-                <h3>Projet 3</h3>
-                <p>Headline</p>
-              </div>
-              <div class="card-product-footer">
-                <p>04/01/2003</p>
-              </div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="link-all">
-        <a href="?controller=post&action=index" class="btn">Voir tous les articles</a>
       </div>
     </div>
-  </div>
+  <?php endif; ?>
   <form id="form-contact" class="row" method="POST" action="?controller=home&action=mail">
     <div class="col-md-8">
       <h3>Vous souhaitez me contacter ? C'est par ici !</h3>

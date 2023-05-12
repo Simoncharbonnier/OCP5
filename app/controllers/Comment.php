@@ -31,9 +31,12 @@ class Comment extends Controller {
 
   /**
    * Add a comment and redirect to post detail
+   * As a user
    */
   public function add() : void {
     try {
+      $this->isLogged();
+
       if ($_GET['id']) {
         $postId = $_GET['id'];
         $postModel = New Post_model();

@@ -6,6 +6,10 @@ class Home {
    * Display the home page
    */
   public function index() : void {
+    require_once('app/models/Post_model.php');
+    $postModel = New Post_model();
+    $posts = $postModel->get3Lasts();
+
     include_once('app/views/home/index.php');
   }
 

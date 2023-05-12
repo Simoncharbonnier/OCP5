@@ -94,11 +94,15 @@
       </div>
     </div>
     <div class="col-md-4">
-      <h3>Quel est votre avis ?</h3>
-      <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">
-        <textarea name="message" rows="7" placeholder="Commentaire" autocomplete="off" required></textarea>
-        <input type="submit" class="btn btn-submit" value="Partager">
-      </form>
+      <?php if ($_SESSION['is_logged']) : ?>
+        <h3>Quel est votre avis ?</h3>
+        <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">
+          <textarea name="message" rows="7" placeholder="Commentaire" autocomplete="off" required></textarea>
+          <input type="submit" class="btn btn-submit" value="Partager">
+        </form>
+      <?php else : ?>
+        <p>Vous devez vous connecter pour pouvoir commenter cet article.</p>
+      <?php endif; ?>
     </div>
   </div>
 </div>

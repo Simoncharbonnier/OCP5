@@ -15,6 +15,16 @@ class Post_model extends Model {
   }
 
   /**
+   * Get 3 lasts
+   */
+  public function get3Lasts() {
+    $sql = "SELECT * FROM Post ORDER BY updated_at DESC LIMIT 3";
+    $query = $this->db->prepare($sql);
+    $query->execute();
+    return $query->fetchAll();
+  }
+
+  /**
    * Get posts by user
    */
   public function getByUser($id) {
