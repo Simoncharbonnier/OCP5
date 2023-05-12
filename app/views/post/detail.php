@@ -55,7 +55,7 @@
           <div class="col-md-4">
             <div class="date-updated">
               <?php if ($post['created_at'] !== $post['updated_at']) : ?>
-                  <p>Dernière mise à jour le <?= $post['updated_at'] ?></p>
+                  <p>Dernière mise à jour le <?= $this->formatDate($post['updated_at']) ?></p>
               <?php endif; ?>
             </div>
           </div>
@@ -64,7 +64,7 @@
           </div>
           <div class="col-md-4">
             <div class="date-created">
-              <p>Publié le <?= $post['created_at'] ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $post['author_id'] ?>"><?= $post['author'] ?></a></p>
+              <p>Publié le <?= $this->formatDate($post['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $post['author_id'] ?>"><?= $post['author'] ?></a></p>
               <img class="avatar" src="assets/img/user/<?= $post['author_avatar'] ?>" alt="">
             </div>
           </div>
@@ -86,7 +86,7 @@
           <div class="comment">
             <p><?= $comment['message'] ?></p>
             <div class="date-created">
-              <p>Publié le <?= $comment['created_at'] ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= $comment['author'] ?></a></p>
+              <p>Publié le <?= $this->formatDate($comment['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= $comment['author'] ?></a></p>
               <img class="avatar" src="assets/img/user/<?= $comment['author_avatar'] ?>" alt="">
             </div>
           </div>

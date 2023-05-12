@@ -68,6 +68,14 @@ a {
   padding: 8px 0;
 }
 
+.notif-icon-cross {
+  width: 15px;
+  cursor: pointer;
+  position: absolute;
+  right: 26px;
+  opacity: .8;
+}
+
 .success {
   background-color: #d0ffb8;
   color: #39721c;
@@ -113,6 +121,7 @@ a {
   width: 100%;
   margin: 8px 0;
   border: none;
+  border-bottom: 1px solid transparent;
 }
 
 #form-add-post input:focus-visible, #form-add-post textarea:focus-visible {

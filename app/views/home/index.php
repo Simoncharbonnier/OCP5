@@ -22,7 +22,7 @@
   <?php if ($posts) : ?>
     <div class="row posts">
       <div class="col-md-12">
-        <h2>Quelles sont mes principales réalisations ?</h2>
+        <h2>Quelles sont mes récentes réalisations ?</h2>
         <div class="row">
           <?php foreach ($posts as $post) : ?>
             <div class="col-md-4">
@@ -36,7 +36,7 @@
                     <p><?= $post['headline'] ?></p>
                   </div>
                   <div class="card-product-footer">
-                    <p><?= $post['updated_at'] ?></p>
+                    <p><?= $this->formatDate($post['updated_at']) ?></p>
                   </div>
                 </div>
               </a>

@@ -1,6 +1,8 @@
 <?php
 
-class Home {
+require_once('app/controllers/Controller.php');
+
+class Home extends Controller {
 
   /**
    * Display the home page

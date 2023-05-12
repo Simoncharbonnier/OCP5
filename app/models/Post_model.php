@@ -8,7 +8,7 @@ class Post_model extends Model {
    * Get all posts
    */
   public function getAll() {
-    $sql = "SELECT * FROM Post";
+    $sql = "SELECT * FROM Post ORDER BY updated_at DESC";
     $query = $this->db->prepare($sql);
     $query->execute();
     return $query->fetchAll();

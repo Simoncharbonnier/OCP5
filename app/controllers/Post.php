@@ -95,7 +95,7 @@ class Post extends Controller {
           }
           $data['user_id'] = $_SESSION['user_id'];
           $data['created_at'] = date("Y-m-d");
-          $data['updated_at'] = date("Y-m-d H:i:s");
+          $data['updated_at'] = date("Y-m-d");
 
           if (!empty($_FILES['image']['name'])) {
             $allowed = array('image/jpeg', 'image/png');
@@ -155,7 +155,7 @@ class Post extends Controller {
                   $data[$name] = $value;
                 }
               }
-              $data['updated_at'] = date("Y-m-d H:i:s");
+              $data['updated_at'] = date("Y-m-d");
               $data['id'] = $postId;
 
               $imgFileName = 'post_' . $_POST['title'] . '.png';

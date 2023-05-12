@@ -20,7 +20,7 @@
                   <p><?= $post['headline'] ?></p>
                 </div>
                 <div class="card-product-footer">
-                  <p><?= $post['updated_at'] ?></p>
+                  <p><?= $this->formatDate($post['updated_at']) ?></p>
                 </div>
               </div>
             </a>

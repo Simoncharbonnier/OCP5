@@ -27,6 +27,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Notif cross
+
+  document.getElementById('notif-cross').addEventListener('click', function(e) {
+    e.target.closest('.notif').classList.add('d-none');
+  })
+
   // Handle image in modal form add post
 
   const modalAddPostImg = document.getElementById('modal-add-post-img');

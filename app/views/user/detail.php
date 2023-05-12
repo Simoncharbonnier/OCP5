@@ -81,7 +81,7 @@
                     <p><?= $post['headline'] ?></p>
                   </div>
                   <div class="col-md-3 flex-center">
-                    <p><?= $post['created_at'] ?></p>
+                    <p><?= $this->formatDate($post['created_at']) ?></p>
                   </div>
                 </div>
               <?php endforeach; ?>
@@ -119,7 +119,7 @@
                   <p><?= $comment['message'] ?></p>
                 </div>
                 <div class="col-md-3 flex-center">
-                  <p><?= $comment['created_at'] ?></p>
+                  <p><?= $this->formatDate($comment['created_at']) ?></p>
                 </div>
               </div>
             <?php endforeach; ?>
