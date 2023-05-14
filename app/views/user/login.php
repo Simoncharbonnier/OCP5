@@ -5,7 +5,7 @@
 
 <div class="container login">
   <div class="row">
-    <div class="col-md-4">
+    <div class="col-10 col-md-4">
       <form id="form-login" class="text-center d-none" action="?controller=user&action=login" method="POST">
         <h1>Connexion</h1>
         <div class="row">

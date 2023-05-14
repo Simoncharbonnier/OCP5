@@ -22,6 +22,6 @@
     </li>
   </div>
   <a class="footer-copyright" href="?controller=home&action=index">
-    Blog fait par Simon Charbonnier.
+    Blog réalisé par Simon Charbonnier.
   </a>
 </div>

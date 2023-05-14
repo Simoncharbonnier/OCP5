@@ -51,6 +51,8 @@ class User extends Controller {
    */
   public function login() : void {
     try {
+      $this->isNotLogged();
+
       if (isset($_POST['mail']) && isset($_POST['password'])) {
         if (!empty($_POST['mail']) && !empty($_POST['password'])) {
           $userModel = New User_model();
@@ -80,7 +82,11 @@ class User extends Controller {
         include_once('app/views/user/login.php');
       }
     } catch(Exception $e) {
-      header("Location: " . PATH . "?controller=user&action=login&form=login&error=" . $e->getMessage());
+      if ($e->getMessage() === 'no_perms_logged') {
+        header("Location: " . PATH . "?controller=home&action=index&error=no_perms");
+      } else {
+        header("Location: " . PATH . "?controller=user&action=login&form=login&error=" . $e->getMessage());
+      }
       exit;
     }
   }

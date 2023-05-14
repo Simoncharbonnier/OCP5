@@ -7,17 +7,16 @@
 <div class="container">
   <div class="row post">
     <form enctype="multipart/form-data" id="form-edit-post" method="POST" action="?controller=post&action=edit&id=<?= $post['id'] ?>">
-      <div class="col-md-12">
+      <div class="col-10 col-md-12">
         <div class="row">
-          <div class="col-md-11">
+          <div class="<?= ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) ? 'col-9 col-md-11' : 'col-md-12' ?>">
             <div class="post-title">
               <h1><?= $post['title'] ?></h1>
               <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off" required></h1>
             </div>
           </div>
           <?php if ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) : ?>
-            <div class="col-md-1 buttons-container">
-              <div class="btn" id="btn-edit-post-cancel">Annuler</div>
+            <div class="col-3 col-md-1 buttons-container">
               <img class="icon-edit" id="btn-edit-post" src="assets/img/icons/edit.svg">
               <img class="icon-delete" id="btn-delete-post" src="assets/img/icons/delete.svg" data-bs-toggle="modal" data-bs-target="#modal-delete-post">
             </div>
@@ -59,7 +58,10 @@
               <?php endif; ?>
             </div>
           </div>
-          <div class="col-md-4 form-submit">
+          <div class="col-md-2">
+            <div class="btn" id="btn-edit-post-cancel">Annuler</div>
+          </div>
+          <div class="col-md-2 form-submit">
             <input type="submit" class="btn long-width" value="Valider">
           </div>
           <div class="col-md-4">
@@ -73,7 +75,7 @@
     </form>
   </div>
   <div class="row comments">
-    <div class="col-md-8">
+    <div class="col-10 col-md-8">
       <div class="comments-title">
         <?php if ($comments) : ?>
           <h3>Commentaires</h3>
@@ -95,7 +97,7 @@
         <?php endforeach; ?>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-10 col-md-4">
       <?php if ($_SESSION['is_logged']) : ?>
         <h3>Quel est votre avis ?</h3>
         <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">

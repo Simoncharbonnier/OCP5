@@ -9,6 +9,7 @@
   bottom: 0;
   transition: bottom 0.2s;
   border-radius: 3px;
+  margin-bottom: 2rem;
 }
 
 .card:hover {

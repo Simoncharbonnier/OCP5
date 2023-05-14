@@ -27,11 +27,26 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  // Responsive navbar
+
+  if (document.getElementById('btn-menu-responsive')) {
+    document.getElementById('btn-menu-responsive').addEventListener('click', function(e) {
+      const navbar = document.querySelector('.navbar');
+      if (navbar.classList.contains('responsive-menu-open')) {
+        document.querySelector('.navbar').classList.remove('responsive-menu-open');
+      } else {
+        document.querySelector('.navbar').classList.add('responsive-menu-open');
+      }
+    })
+  }
+
   // Notif cross
 
-  document.getElementById('notif-cross').addEventListener('click', function(e) {
-    e.target.closest('.notif').classList.add('d-none');
-  })
+  if (document.getElementById('notif-cross')) {
+    document.getElementById('notif-cross').addEventListener('click', function(e) {
+      e.target.closest('.notif').classList.add('d-none');
+    })
+  }
 
   // Handle image in modal form add post
 

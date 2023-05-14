@@ -1,3 +1,37 @@
+#form-edit-post {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 20px;
+  }
+
+  .post-content textarea {
+    height: 70vh;
+  }
+
+  .post-date .btn, .post-date .date-created {
+    margin: 8px 0;
+  }
+
+  .icon-edit, .icon-delete {
+    width: 20px;
+  }
+
+  #modal-delete-post {
+    max-width: 100vw;
+  }
+
+  #modal-delete-post .modal-dialog {
+    width: 90vw;
+    margin-right: auto;
+    margin-left: auto;
+    top: 25%;
+  }
+}
+
 .post .post-title h1:last-child, .post .post-headline h2:last-child, .post .post-content p:last-child {
   display: none;
 }
@@ -87,6 +121,7 @@
 
 .comments {
   margin-top: 3rem;
+  justify-content: center;
 }
 
 .comments h3 {

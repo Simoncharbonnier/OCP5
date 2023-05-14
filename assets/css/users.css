@@ -1,5 +1,6 @@
 .users {
   text-align: center;
+  justify-content: center;
 }
 
 .users .user-part {
@@ -14,6 +15,7 @@
 
 .user {
   padding: 8px;
+  justify-content: center;
 }
 
 .user .btn-underline:hover {
@@ -38,6 +40,20 @@
 
 .user.deleting .btn-valid-delete-user, .user.deleting .btn-cancel-delete-user {
   display: block;
+}
+
+@media (max-width: 768px) {
+  .user .dnone-responsive {
+    display: none;
+  }
+
+  .user.deleting .dnone-responsive {
+    display: block;
+  }
+
+  .user-part {
+    padding: 4px 0;
+  }
 }
 
 .deleting {

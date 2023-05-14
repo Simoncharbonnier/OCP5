@@ -1,5 +1,6 @@
 .comments {
   text-align: center;
+  justify-content: center;
 }
 
 .comments .comment-part {
@@ -16,12 +17,20 @@
   justify-content: flex-start;
 }
 
+@media (max-width: 768px) {
+  .message p {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+}
+
 .comments .date-created img {
   margin-left: 1rem;
 }
 
 .comment {
   padding: 8px;
+  justify-content: center;
 }
 
 .comment:not(:last-child) {

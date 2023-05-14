@@ -26,7 +26,7 @@ a {
   border-radius: 25%;
 }
 
-.icon-edit, .icon-delete, .icon-cross {
+.icon-edit, .icon-delete, .icon-cross, .icon-bars {
   width: 25px;
   cursor: pointer;
   margin: 8px;
@@ -85,6 +85,54 @@ form .no-border-bottom {
   padding: 8px;
 }
 
+.navbar .navbar-part:first-child {
+  display: none;
+}
+
+.navbar.navbar.responsive-menu-open .navbar-part:first-child {
+  display: block;
+}
+
+.navbar.responsive-menu-open .navbar-part.left {
+  z-index: 99;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  transition: all 0.3s ease-in;
+  top: 0;
+  left: 0;
+  padding-top: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.navbar.responsive-menu-open .navbar-part.left .icon-bars {
+  position: absolute;
+  top: 16px;
+  left: 18px;
+}
+
+.navbar.responsive-menu-open .navbar-part.left .nav-item {
+  display: block;
+}
+
+.navbar .icon-bars {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar .icon-bars {
+    display: block;
+  }
+
+  .navbar .navbar-part.left .nav-item {
+    display: none;
+  }
+}
+
 .navbar .nav-item {
   padding: 8px;
 }
@@ -105,6 +153,10 @@ form .no-border-bottom {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+
 }
 
 #form-add-post img {
@@ -158,6 +210,16 @@ form .no-border-bottom {
   height: 100px;
   padding: 0px 50px;
   color: white;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 0 10px;
+  }
+
+  #modal-add-post-btn-img-cancel {
+    margin-top: 1rem;
+  }
 }
 
 .footer-links {

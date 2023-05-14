@@ -4,11 +4,11 @@
 <?php include_once('app/views/components/header.php'); ?>
 
 <div class="col-md-12 banner">
-  <h1>Simon Charbonnier, le développeur qu'il vous faut !</h1>
+  <h1 class="text-center">Simon Charbonnier, le développeur qu'il vous faut !</h1>
 </div>
 <div id="home-container" class="container">
   <div class="row presentation">
-    <div class="col-md-9">
+    <div class="col-10 col-md-9">
       <div class="presentation-header">
         <h2>Qui suis-je ?</h2>
         <a href="assets/CV.pdf" target="_blank" class="btn">Voir mon CV</a>
@@ -26,7 +26,7 @@
         Sinon j'aime aussi beaucoup le sport, j'en ai fait toute ma vie jusque là, les jeux vidéos, les voyages, les animaux...
       </p>
     </div>
-    <div class="col-md-3 img-wrapper">
+    <div class="col-10 col-md-3 img-wrapper">
       <img src="assets/img/photo.jpg" alt="">
     </div>
   </div>
@@ -36,7 +36,7 @@
         <h2>Voici les dernières actualités à mon sujet !</h2>
         <div class="row">
           <?php foreach ($posts as $post) : ?>
-            <div class="col-md-4">
+            <div class="col-10 col-md-4">
               <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
                 <div class="card">
                   <?php if ($post['image']) : ?>
@@ -61,7 +61,7 @@
     </div>
   <?php endif; ?>
   <form id="form-contact" class="row" method="POST" action="?controller=home&action=mail">
-    <div class="col-md-8">
+    <div class="col-10 col-md-8">
       <h3>Vous souhaitez me contacter ? C'est par ici !</h3>
       <div class="row">
         <div class="col-md-4">

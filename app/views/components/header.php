@@ -1,6 +1,8 @@
 <div class="navbar">
   <ul class="navbar-nav">
-    <div class="navbar-part">
+    <div class="navbar-part"></div>
+    <div class="navbar-part left">
+      <img class="icon-bars" id="btn-menu-responsive" src="assets/img/icons/bars.svg" alt="">
       <li class="nav-item" controller="home" action="index">
         <a class="nav-link" href="?controller=home&action=index">Accueil</a>
       </li>
@@ -19,7 +21,7 @@
         </li>
       <?php endif; ?>
     </div>
-    <div class="navbar-part">
+    <div class="navbar-part right">
       <?php if ($_SESSION['is_logged'] === false) : ?>
         <li class="nav-item" controller="user" action="login" form="login">
           <a class="nav-link" href="?controller=user&action=login&form=login">Connexion</a>
@@ -43,7 +45,7 @@
 </div>
 
 <?php if ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) : ?>
-  <div class="modal fade modal-xl" id="modal-add-post" tabindex="-1" aria-labelledby="modal-add-post-label" aria-hidden="true">
+  <div class="modal fade modal-xl modal-fullscreen-md-down" id="modal-add-post" tabindex="-1" aria-labelledby="modal-add-post-label" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <form enctype="multipart/form-data" id="form-add-post" method="POST" action="?controller=post&action=add">
@@ -52,8 +54,8 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <h1><input type="text" class="no-border-bottom" name="title" placeholder="Le titre de votre futur article préféré" autocomplete="off" required></h1>
-            <h2><input type="text" class="no-border-bottom" name="headline" placeholder="Vous pouvez écrire son chapô juste ici !" autocomplete="off" required></h2>
+            <h1><input type="text" class="no-border-bottom" name="title" placeholder="Le titre de l'article" autocomplete="off" required></h1>
+            <h2><input type="text" class="no-border-bottom" name="headline" placeholder="Son chapô juste ici !" autocomplete="off" required></h2>
             <p><textarea name="content" class="no-border-bottom" rows="7" placeholder="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam quidem ipsum ullam perferendis, voluptatum provident natus, delectus numquam maxime molestias soluta atque autem alias deleniti explicabo ipsam sint aspernatur quaerat dolores eum unde cum eligendi dicta. Soluta, quos at quaerat maxime veniam neque similique quibusdam ipsum quam provident, optio dolorem. Beatae omnis temporibus assumenda ipsa nemo, laboriosam cupiditate deleniti soluta earum qui laborum ducimus. Tempora consectetur dolore reprehenderit maiores sint deleniti tempore! Sit placeat animi, unde atque vel repellat doloribus velit, accusamus exercitationem sed tenetur. Quis ratione autem exercitationem delectus, quae magnam quod placeat consequatur iusto! Mollitia sequi non tempora?" autocomplete="off" required></textarea></p>
             <div>
               <img id="modal-add-post-img" src="" alt="">

@@ -9,7 +9,7 @@
     <div class="col-md-12">
       <div class="row">
         <?php foreach ($posts as $i => $post) : ?>
-          <div class="col-md-4">
+          <div class="col-10 col-md-4">
             <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
               <div class="card">
                 <?php if ($post['image']) : ?>
