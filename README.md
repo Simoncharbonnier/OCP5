@@ -6,7 +6,7 @@ Ce projet est réalisé dans le cadre de la formation de développeur d'applicat
 Ce blog doit être réalisé via une architecture MVC.
 
 Voici les différentes technologies utilisées dans ce projet :
-- PHP - HTML - CSS- Javascript - Bootstrap - SQL
+  - PHP - HTML - CSS- Javascript - Bootstrap - SQL
 
 
 ## Installation
