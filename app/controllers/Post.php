@@ -1,25 +1,27 @@
 <?php
 
-require_once('app/controllers/Controller.php');
+require_once 'app/controllers/Controller.php';
 
-require_once('app/models/Post_model.php');
-require_once('app/models/Comment_model.php');
+require_once 'app/models/Post_model.php';
+require_once 'app/models/Comment_model.php';
 
-class Post extends Controller {
+class Post extends Controller
+{
 
   /**
    * Retrieve all posts and display posts index
    */
-  public function index() : void {
+  public function index() : void
+  {
     try {
-      $postModel = New Post_model();
+      $postModel = new Post_model();
       $posts = $postModel->getAll();
 
       if (empty($posts)) {
         throw new Exception("no_posts");
       }
 
-      include_once('app/views/post/index.php');
+      include_once 'app/views/post/index.php';
     } catch(Exception $e) {
       header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
       exit;
@@ -29,11 +31,12 @@ class Post extends Controller {
   /**
    * Retrieve a post by its id and display post detail
    */
-  public function detail() : void {
+  public function detail() : void
+  {
     try {
       if ($_GET['id']) {
         $postId = $_GET['id'];
-        $postModel = New Post_model();
+        $postModel = new Post_model();
         $result = $postModel->getById($postId);
 
         if (!empty($result)) {
@@ -63,7 +66,7 @@ class Post extends Controller {
             }
           }
 
-          include_once('app/views/post/detail.php');
+          include_once 'app/views/post/detail.php';
         } else {
           throw new Exception("no_post");
         }
@@ -80,12 +83,13 @@ class Post extends Controller {
    * Add a post and redirect to post detail
    * As an admin
    */
-  public function add() : void {
+  public function add() : void
+  {
     try {
       $this->isAdmin();
 
       if (!empty($_POST) && (isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['headline']) && !empty($_POST['headline'])) && (isset($_POST['content']) && !empty($_POST['content']))) {
-        $postModel = New Post_model();
+        $postModel = new Post_model();
         $sameTitle = $postModel->getByTitle($_POST['title']);
 
         if (empty($sameTitle)) {
@@ -132,20 +136,21 @@ class Post extends Controller {
    * Edit a post by its id and redirect to post detail
    * As an admin
    */
-  public function edit() : void {
+  public function edit() : void
+  {
     try {
       $this->isAdmin();
 
       if ($_GET['id']) {
         $postId = $_GET['id'];
-        $postModel = New Post_model();
+        $postModel = new Post_model();
         $post = $postModel->getById($postId);
 
         if (!empty($post)) {
           $post = $post[0];
 
           if (!empty($_POST) && (isset($_POST['title']) && !empty($_POST['title'])) && (isset($_POST['headline']) && !empty($_POST['headline'])) && (isset($_POST['content']) && !empty($_POST['content']))) {
-            $postModel = New Post_model();
+            $postModel = new Post_model();
             $sameTitle = $postModel->getByTitle($_POST['title'], $postId);
 
             if (empty($sameTitle)) {
@@ -209,20 +214,21 @@ class Post extends Controller {
    * Delete a post by its id and redirect to post index
    * As an admin
    */
-  public function delete($postId = NULL) : void {
+  public function delete($postId = NULL) : void
+  {
     try {
       $this->isAdmin();
 
       $postId = $postId ? $postId : $_GET['id'];
 
       if ($postId) {
-        $postModel = New Post_model();
+        $postModel = new Post_model();
         $post = $postModel->getById($postId);
 
         if (!empty($post)) {
           $post = $post[0];
 
-          $commentModel = New Comment_model();
+          $commentModel = new Comment_model();
           $comments = $commentModel->getByPost($post['id']);
           foreach ($comments as $comment) {
             $commentModel->delete($comment['id']);
@@ -247,7 +253,8 @@ class Post extends Controller {
     }
   }
 
-  private function uploadImage($currentPath, $newFileName) {
+  private function uploadImage($currentPath, $newFileName)
+  {
     $newPath = IMAGE_PATH . "post/" . $newFileName;
 
     if (move_uploaded_file($currentPath, $newPath)) {
@@ -257,7 +264,8 @@ class Post extends Controller {
     }
   }
 
-  private function deleteImage($fileName) {
+  private function deleteImage($fileName)
+  {
     $path = IMAGE_PATH . "post/"  . $fileName;
 
     if (file_exists($path)) {
@@ -265,7 +273,8 @@ class Post extends Controller {
     }
   }
 
-  private function renameImage($oldFileName, $newFileName) {
+  private function renameImage($oldFileName, $newFileName)
+  {
     if (file_exists(IMAGE_PATH . "post/" . $oldFileName)) {
       rename(IMAGE_PATH . "post/" . $oldFileName, IMAGE_PATH . "post/" . $newFileName);
     }

@@ -1,24 +1,26 @@
 <?php
 
-require_once('app/controllers/Controller.php');
-require_once('app/controllers/Comment.php');
-require_once('app/controllers/Post.php');
+require_once 'app/controllers/Controller.php';
+require_once 'app/controllers/Comment.php';
+require_once 'app/controllers/Post.php';
 
-require_once('app/models/User_model.php');
-require_once('app/models/Comment_model.php');
-require_once('app/models/Post_model.php');
+require_once 'app/models/User_model.php';
+require_once 'app/models/Comment_model.php';
+require_once 'app/models/Post_model.php';
 
-class User extends Controller {
+class User extends Controller
+{
 
   /**
    * Add a user and redirect to the login page
    */
-  public function signup() : void {
+  public function signup() : void
+  {
     try {
       if (!empty($_POST) && (isset($_POST['first_name']) && !empty($_POST['first_name'])) && (isset($_POST['last_name']) && !empty($_POST['last_name'])) && (isset($_POST['mail']) && !empty($_POST['mail'])) && (isset($_POST['password']) && !empty($_POST['password']))) {
         if (isset($_POST['confirm']) && $_POST['password'] === $_POST['confirm']) {
           unset($_POST['confirm']);
-          $userModel = New User_model();
+          $userModel = new User_model();
           $user = $userModel->getByMail($_POST['mail']);
 
           if (empty($user)) {
@@ -49,13 +51,14 @@ class User extends Controller {
   /**
    * Verify the credentials and redirect to the home page
    */
-  public function login() : void {
+  public function login() : void
+  {
     try {
       $this->isNotLogged();
 
       if (isset($_POST['mail']) && isset($_POST['password'])) {
         if (!empty($_POST['mail']) && !empty($_POST['password'])) {
-          $userModel = New User_model();
+          $userModel = new User_model();
           $user = $userModel->getByMail($_POST['mail']);
 
           if (!empty($user)) {
@@ -79,7 +82,7 @@ class User extends Controller {
           throw new Exception("missing_param");
         }
       } else {
-        include_once('app/views/user/login.php');
+        include_once 'app/views/user/login.php';
       }
     } catch(Exception $e) {
       if ($e->getMessage() === 'no_perms_logged') {
@@ -94,7 +97,8 @@ class User extends Controller {
   /**
    * Logout a user and redirect to the home page
    */
-  public function logout() : void {
+  public function logout() : void
+  {
     try {
       $this->isLogged();
       session_unset();
@@ -111,18 +115,19 @@ class User extends Controller {
    * Retrieve all users and display the list of users
    * As an admin
    */
-  public function index() : void {
+  public function index() : void
+  {
     try {
       $this->isAdmin();
 
-      $userModel = New User_model();
+      $userModel = new User_model();
       $users = $userModel->getAll();
 
       if (empty($users)) {
         throw new Exception("no_users");
       }
 
-      include_once('app/views/user/index.php');
+      include_once 'app/views/user/index.php';
     } catch(Exception $e) {
       header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
       exit;
@@ -132,26 +137,27 @@ class User extends Controller {
   /**
    * Retrieve a user by its id and display user detail
    */
-  public function detail() : void {
+  public function detail() : void
+  {
     try {
       if ($_GET['id']) {
-        $userModel = New User_model();
+        $userModel = new User_model();
         $result = $userModel->getById($_GET['id'], true);
 
         if (!empty($result)) {
           $user = $result[0];
 
           if ($user['admin']) {
-            $postModel = New Post_model();
+            $postModel = new Post_model();
             $posts = $postModel->getByUser($user['id']);
           }
 
-          $commentModel = New Comment_model();
+          $commentModel = new Comment_model();
           $result = $commentModel->getByUser($user['id']);
           $comments = [];
           foreach ($result as $comment) {
             if ($comment['valid']) {
-              $postModel = New Post_model();
+              $postModel = new Post_model();
               $post = $postModel->getById($comment['post_id'])[0];
               $comment['post_title'] = $post['title'];
               $comment['post_id'] = $post['id'];
@@ -159,7 +165,7 @@ class User extends Controller {
             }
           }
 
-          include_once('app/views/user/detail.php');
+          include_once 'app/views/user/detail.php';
         } else {
           throw new Exception("no_user");
         }
@@ -176,12 +182,13 @@ class User extends Controller {
    * Update a user by its id and redirect to user detail
    * As the user himself
    */
-  public function edit() : void {
+  public function edit() : void
+  {
     try {
       $this->isLogged();
 
       if ($_GET['id']) {
-        $userModel = New User_model();
+        $userModel = new User_model();
         $user = $userModel->getById($_GET['id']);
         if (!empty($user)) {
           $user = $user[0];
@@ -245,24 +252,25 @@ class User extends Controller {
    * Delete a user by its id and redirect to users index
    * As an admin
    */
-  public function delete() : void {
+  public function delete() : void
+  {
     try {
       if ($_GET['id']) {
-        $userModel = New User_model();
+        $userModel = new User_model();
         $result = $userModel->getById($_GET['id']);
 
         if (!empty($result)) {
           $user = $result[0];
           if ($_SESSION['is_logged'] === true && ($_SESSION['user_admin'] === 1 || $_SESSION['user_mail'] === $user['mail'])) {
             if (!$user['admin']) {
-              $commentModel = New Comment_model();
+              $commentModel = new Comment_model();
               $comments = $commentModel->getByUser($_GET['id']);
 
               foreach ($comments as $comment) {
                 $commentModel->delete($comment['id']);
               }
 
-              $postModel = New Post_model();
+              $postModel = new Post_model();
               $posts = $postModel->getByUser($_GET['id']);
 
               foreach ($posts as $post) {
@@ -303,7 +311,8 @@ class User extends Controller {
     }
   }
 
-  private function uploadAvatar($currentPath, $newFileName) {
+  private function uploadAvatar($currentPath, $newFileName)
+  {
     $newPath = IMAGE_PATH . "user/" . $newFileName;
 
     if (move_uploaded_file($currentPath, $newPath)) {
@@ -313,7 +322,8 @@ class User extends Controller {
     }
   }
 
-  private function deleteAvatar($fileName) {
+  private function deleteAvatar($fileName)
+  {
     $path = IMAGE_PATH . "user/"  . $fileName;
 
     if (file_exists($path)) {
@@ -321,7 +331,8 @@ class User extends Controller {
     }
   }
 
-  private function deleteImage($fileName) {
+  private function deleteImage($fileName)
+  {
     $path = IMAGE_PATH . "post/"  . $fileName;
 
     if (file_exists($path)) {
