@@ -28,12 +28,12 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `Comment` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `post_id` int(11) NOT NULL,
-  `message` varchar(255) NOT NULL,
-  `created_at` date NOT NULL,
-  `valid` tinyint(1) NOT NULL DEFAULT 0
+	`id` int(11) NOT NULL,
+	`user_id` int(11) NOT NULL,
+	`post_id` int(11) NOT NULL,
+	`message` varchar(255) NOT NULL,
+	`created_at` date NOT NULL,
+	`valid` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -53,14 +53,14 @@ INSERT INTO `Comment` (`id`, `user_id`, `post_id`, `message`, `created_at`, `val
 --
 
 CREATE TABLE `Post` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `title` varchar(128) NOT NULL,
-  `headline` varchar(255) NOT NULL,
-  `content` text NOT NULL,
-  `image` varchar(128) DEFAULT NULL,
-  `created_at` date NOT NULL,
-  `updated_at` date NOT NULL
+	`id` int(11) NOT NULL,
+	`user_id` int(11) NOT NULL,
+	`title` varchar(128) NOT NULL,
+	`headline` varchar(255) NOT NULL,
+	`content` text NOT NULL,
+	`image` varchar(128) DEFAULT NULL,
+	`created_at` date NOT NULL,
+	`updated_at` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -81,13 +81,13 @@ INSERT INTO `Post` (`id`, `user_id`, `title`, `headline`, `content`, `image`, `c
 --
 
 CREATE TABLE `User` (
-  `id` int(11) NOT NULL,
-  `first_name` varchar(128) NOT NULL,
-  `last_name` varchar(128) NOT NULL,
-  `mail` varchar(128) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `admin` tinyint(1) NOT NULL DEFAULT 0,
-  `avatar` varchar(128) NOT NULL DEFAULT 'default.jpg'
+	`id` int(11) NOT NULL,
+	`first_name` varchar(128) NOT NULL,
+	`last_name` varchar(128) NOT NULL,
+	`mail` varchar(128) NOT NULL,
+	`password` varchar(255) NOT NULL,
+	`admin` tinyint(1) NOT NULL DEFAULT 0,
+	`avatar` varchar(128) NOT NULL DEFAULT 'default.jpg'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -109,22 +109,22 @@ INSERT INTO `User` (`id`, `first_name`, `last_name`, `mail`, `password`, `admin`
 -- Index pour la table `Comment`
 --
 ALTER TABLE `Comment`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`),
-  ADD KEY `post_id` (`post_id`);
+	ADD PRIMARY KEY (`id`),
+	ADD KEY `user_id` (`user_id`),
+	ADD KEY `post_id` (`post_id`);
 
 --
 -- Index pour la table `Post`
 --
 ALTER TABLE `Post`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+	ADD PRIMARY KEY (`id`),
+	ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `User`
 --
 ALTER TABLE `User`
-  ADD PRIMARY KEY (`id`);
+	ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT pour les tables déchargées
@@ -134,19 +134,19 @@ ALTER TABLE `User`
 -- AUTO_INCREMENT pour la table `Comment`
 --
 ALTER TABLE `Comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
+	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=64;
 
 --
 -- AUTO_INCREMENT pour la table `Post`
 --
 ALTER TABLE `Post`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT pour la table `User`
 --
 ALTER TABLE `User`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Contraintes pour les tables déchargées
@@ -156,14 +156,14 @@ ALTER TABLE `User`
 -- Contraintes pour la table `Comment`
 --
 ALTER TABLE `Comment`
-  ADD CONSTRAINT `Comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
-  ADD CONSTRAINT `Comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `Post` (`id`);
+	ADD CONSTRAINT `Comment_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`),
+	ADD CONSTRAINT `Comment_ibfk_2` FOREIGN KEY (`post_id`) REFERENCES `Post` (`id`);
 
 --
 -- Contraintes pour la table `Post`
 --
 ALTER TABLE `Post`
-  ADD CONSTRAINT `Post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
+	ADD CONSTRAINT `Post_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `User` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
