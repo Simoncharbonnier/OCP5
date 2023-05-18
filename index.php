@@ -12,8 +12,8 @@ if (!empty($_GET['controller'])) {
 }
 
 $controllerClassName = ucfirst($controller);
-if (file_exists('app/controllers/' . $controllerClassName . '.php')) {
-    require_once 'app/controllers/' . $controllerClassName . '.php';
+if (file_exists('app/controllers/'.$controllerClassName.'.php')) {
+    require_once 'app/controllers/'.$controllerClassName.'.php';
     $instance = new $controllerClassName();
 
     if (!empty($_GET['action'])) {
@@ -23,11 +23,11 @@ if (file_exists('app/controllers/' . $controllerClassName . '.php')) {
     }
 
     if (!method_exists($instance, $action)) {
-        header("Location: " . PATH . "?controller=home&action=index&error=inval");
+        header("Location: ".PATH."?controller=home&action=index&error=inval");
         exit;
     }
 } else {
-    header("Location: " . PATH . "?controller=home&action=index&error=inval");
+    header("Location: ".PATH."?controller=home&action=index&error=inval");
     exit;
 }
 
