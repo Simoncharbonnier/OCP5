@@ -8,10 +8,11 @@ require_once 'app/models/Post_model.php';
 class Comment extends Controller
 {
 
-	/**
+    /**
 	 * Retrieve all comments and display comments index
 	 * As an admin
 	 */
+
 	public function index() : void
 	{
 		try {
@@ -35,6 +36,7 @@ class Comment extends Controller
 	 * Add a comment and redirect to post detail
 	 * As a user
 	 */
+
 	public function add() : void
 	{
 		try {
@@ -78,6 +80,7 @@ class Comment extends Controller
 	 * Update a comment by its id and redirect to comments index
 	 * As an admin
 	 */
+
 	public function edit() : void
 	{
 		try {
@@ -118,6 +121,7 @@ class Comment extends Controller
 	 * Delete a comment by its id and redirect to comments index
 	 * As an admin
 	 */
+
 	public function delete($commentId = NULL) : void
 	{
 		try {

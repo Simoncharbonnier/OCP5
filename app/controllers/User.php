@@ -14,6 +14,7 @@ class User extends Controller
 	/**
 	 * Add a user and redirect to the login page
 	 */
+
 	public function signup() : void
 	{
 		try {
@@ -51,6 +52,7 @@ class User extends Controller
 	/**
 	 * Verify the credentials and redirect to the home page
 	 */
+
 	public function login() : void
 	{
 		try {
@@ -97,6 +99,7 @@ class User extends Controller
 	/**
 	 * Logout a user and redirect to the home page
 	 */
+
 	public function logout() : void
 	{
 		try {
@@ -115,6 +118,7 @@ class User extends Controller
 	 * Retrieve all users and display the list of users
 	 * As an admin
 	 */
+
 	public function index() : void
 	{
 		try {
@@ -137,6 +141,7 @@ class User extends Controller
 	/**
 	 * Retrieve a user by its id and display user detail
 	 */
+
 	public function detail() : void
 	{
 		try {
@@ -182,6 +187,7 @@ class User extends Controller
 	 * Update a user by its id and redirect to user detail
 	 * As the user himself
 	 */
+
 	public function edit() : void
 	{
 		try {
@@ -251,6 +257,7 @@ class User extends Controller
 	 * Delete a user by its id and redirect to users index
 	 * As an admin
 	 */
+
 	public function delete() : void
 	{
 		try {

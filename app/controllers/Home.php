@@ -8,6 +8,7 @@ class Home extends Controller
     /**
      * Display the home page
     */
+
     public function index() : void
     {
         require_once 'app/models/Post_model.php';
@@ -21,6 +22,7 @@ class Home extends Controller
     /**
      * Send a mail and redirect to the home page
     */
+
     public function mail() : void
     {
         try {

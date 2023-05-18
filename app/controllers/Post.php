@@ -11,6 +11,7 @@ class Post extends Controller
 	/**
 	 * Retrieve all posts and display posts index
 	 */
+
 	public function index() : void
 	{
 		try {
@@ -31,6 +32,7 @@ class Post extends Controller
 	/**
 	 * Retrieve a post by its id and display post detail
 	 */
+
 	public function detail() : void
 	{
 		try {
@@ -83,6 +85,7 @@ class Post extends Controller
 	 * Add a post and redirect to post detail
 	 * As an admin
 	 */
+
 	public function add() : void
 	{
 		try {
@@ -136,6 +139,7 @@ class Post extends Controller
 	 * Edit a post by its id and redirect to post detail
 	 * As an admin
 	 */
+
 	public function edit() : void
 	{
 		try {
@@ -213,6 +217,7 @@ class Post extends Controller
 	 * Delete a post by its id and redirect to post index
 	 * As an admin
 	 */
+
 	public function delete($postId = NULL) : void
 	{
 		try {

@@ -6,6 +6,7 @@ class Controller
 	/**
 	 * Check if user is not logged
 	 */
+
 	public function isNotLogged()
 	{
 		if ($_SESSION['is_logged'] === false) {
@@ -18,6 +19,7 @@ class Controller
 	/**
 	 * Check if user is logged
 	 */
+
 	public function isLogged()
 	{
 		if ($_SESSION['is_logged'] === true) {
@@ -30,6 +32,7 @@ class Controller
 	/**
 	 * Check if user is logged and admin
 	 */
+
 	public function isAdmin()
 	{
 		if ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) {
@@ -42,6 +45,7 @@ class Controller
 	/**
 	 * Format date
 	 */
+
 	public function formatDate($date)
 	{
 		$date = explode('-', $date);
