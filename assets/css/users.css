@@ -1,61 +1,64 @@
 .users {
-  text-align: center;
-  justify-content: center;
+	text-align: center;
+	justify-content: center;
 }
 
 .users .user-part {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .users h1 {
-  padding-bottom: 1rem;
+	padding-bottom: 1rem;
 }
 
 .user {
-  padding: 8px;
-  justify-content: center;
+	padding: 8px;
+	justify-content: center;
 }
 
 .user .btn-underline:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .user:not(:last-child) {
-  border-bottom: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
 }
 
 .user .icon-delete {
-  width: 20px;
+	width: 20px;
 }
 
-.user .btn-valid-delete-user, .user .btn-cancel-delete-user {
-  display: none;
+.user .btn-valid-delete-user,
+.user .btn-cancel-delete-user {
+	display: none;
 }
 
-.user.deleting .btn-delete-user, .user.deleting .btn-edit-user {
-  display: none;
+.user.deleting .btn-delete-user,
+.user.deleting .btn-edit-user {
+	display: none;
 }
 
-.user.deleting .btn-valid-delete-user, .user.deleting .btn-cancel-delete-user {
-  display: block;
+.user.deleting .btn-valid-delete-user,
+.user.deleting .btn-cancel-delete-user {
+	display: block;
 }
 
 @media (max-width: 768px) {
-  .user .dnone-responsive {
-    display: none;
-  }
+	.user .dnone-responsive {
+		display: none;
+	}
 
-  .user.deleting .dnone-responsive {
-    display: block;
-  }
+	.user.deleting .dnone-responsive {
+		display: block;
+	}
 
-  .user-part {
-    padding: 4px 0;
-  }
+	.user-part {
+		padding: 4px 0;
+	}
 }
 
 .deleting {
-  background-color: #ffcccc;
+	background-color: #fcc;
 }

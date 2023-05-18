@@ -1,144 +1,154 @@
 #form-edit-post {
-  display: flex;
-  justify-content: center;
+	display: flex;
+	justify-content: center;
 }
 
 @media (max-width: 768px) {
-  h2 {
-    font-size: 20px;
-  }
+	h2 {
+		font-size: 20px;
+	}
 
-  .post-content textarea {
-    height: 70vh;
-  }
+	.post-content textarea {
+		height: 70vh;
+	}
 
-  .post-date .btn, .post-date .date-created {
-    margin: 8px 0;
-  }
+	.post-date .btn,
+	.post-date .date-created {
+		margin: 8px 0;
+	}
 
-  .icon-edit, .icon-delete {
-    width: 20px;
-  }
+	.icon-edit,
+	.icon-delete {
+		width: 20px;
+	}
 
-  #modal-delete-post {
-    max-width: 100vw;
-  }
+	#modal-delete-post {
+		max-width: 100vw;
+	}
 
-  #modal-delete-post .modal-dialog {
-    width: 90vw;
-    margin-right: auto;
-    margin-left: auto;
-    top: 25%;
-  }
+	#modal-delete-post .modal-dialog {
+		width: 90vw;
+		margin-right: auto;
+		margin-left: auto;
+		top: 25%;
+	}
 }
 
-.post .post-title h1:last-child, .post .post-headline h2:last-child, .post .post-content p:last-child {
-  display: none;
+.post .post-title h1:last-child,
+.post .post-headline h2:last-child,
+.post .post-content p:last-child {
+	display: none;
 }
 
 .post .form-submit {
-  display: none;
+	display: none;
 }
 
 .post #btn-edit-post-cancel {
-  display: none;
+	display: none;
 }
 
-.post.editing .post-title h1:first-child, .post.editing .post-headline h2:first-child, .post.editing .post-content p:first-child, .post.editing #btn-delete-post {
-  display: none;
+.post.editing .post-title h1:first-child,
+.post.editing .post-headline h2:first-child,
+.post.editing .post-content p:first-child,
+.post.editing #btn-delete-post {
+	display: none;
 }
 
-.post.editing .post-title h1:last-child, .post.editing .post-headline h2:last-child, .post.editing .post-content p:last-child {
-  display: block;
+.post.editing .post-title h1:last-child,
+.post.editing .post-headline h2:last-child,
+.post.editing .post-content p:last-child {
+	display: block;
 }
 
 .post.editing .form-submit {
-  display: block;
+	display: block;
 }
 
 .post.editing #btn-edit-post {
-  display: none;
+	display: none;
 }
 
 .post.editing #btn-edit-post-cancel {
-  display: block;
+	display: block;
 }
 
-#form-edit-post h1 input, #form-edit-post h2 input {
-  font-weight: 500;
+#form-edit-post h1 input,
+#form-edit-post h2 input {
+	font-weight: 500;
 }
 
 .post .buttons-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .post-image {
-  position: relative;
+	position: relative;
 }
 
 .post-image .icon-cross {
-  z-index: 5;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 20px;
+	z-index: 5;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 20px;
 }
 
 #post-img {
-  max-height: 300px;
-  max-width: 100%;
-}
-
-.editing .post-image img {
-  cursor: pointer;
-}
-
-.editing #post-img:hover {
-  opacity: .7;
+	max-height: 300px;
+	max-width: 100%;
 }
 
 .post-content {
-  margin: 2rem 0;
+	margin: 2rem 0;
 }
 
 .post-date {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .date-created {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .date-created img {
-  margin-left: 1rem;
+	margin-left: 1rem;
+}
+
+.editing .post-image img {
+	cursor: pointer;
+}
+
+.editing #post-img:hover {
+	opacity: 0.7;
 }
 
 .comments {
-  margin-top: 3rem;
-  justify-content: center;
+	margin-top: 3rem;
+	justify-content: center;
 }
 
 .comments h3 {
-  margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 .comment {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 8px;
 }
 
 .comment:not(:last-child) {
-  border-bottom: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
 }
 
 .comment .date-created {
-  font-size: 15px;
+	font-size: 15px;
 }

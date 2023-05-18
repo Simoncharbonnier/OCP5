@@ -1,14 +1,14 @@
 .container.login .row {
-  justify-content: center;
+	justify-content: center;
 }
 
 .login form {
-  margin-top: 5vh;
-  padding: 2rem;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  border-radius: 3px;
+	margin-top: 5vh;
+	padding: 2rem;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+	border-radius: 3px;
 }
 
 form input {
-  margin: 1rem 0 !important;
+	margin: 1rem 0 !important;
 }

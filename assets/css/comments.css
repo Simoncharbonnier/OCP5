@@ -1,58 +1,61 @@
 .comments {
-  text-align: center;
-  justify-content: center;
+	text-align: center;
+	justify-content: center;
 }
 
 .comments .comment-part {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .comments h1 {
-  padding-bottom: 1rem;
+	padding-bottom: 1rem;
 }
 
 .comments .message {
-  justify-content: flex-start;
+	justify-content: flex-start;
 }
 
 @media (max-width: 768px) {
-  .message p {
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
+	.message p {
+		margin-top: 16px;
+		margin-bottom: 8px;
+	}
 }
 
 .comments .date-created img {
-  margin-left: 1rem;
+	margin-left: 1rem;
 }
 
 .comment {
-  padding: 8px;
-  justify-content: center;
+	padding: 8px;
+	justify-content: center;
 }
 
 .comment:not(:last-child) {
-  border-bottom: 1px solid lightgrey;
+	border-bottom: 1px solid lightgrey;
 }
 
 .comment .icon-delete {
-  width: 20px;
+	width: 20px;
 }
 
-.comment .btn-valid-delete-comment, .comment .btn-cancel-delete-comment {
-  display: none;
+.comment .btn-valid-delete-comment,
+.comment .btn-cancel-delete-comment {
+	display: none;
 }
 
-.comment.deleting .btn-delete-comment, .comment.deleting .btn-edit-comment {
-  display: none;
+.comment.deleting .btn-delete-comment,
+.comment.deleting .btn-edit-comment {
+	display: none;
 }
 
-.comment.deleting .btn-valid-delete-comment, .comment.deleting .btn-cancel-delete-comment {
-  display: block;
+.comment.deleting .btn-valid-delete-comment,
+.comment.deleting .btn-cancel-delete-comment {
+	display: block;
 }
 
 .deleting {
-  background-color: #ffcccc;
+	background-color: #fcc;
 }

@@ -1,52 +1,52 @@
 /* CARDS */
 
 .card {
-  overflow: hidden;
-  height: 400px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.2);
-  position: relative;
-  bottom: 0;
-  transition: bottom 0.2s;
-  border-radius: 3px;
-  margin-bottom: 2rem;
+    overflow: hidden;
+    height: 400px;
+    background: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    position: relative;
+    bottom: 0;
+    transition: bottom 0.2s;
+    border-radius: 3px;
+    margin-bottom: 2rem;
 }
 
 .card:hover {
-  bottom: 10px;
+    bottom: 10px;
 }
 
 .card img {
-  height: 50%;
-  width: 100%;
-  object-fit: cover;
+    height: 50%;
+    width: 100%;
+    object-fit: cover;
 }
 
 .card h3 {
-  font-size: 18px;
-  font-weight: bold;
-  margin: 2rem 0;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2rem 0;
 }
 
 .card p {
-  font-size: 14px;
-  line-height: 1.4;
-  opacity: .7;
-  margin-bottom: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    opacity: 0.7;
+    margin-bottom: 0;
 }
 
 .card .card-infos {
-  padding: 16px;
+    padding: 16px;
 }
 
 .card .card-footer {
-  position: absolute;
-  bottom: 1rem;
-  right: 1rem;
-  background-color: inherit;
-  border: none;
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: inherit;
+    border: none;
 }
 
 .card .no-image {
-  padding-top: 40%;
+    padding-top: 40%;
 }
