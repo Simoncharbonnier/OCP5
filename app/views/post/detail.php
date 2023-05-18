@@ -12,7 +12,7 @@
           <div class="<?= ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) ? 'col-9 col-md-11' : 'col-md-12' ?>">
             <div class="post-title">
               <h1><?= $post['title'] ?></h1>
-              <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off" required></h1>
+              <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off" maxlength="128" required></h1>
             </div>
           </div>
           <?php if ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) : ?>
@@ -26,7 +26,7 @@
           <div class="col-md-12">
             <div class="post-headline">
               <h2><?= $post['headline'] ?></h2>
-              <h2><input type="text" name="headline" value="<?= $post['headline'] ?>" autocomplete="off" required></h2>
+              <h2><input type="text" name="headline" value="<?= $post['headline'] ?>" autocomplete="off" maxlength="255" required></h2>
             </div>
           </div>
         </div>

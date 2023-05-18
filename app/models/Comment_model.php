@@ -89,15 +89,4 @@ class Comment_model extends Model
     $query->bindParam(':id', $id);
     return $query->execute();
   }
-
-  /**
-   * Delete comments by user
-   */
-  public function deleteByUser($id)
-  {
-    $sql = "DELETE FROM Comment WHERE user_id = :user_id";
-    $query = $this->db->prepare($sql);
-    $query->bindParam(':user_id', $id);
-    return $query->execute();
-  }
 }

@@ -64,17 +64,6 @@ class User_model extends Model
   }
 
   /**
-   * Update admin of a user
-   */
-  public function updateAdmin(array $data)
-  {
-    $sql = "UPDATE User SET admin = :admin
-            WHERE id = :id";
-    $query = $this->db->prepare($sql);
-    return $query->execute($data);
-  }
-
-  /**
    * Delete a user
    */
   public function delete($id)

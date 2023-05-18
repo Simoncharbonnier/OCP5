@@ -105,15 +105,4 @@ class Post_model extends Model
     $query->bindParam(':post_id', $id);
     return $query->execute();
   }
-
-  /**
-   * Delete posts by user
-   */
-  public function deleteByUser($id)
-  {
-    $sql = "DELETE FROM Post WHERE user_id = :user_id";
-    $query = $this->db->prepare($sql);
-    $query->bindParam(':user_id', $id);
-    return $query->execute();
-  }
 }
