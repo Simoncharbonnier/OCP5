@@ -1,13 +1,15 @@
 <?php
 
-require_once('app/models/Model.php');
+require_once 'app/models/Model.php';
 
-class Comment_model extends Model {
+class Comment_model extends Model
+{
 
   /**
    * Get all comments
    */
-  public function getAll() {
+  public function getAll()
+  {
     $sql = "SELECT Comment.id, Comment.message, Comment.created_at, Comment.valid,
                     User.id author_id, User.first_name author, User.avatar author_avatar,
                     Post.id post_id, Post.title post_title
@@ -23,7 +25,8 @@ class Comment_model extends Model {
   /**
    * Get a comment by id
    */
-  public function getById($id) {
+  public function getById($id)
+  {
     $sql = "SELECT * FROM Comment WHERE id = :comment_id";
     $query = $this->db->prepare($sql);
     $query->bindParam(':comment_id', $id);
@@ -34,7 +37,8 @@ class Comment_model extends Model {
   /**
    * Get comments by user
    */
-  public function getByUser($id) {
+  public function getByUser($id)
+  {
     $sql = "SELECT * FROM Comment WHERE user_id = :user_id ORDER BY created_at DESC";
     $query = $this->db->prepare($sql);
     $query->bindParam(':user_id', $id);
@@ -45,7 +49,8 @@ class Comment_model extends Model {
   /**
    * Get comments by post
    */
-  public function getByPost($id) {
+  public function getByPost($id)
+  {
     $sql = "SELECT * FROM Comment WHERE post_id = :post_id ORDER BY created_at DESC";
     $query = $this->db->prepare($sql);
     $query->bindParam(':post_id', $id);
@@ -56,7 +61,8 @@ class Comment_model extends Model {
   /**
    * Create a comment
    */
-  public function create(array $data) {
+  public function create(array $data)
+  {
     $sql = "INSERT INTO Comment (user_id, post_id, message, created_at)
             VALUES (:user_id, :post_id, :message, :created_at)";
     $query = $this->db->prepare($sql);
@@ -66,7 +72,8 @@ class Comment_model extends Model {
   /**
    * Update a comment
    */
-  public function update(array $data) {
+  public function update(array $data)
+  {
     $sql = "UPDATE Comment SET valid = :valid WHERE id = :id";
     $query = $this->db->prepare($sql);
     return $query->execute($data);
@@ -75,7 +82,8 @@ class Comment_model extends Model {
   /**
    * Delete a comment
    */
-  public function delete($id) {
+  public function delete($id)
+  {
     $sql = "DELETE FROM Comment WHERE id = :id";
     $query = $this->db->prepare($sql);
     $query->bindParam(':id', $id);
@@ -85,7 +93,8 @@ class Comment_model extends Model {
   /**
    * Delete comments by user
    */
-  public function deleteByUser($id) {
+  public function deleteByUser($id)
+  {
     $sql = "DELETE FROM Comment WHERE user_id = :user_id";
     $query = $this->db->prepare($sql);
     $query->bindParam(':user_id', $id);

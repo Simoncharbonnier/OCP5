@@ -1,10 +1,12 @@
 <?php
 
-class Model {
+class Model
+{
 
   protected PDO $db;
 
-  public function __construct() {
+  public function __construct()
+  {
     try {
       $this->db = new PDO('mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8',
         DB_USER,
