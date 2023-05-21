@@ -7,7 +7,7 @@ class Controller
      * Check if user is not logged
      *
      * @return true
-     * @throws
+     * @throws Exception
      */
 
     public function isNotLogged()
@@ -23,7 +23,7 @@ class Controller
      * Check if user is logged
      *
      * @return true
-     * @throws
+     * @throws Exception
      */
 
     public function isLogged()
@@ -39,7 +39,7 @@ class Controller
      * Check if user is logged and admin
      *
      * @return true
-     * @throws
+     * @throws Exception
      */
 
     public function isAdmin()
@@ -53,7 +53,7 @@ class Controller
 
     /**
      * Format date
-     * @param string $date
+     * @param string $date date to format
      *
      * @return string
      */

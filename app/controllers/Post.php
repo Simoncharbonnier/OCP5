@@ -189,7 +189,7 @@ class Post extends Controller
                                     $this->deleteImage($imgFileName);
                                 }
                             } else {
-                                $data['image'] = isset($oldPath) ? $imgFileName : $post['image'];
+                                $data['image'] = $imgFileName;
                             }
 
                             $postModel->update($data);

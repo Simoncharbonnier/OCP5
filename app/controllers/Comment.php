@@ -11,6 +11,9 @@ class Comment extends Controller
     /**
      * Retrieve all comments and display comments index
      * As an admin
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function index() : void
@@ -21,12 +24,13 @@ class Comment extends Controller
             $commentModel = new Comment_model();
             $comments = $commentModel->getAll();
 
-            if (empty($comments)) {
-                throw new Exception("no_comments");
+            if (empty($comments) === FALSE) {
+                include_once 'app/views/comment/index.php';
+                return;
             }
 
-            include_once 'app/views/comment/index.php';
-        } catch(Exception $e) {
+            throw new Exception("no_comments");
+        } catch (Exception $e) {
             header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
             exit;
         }
@@ -35,6 +39,9 @@ class Comment extends Controller
     /**
      * Add a comment and redirect to post detail
      * As a user
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function add() : void
@@ -47,10 +54,10 @@ class Comment extends Controller
                 $postModel = new Post_model();
                 $post = $postModel->getById($postId);
 
-                if (!empty($post)) {
+                if (empty($post) === FALSE) {
                     $data = [];
 
-                    if (!empty($_POST) && (isset($_POST['message']) && !empty($_POST['message']))) {
+                    if (empty($_POST) === FALSE && (isset($_POST['message']) === TRUE && empty($_POST['message']) === FALSE)) {
                         $data['message'] = $_POST['message'];
                         $data['user_id'] = $_SESSION['user_id'];
                         $data['post_id'] = $postId;
@@ -59,7 +66,7 @@ class Comment extends Controller
                         $commentModel = new Comment_model();
                         $commentModel->create($data);
 
-                        header("Location: " . PATH . "?controller=post&action=detail&id=" . $postId . "&success=success_comment_add");
+                        header("Location: ".PATH."?controller=post&action=detail&id=".$postId."&success=success_comment_add");
                         exit;
                     } else {
                         throw new Exception("missing_param");
@@ -70,8 +77,8 @@ class Comment extends Controller
             } else {
                 throw new Exception("inval");
             }
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=post&action=index&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=post&action=index&error=".$e->getMessage());
             exit;
         }
     }
@@ -79,6 +86,9 @@ class Comment extends Controller
     /**
      * Update a comment by its id and redirect to comments index
      * As an admin
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function edit() : void
@@ -91,7 +101,7 @@ class Comment extends Controller
                 $commentModel = new Comment_model();
                 $comment = $commentModel->getById($commentId);
 
-                if (!empty($comment)) {
+                if (empty($comment) === FALSE) {
                     $data = [];
 
                     if ($comment[0]['valid']) {
@@ -103,7 +113,7 @@ class Comment extends Controller
 
                     $commentModel->update($data);
 
-                    header("Location: " . PATH . "?controller=comment&action=index&success=success_comment_edit");
+                    header("Location: ".PATH."?controller=comment&action=index&success=success_comment_edit");
                     exit;
                 } else {
                     throw new Exception("no_comment");
@@ -111,8 +121,8 @@ class Comment extends Controller
             } else {
                 throw new Exception("inval");
             }
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=comment&action=index&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=comment&action=index&error=".$e->getMessage());
             exit;
         }
     }
@@ -120,6 +130,10 @@ class Comment extends Controller
     /**
      * Delete a comment by its id and redirect to comments index
      * As an admin
+     * @param $commentId id of the comment to delete
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function delete($commentId = NULL) : void
@@ -133,9 +147,9 @@ class Comment extends Controller
                 $commentModel = new Comment_model();
                 $comment = $commentModel->getById($commentId);
 
-                if (!empty($comment)) {
+                if (empty($comment) === FALSE) {
                     $commentModel->delete($commentId);
-                    header("Location: " . PATH . "?controller=comment&action=index&success=success_comment_delete");
+                    header("Location: ".PATH."?controller=comment&action=index&success=success_comment_delete");
                     exit;
                 } else {
                     throw new Exception("no_comment");
@@ -143,8 +157,8 @@ class Comment extends Controller
             } else {
                 throw new Exception("inval");
             }
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=comment&action=index&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=comment&action=index&error=".$e->getMessage());
             exit;
         }
     }

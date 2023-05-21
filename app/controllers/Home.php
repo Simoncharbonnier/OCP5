@@ -24,7 +24,7 @@ class Home extends Controller
      * Send a mail and redirect to the home page
      *
      * @return void
-     * @throws
+     * @throws Exception
     */
 
     public function mail() : void
