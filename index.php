@@ -3,7 +3,7 @@
 require_once 'app/config/config.php';
 
 if (isset($_GET['controller']) === TRUE && empty($_GET['controller']) === FALSE) {
-    $controller = stripslashes($_GET['controller']);
+    $controller = $_GET['controller'];
 } else {
     $controller = 'Home';
 }
@@ -14,7 +14,7 @@ if (file_exists('app/controllers/'.$controllerClassName.'.php') === TRUE) {
     $instance = new $controllerClassName();
 
     if (isset($_GET['action']) === TRUE && empty($_GET['action']) === FALSE) {
-        $action = stripslashes($_GET['action']);
+        $action = $_GET['action'];
     } else {
         $action = 'index';
     }
