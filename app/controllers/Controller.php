@@ -6,7 +6,7 @@ class Controller
     /**
      * Check if user is not logged
      *
-     * @return true
+     * @return boolean
      * @throws Exception
      */
 
@@ -22,7 +22,7 @@ class Controller
     /**
      * Check if user is logged
      *
-     * @return true
+     * @return boolean
      * @throws Exception
      */
 
@@ -38,7 +38,7 @@ class Controller
     /**
      * Check if user is logged and admin
      *
-     * @return true
+     * @return boolean
      * @throws Exception
      */
 

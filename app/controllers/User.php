@@ -13,18 +13,21 @@ class User extends Controller
 
     /**
      * Add a user and redirect to the login page
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function signup() : void
     {
         try {
-            if (!empty($_POST) && (isset($_POST['first_name']) && !empty($_POST['first_name'])) && (isset($_POST['last_name']) && !empty($_POST['last_name'])) && (isset($_POST['mail']) && !empty($_POST['mail'])) && (isset($_POST['password']) && !empty($_POST['password']))) {
-                if (isset($_POST['confirm']) && $_POST['password'] === $_POST['confirm']) {
+            if (empty($_POST) === FALSE && (isset($_POST['first_name']) === TRUE && empty($_POST['first_name']) === FALSE) && (isset($_POST['last_name']) === TRUE && empty($_POST['last_name']) === FALSE) && (isset($_POST['mail']) === TRUE && empty($_POST['mail']) === FALSE) && (isset($_POST['password']) === TRUE && empty($_POST['password']) === FALSE)) {
+                if (isset($_POST['confirm']) === TRUE && $_POST['password'] === $_POST['confirm']) {
                     unset($_POST['confirm']);
                     $userModel = new User_model();
                     $user = $userModel->getByMail($_POST['mail']);
 
-                    if (empty($user)) {
+                    if (empty($user) === TRUE) {
                         $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
                         foreach ($_POST as $name => $value) {
                             $data[$name] = $value;
@@ -32,7 +35,7 @@ class User extends Controller
                         $data['password'] = $passwordHash;
 
                         $userModel->create($data);
-                        header("Location: " . PATH . "?controller=user&action=login&form=login&success=success_user_add");
+                        header("Location: ".PATH."?controller=user&action=login&form=login&success=success_user_add");
                         exit;
                     } else {
                         throw new Exception("user_exist");
@@ -43,14 +46,17 @@ class User extends Controller
             } else {
                 throw new Exception("missing_param");
             }
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=user&action=login&form=signup&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=user&action=login&form=signup&error=".$e->getMessage());
             exit;
         }
     }
 
     /**
      * Verify the credentials and redirect to the home page
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function login() : void
@@ -58,15 +64,15 @@ class User extends Controller
         try {
             $this->isNotLogged();
 
-            if (isset($_POST['mail']) && isset($_POST['password'])) {
-                if (!empty($_POST['mail']) && !empty($_POST['password'])) {
+            if (isset($_POST['mail']) === TRUE && isset($_POST['password']) === TRUE) {
+                if (empty($_POST['mail']) === FALSE && empty($_POST['password']) === FALSE) {
                     $userModel = new User_model();
                     $user = $userModel->getByMail($_POST['mail']);
 
-                    if (!empty($user)) {
+                    if (empty($user) === FALSE) {
                         $user = $user[0];
                         $passwordHash = $user['password'];
-                        if (password_verify($_POST['password'], $passwordHash)) {
+                        if (password_verify($_POST['password'], $passwordHash) === TRUE) {
                             $_SESSION['is_logged'] = true;
                             $_SESSION['user_id'] = $user['id'];
                             $_SESSION['user_mail'] = $user['mail'];
@@ -86,11 +92,11 @@ class User extends Controller
             } else {
                 include_once 'app/views/user/login.php';
             }
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             if ($e->getMessage() === 'no_perms_logged') {
-                header("Location: " . PATH . "?controller=home&action=index&error=no_perms");
+                header("Location: ".PATH."?controller=home&action=index&error=no_perms");
             } else {
-                header("Location: " . PATH . "?controller=user&action=login&form=login&error=" . $e->getMessage());
+                header("Location: ".PATH."?controller=user&action=login&form=login&error=".$e->getMessage());
             }
             exit;
         }
@@ -98,6 +104,9 @@ class User extends Controller
 
     /**
      * Logout a user and redirect to the home page
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function logout() : void
@@ -106,17 +115,19 @@ class User extends Controller
             $this->isLogged();
             session_unset();
             session_destroy();
-            header("Location: " . PATH . "?controller=home&action=index");
+            header("Location: ".PATH."?controller=home&action=index");
             exit;
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=home&action=index&error=".$e->getMessage());
             exit;
         }
     }
 
     /**
-     * Retrieve all users and display the list of users
-     * As an admin
+     * Retrieve all users and display the list of users as an admin
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function index() : void
@@ -127,32 +138,35 @@ class User extends Controller
             $userModel = new User_model();
             $users = $userModel->getAll();
 
-            if (empty($users)) {
+            if (empty($users) === TRUE) {
                 throw new Exception("no_users");
             }
 
             include_once 'app/views/user/index.php';
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=home&action=index&error=".$e->getMessage());
             exit;
         }
     }
 
     /**
      * Retrieve a user by its id and display user detail
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function detail() : void
     {
         try {
-            if ($_GET['id']) {
+            if (isset($_GET['id']) === TRUE) {
                 $userModel = new User_model();
                 $result = $userModel->getById($_GET['id'], true);
 
-                if (!empty($result)) {
+                if (empty($result) === FALSE) {
                     $user = $result[0];
 
-                    if ($user['admin']) {
+                    if ($user['admin'] === 1) {
                         $postModel = new Post_model();
                         $posts = $postModel->getByUser($user['id']);
                     }
@@ -161,7 +175,7 @@ class User extends Controller
                     $result = $commentModel->getByUser($user['id']);
                     $comments = [];
                     foreach ($result as $comment) {
-                        if ($comment['valid']) {
+                        if ($comment['valid'] === 1) {
                             $postModel = new Post_model();
                             $post = $postModel->getById($comment['post_id'])[0];
                             $comment['post_title'] = $post['title'];
@@ -177,15 +191,17 @@ class User extends Controller
             } else {
                 throw new Exception("inval");
             }
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=home&action=index&error=".$e->getMessage());
             exit;
         }
     }
 
     /**
-     * Update a user by its id and redirect to user detail
-     * As the user himself
+     * Update a user by its id and redirect to user detail as the user himself
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function edit() : void
@@ -193,14 +209,14 @@ class User extends Controller
         try {
             $this->isLogged();
 
-            if ($_GET['id']) {
+            if (isset($_GET['id']) === true) {
                 $userModel = new User_model();
                 $user = $userModel->getById($_GET['id']);
-                if (!empty($user)) {
+                if (empty($user) === false) {
                     $user = $user[0];
 
                     if ($_SESSION['user_mail'] === $user['mail']) {
-                        if (!empty($_POST) && (isset($_POST['first_name']) && !empty($_POST['first_name'])) && (isset($_POST['last_name']) && !empty($_POST['last_name'])) && (isset($_POST['password']) && !empty($_POST['password'])) && (isset($_POST['confirm']) && !empty($_POST['confirm'])) && (isset($_POST['avatar']) && !empty($_POST['avatar']))) {
+                        if (empty($_POST) === FALSE && (isset($_POST['first_name']) === TRUE && empty($_POST['first_name']) === FALSE) && (isset($_POST['last_name']) === TRUE && empty($_POST['last_name']) === FALSE) && (isset($_POST['password']) === TRUE && empty($_POST['password']) === FALSE) && (isset($_POST['confirm']) === TRUE && empty($_POST['confirm']) === FALSE) && (isset($_POST['avatar']) === TRUE && empty($_POST['avatar']) === FALSE)) {
                             if ($_POST['password'] === $_POST['confirm']) {
                                 unset($_POST['confirm']);
 
@@ -219,7 +235,7 @@ class User extends Controller
                                         $type = $_FILES['image']['type'];
                                         if (in_array($type, $allowed)) {
                                             $currentPath = $_FILES['image']['tmp_name'];
-                                            $data['avatar'] = $this->uploadAvatar($currentPath, 'user_' . $user['id'] . '.jpg');
+                                            $data['avatar'] = $this->uploadAvatar($currentPath, 'user_'.$user['id'].'.jpg');
                                         }
                                     } else {
                                         $this->deleteAvatar($user['avatar']);
@@ -230,7 +246,7 @@ class User extends Controller
 
                                 $_SESSION['user_avatar'] = $data['avatar'];
 
-                                header("Location: " . PATH . "?controller=user&action=detail&id=" . $user['id'] . "&success=success_user_edit");
+                                header("Location: ".PATH."?controller=user&action=detail&id=".$user['id']."&success=success_user_edit");
                                 exit;
                             } else {
                                 throw new Exception("password_confirm");
@@ -247,28 +263,30 @@ class User extends Controller
             } else {
                 throw new Exception("inval");
             }
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=user&action=detail&id=" . $_GET['id'] . "&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=user&action=detail&id=".$_GET['id']."&error=".$e->getMessage());
             exit;
         }
     }
 
     /**
-     * Delete a user by its id and redirect to users index
-     * As an admin
+     * Delete a user by its id and redirect to users index as an admin
+     *
+     * @return void
+     * @throws Exception
      */
 
     public function delete() : void
     {
         try {
-            if ($_GET['id']) {
+            if (isset($_GET['id']) === TRUE) {
                 $userModel = new User_model();
                 $result = $userModel->getById($_GET['id']);
 
-                if (!empty($result)) {
+                if (empty($result) === FALSE) {
                     $user = $result[0];
                     if ($_SESSION['is_logged'] === true && ($_SESSION['user_admin'] === 1 || $_SESSION['user_mail'] === $user['mail'])) {
-                        if (!$user['admin']) {
+                        if ($user['admin'] === 0) {
                             $commentModel = new Comment_model();
                             $comments = $commentModel->getByUser($_GET['id']);
 
@@ -281,7 +299,7 @@ class User extends Controller
 
                             foreach ($posts as $post) {
                                 $postModel->delete($post['id']);
-                                if ($post['image']) {
+                                if (empty($post['image']) === FALSE) {
                                     $this->deleteImage($post['image']);
                                 }
                             }
@@ -297,7 +315,7 @@ class User extends Controller
                                 session_destroy();
                             }
 
-                            header("Location: " . PATH . "?controller=user&action=index&success=success_user_delete");
+                            header("Location: ".PATH."?controller=user&action=index&success=success_user_delete");
                             exit;
                         } else {
                             throw new Exception("user_admin");
@@ -311,26 +329,26 @@ class User extends Controller
             } else {
                 throw new Exception("inval");
             }
-        } catch(Exception $e) {
-            header("Location: " . PATH . "?controller=user&action=index&error=" . $e->getMessage());
+        } catch (Exception $e) {
+            header("Location: ".PATH."?controller=user&action=index&error=".$e->getMessage());
             exit;
         }
     }
 
     private function uploadAvatar($currentPath, $newFileName)
     {
-        $newPath = IMAGE_PATH . "user/" . $newFileName;
+        $newPath = IMAGE_PATH."user/".$newFileName;
 
         if (move_uploaded_file($currentPath, $newPath)) {
             return $newFileName;
-        } else {
-            return 'default.jpg';
         }
+
+        return 'default.jpg';
     }
 
     private function deleteAvatar($fileName)
     {
-        $path = IMAGE_PATH . "user/"  . $fileName;
+        $path = IMAGE_PATH."user/".$fileName;
 
         if (file_exists($path)) {
             unlink($path);
@@ -339,7 +357,7 @@ class User extends Controller
 
     private function deleteImage($fileName)
     {
-        $path = IMAGE_PATH . "post/"  . $fileName;
+        $path = IMAGE_PATH."post/".$fileName;
 
         if (file_exists($path)) {
             unlink($path);

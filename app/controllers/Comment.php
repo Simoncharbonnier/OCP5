@@ -9,8 +9,7 @@ class Comment extends Controller
 {
 
     /**
-     * Retrieve all comments and display comments index
-     * As an admin
+     * Retrieve all comments and display comments index as an admin
      *
      * @return void
      * @throws Exception
@@ -31,7 +30,7 @@ class Comment extends Controller
 
             throw new Exception("no_comments");
         } catch (Exception $e) {
-            header("Location: " . PATH . "?controller=home&action=index&error=" . $e->getMessage());
+            header("Location: ".PATH."?controller=home&action=index&error=".$e->getMessage());
             exit;
         }
     }
@@ -49,7 +48,7 @@ class Comment extends Controller
         try {
             $this->isLogged();
 
-            if ($_GET['id']) {
+            if (isset($_GET['id']) === TRUE) {
                 $postId = $_GET['id'];
                 $postModel = new Post_model();
                 $post = $postModel->getById($postId);
@@ -68,15 +67,12 @@ class Comment extends Controller
 
                         header("Location: ".PATH."?controller=post&action=detail&id=".$postId."&success=success_comment_add");
                         exit;
-                    } else {
-                        throw new Exception("missing_param");
                     }
-                } else {
-                    throw new Exception("no_post");
+                    throw new Exception("missing_param");
                 }
-            } else {
-                throw new Exception("inval");
+                throw new Exception("no_post");
             }
+            throw new Exception("inval");
         } catch (Exception $e) {
             header("Location: ".PATH."?controller=post&action=index&error=".$e->getMessage());
             exit;
@@ -84,8 +80,7 @@ class Comment extends Controller
     }
 
     /**
-     * Update a comment by its id and redirect to comments index
-     * As an admin
+     * Update a comment by its id and redirect to comments index as an admin
      *
      * @return void
      * @throws Exception
@@ -96,7 +91,7 @@ class Comment extends Controller
         try {
             $this->isAdmin();
 
-            if ($_GET['id']) {
+            if (isset($_GET['id']) === TRUE) {
                 $commentId = $_GET['id'];
                 $commentModel = new Comment_model();
                 $comment = $commentModel->getById($commentId);
@@ -104,11 +99,7 @@ class Comment extends Controller
                 if (empty($comment) === FALSE) {
                     $data = [];
 
-                    if ($comment[0]['valid']) {
-                        $data['valid'] = 0;
-                    } else {
-                        $data['valid'] = 1;
-                    }
+                    $data['valid'] = ($comment[0]['valid'] === 1) ? 0 : 1;
                     $data['id'] = $commentId;
 
                     $commentModel->update($data);
@@ -128,9 +119,8 @@ class Comment extends Controller
     }
 
     /**
-     * Delete a comment by its id and redirect to comments index
-     * As an admin
-     * @param $commentId id of the comment to delete
+     * Delete a comment by its id and redirect to comments index as an admin
+     * @param ?integer $commentId id of the comment to delete
      *
      * @return void
      * @throws Exception
@@ -143,7 +133,7 @@ class Comment extends Controller
 
             $commentId = $commentId ? $commentId : $_GET['id'];
 
-            if ($commentId) {
+            if ($commentId !== NULL) {
                 $commentModel = new Comment_model();
                 $comment = $commentModel->getById($commentId);
 
