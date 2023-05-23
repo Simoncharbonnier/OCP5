@@ -21,7 +21,7 @@
                     </div>
                     <div class="col-4 col-md-1 comment-part">
                         <a class="btn btn-edit-comment" href="?controller=comment&action=edit&id=<?= $comment['id'] ?>">
-                            <?= $comment['valid'] ? "Archiver" : "Valider" ?>
+                            <?= $comment['valid'] === 1 ? "Archiver" : "Valider" ?>
                         </a>
                         <a class="btn btn-cancel-delete-comment" data-comment-id="<?= $comment['id'] ?>">Annuler</a>
                     </div>
@@ -35,4 +35,4 @@
     </div>
 </div>
 
-<?php require_once 'app/views/components/footer.php'; ?>
+<?php require_once 'app/views/components/footer.php';

@@ -30,7 +30,7 @@
             <img src="assets/img/photo.jpg" alt="">
         </div>
     </div>
-    <?php if ($posts) : ?>
+    <?php if (empty($posts) === FALSE) : ?>
         <div class="row posts">
             <div class="col-md-12">
                 <h2>Voici les dernières actualités à mon sujet !</h2>
@@ -39,8 +39,8 @@
                         <div class="col-10 col-md-4">
                             <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
                                 <div class="card">
-                                    <?php if ($post['image']) : ?>
-                                        <img src="assets/img/post/<?= $post['image'] ?>" alt="">
+                                    <?php if ($post['image'] !== null) : ?>
+                                        <img src="assets/img/post/<?= htmlspecialchars($post['image']) ?>" alt="">
                                     <?php endif; ?>
                                     <div class="card-infos <?= $post['image'] ? '' : 'no-image' ?>">
                                         <h3><?= htmlspecialchars($post['title']) ?></h3>
@@ -84,4 +84,4 @@
     </form>
 </div>
 
-<?php require_once 'app/views/components/footer.php'; ?>
+<?php require_once 'app/views/components/footer.php';

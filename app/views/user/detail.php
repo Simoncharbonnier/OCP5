@@ -58,13 +58,13 @@
             <?php endif; ?>
         </form>
     </div>
-    <?php if ($user['admin']) : ?>
+    <?php if ($user['admin'] === 1) : ?>
         <div class="row center">
             <div class="col-10 col-md-10 text-center card">
                 <h3 class="margin-bottom">Articles</h3>
                 <div class="row">
                     <div class="col-md-12">
-                        <?php if ($posts) : ?>
+                        <?php if (empty($posts) === FALSE) : ?>
                             <div class="row headers margin-bottom">
                                 <div class="col-md-3 flex-center">
                                     <p>Titre</p>
@@ -102,7 +102,7 @@
             <h3 class="margin-bottom">Commentaires</h3>
             <div class="row">
                 <div class="col-md-12">
-                    <?php if ($comments) : ?>
+                    <?php if (empty($comments) === FALSE) : ?>
                         <div class="row headers margin-bottom">
                             <div class="col-md-3 flex-center">
                                 <p>Titre de l'article</p>

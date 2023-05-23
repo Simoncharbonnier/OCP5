@@ -12,8 +12,8 @@
                     <div class="col-10 col-md-4">
                         <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
                             <div class="card">
-                                <?php if ($post['image']) : ?>
-                                    <img src="assets/img/post/<?= $post['image'] ?>" alt="">
+                                <?php if ($post['image'] !== null) : ?>
+                                    <img src="assets/img/post/<?= htmlspecialchars($post['image']) ?>" alt="">
                                 <?php endif; ?>
                                 <div class="card-infos <?= $post['image'] ? '' : 'no-image' ?>">
                                     <h3><?= htmlspecialchars($post['title']) ?></h3>
@@ -31,4 +31,4 @@
     </div>
 </div>
 
-<?php require_once 'app/views/components/footer.php'; ?>
+<?php require_once 'app/views/components/footer.php';

@@ -34,7 +34,7 @@
                     <div class="col-md-12">
                         <div class="post-image">
                             <img id="btn-img-delete" class="icon-cross d-none" src="assets/img/icons/cross.svg">
-                            <img id="post-img" src="<?= $post['image'] ? 'assets/img/post/' . $post['image'] : '' ?>">
+                            <img id="post-img" src="<?= $post['image'] !== null ? 'assets/img/post/' . htmlspecialchars($post['image']) : '' ?>">
                             <div id="btn-img-add" class="btn d-none">Ajouter une image</div>
                             <div id="btn-img-cancel" class="btn d-none">Annuler</div>
                             <input type="file" name="image" accept="image/*" id="image-input" hidden>
@@ -77,7 +77,7 @@
     <div class="row comments">
         <div class="col-10 col-md-8">
             <div class="comments-title">
-                <?php if ($comments) : ?>
+                <?php if (empty($comments) === FALSE) : ?>
                     <h3>Commentaires</h3>
                 <?php else : ?>
                     <h3>Pas encore de commentaires</h3>
@@ -98,7 +98,7 @@
             </div>
         </div>
         <div class="col-10 col-md-4">
-            <?php if ($_SESSION['is_logged']) : ?>
+            <?php if ($_SESSION['is_logged'] === true) : ?>
                 <h3>Quel est votre avis ?</h3>
                 <form id="form-comment" method="POST" action="?controller=comment&action=add&id=<?= $post['id'] ?>">
                     <textarea name="message" rows="7" placeholder="Commentaire" autocomplete="off" required></textarea>
@@ -130,4 +130,4 @@
     </div>
 </div>
 
-<?php require_once 'app/views/components/footer.php'; ?>
+<?php require_once 'app/views/components/footer.php';

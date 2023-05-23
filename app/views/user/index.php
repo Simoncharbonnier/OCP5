@@ -22,7 +22,7 @@
                         <p><?= htmlspecialchars($user['last_name']) ?></p>
                     </div>
                     <div class="col-md-1 user-part">
-                        <p><?= $user['admin'] ? "Admin" : "Visiteur" ?></p>
+                        <p><?= $user['admin'] === 1 ? "Admin" : "Visiteur" ?></p>
                     </div>
                     <div class="col-md-1"></div>
                     <div class="col-4 col-md-1 user-part dnone-responsive">
