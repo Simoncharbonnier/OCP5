@@ -15,7 +15,7 @@
                                 <?php if ($post['image'] !== null) : ?>
                                     <img src="assets/img/post/<?= htmlspecialchars($post['image']) ?>" alt="">
                                 <?php endif; ?>
-                                <div class="card-infos <?= $post['image'] ? '' : 'no-image' ?>">
+                                <div class="card-infos <?= $post['image'] !== null ? '' : 'no-image' ?>">
                                     <h3><?= htmlspecialchars($post['title']) ?></h3>
                                     <p><?= htmlspecialchars($post['headline']) ?></p>
                                 </div>
