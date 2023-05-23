@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="assets/css/users.css">
 <script src="assets/js/users.js"></script>
 
-<?php include_once 'app/views/components/header.php'; ?>
+<?php require_once 'app/views/components/header.php'; ?>
 
 <div class="container">
     <div class="row users">
@@ -13,13 +13,13 @@
                         <img class="avatar" src="assets/img/user/<?= $user['avatar'] ?>" />
                     </div>
                     <div class="col-md-3 user-part">
-                        <a class="btn-underline" href="?controller=user&action=detail&id=<?= $user['id'] ?>"><?= $user['mail'] ?></a>
+                        <a class="btn-underline" href="?controller=user&action=detail&id=<?= $user['id'] ?>"><?= htmlspecialchars($user['mail']) ?></a>
                     </div>
                     <div class="col-5 col-md-2 user-part">
-                        <p><?= $user['first_name'] ?></p>
+                        <p><?= htmlspecialchars($user['first_name']) ?></p>
                     </div>
                     <div class="col-5 col-md-2 user-part">
-                        <p><?= $user['last_name'] ?></p>
+                        <p><?= htmlspecialchars($user['last_name']) ?></p>
                     </div>
                     <div class="col-md-1 user-part">
                         <p><?= $user['admin'] ? "Admin" : "Visiteur" ?></p>
@@ -38,4 +38,4 @@
     </div>
 </div>
 
-<?php include_once 'app/views/components/footer.php';
+<?php require_once 'app/views/components/footer.php';

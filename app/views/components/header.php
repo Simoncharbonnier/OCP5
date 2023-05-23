@@ -73,4 +73,4 @@
     </div>
 <?php endif; ?>
 
-<?php include_once 'app/views/components/notif.php'; ?>
+<?php require_once 'app/views/components/notif.php'; ?>

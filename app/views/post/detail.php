@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="assets/css/card.css">
 <script src="assets/js/post.js"></script>
 
-<?php include_once 'app/views/components/header.php'; ?>
+<?php require_once 'app/views/components/header.php'; ?>
 
 <div class="container">
     <div class="row post">
@@ -11,8 +11,8 @@
                 <div class="row">
                     <div class="<?= ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) ? 'col-9 col-md-11' : 'col-md-12' ?>">
                         <div class="post-title">
-                            <h1><?= $post['title'] ?></h1>
-                            <h1><input type="text" name="title" value="<?= $post['title'] ?>" autocomplete="off" maxlength="128" required></h1>
+                            <h1><?= htmlspecialchars($post['title']) ?></h1>
+                            <h1><input type="text" name="title" value="<?= htmlspecialchars($post['title']) ?>" autocomplete="off" maxlength="128" required></h1>
                         </div>
                     </div>
                     <?php if ($_SESSION['is_logged'] === true && $_SESSION['user_admin'] === 1) : ?>
@@ -25,8 +25,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="post-headline">
-                            <h2><?= $post['headline'] ?></h2>
-                            <h2><input type="text" name="headline" value="<?= $post['headline'] ?>" autocomplete="off" maxlength="255" required></h2>
+                            <h2><?= htmlspecialchars($post['headline']) ?></h2>
+                            <h2><input type="text" name="headline" value="<?= htmlspecialchars($post['headline']) ?>" autocomplete="off" maxlength="255" required></h2>
                         </div>
                     </div>
                 </div>
@@ -45,8 +45,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="post-content">
-                            <p><?= $post['content'] ?></p>
-                            <p><textarea name="content" rows="7" required><?= $post['content'] ?></textarea></p>
+                            <p><?= htmlspecialchars($post['content']) ?></p>
+                            <p><textarea name="content" rows="7" required><?= htmlspecialchars($post['content']) ?></textarea></p>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="date-created">
-                            <p>Publié le <?= $this->formatDate($post['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $post['author_id'] ?>"><?= $post['author'] ?></a></p>
+                            <p>Publié le <?= $this->formatDate($post['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $post['author_id'] ?>"><?= htmlspecialchars($post['author']) ?></a></p>
                             <img class="avatar" src="assets/img/user/<?= $post['author_avatar'] ?>" alt="">
                         </div>
                     </div>
@@ -90,7 +90,7 @@
                             <p><?= htmlspecialchars($comment['message']) ?></p>
                         </div>
                         <div class="col-md-4 date-created">
-                            <p>Publié le <?= $this->formatDate($comment['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= $comment['author'] ?></a></p>
+                            <p>Publié le <?= $this->formatDate($comment['created_at']) ?> par <a class="btn-underline" href="?controller=user&action=detail&id=<?= $comment['author_id'] ?>"><?= htmlspecialchars($comment['author']) ?></a></p>
                             <img class="avatar" src="assets/img/user/<?= $comment['author_avatar'] ?>" alt="">
                         </div>
                     </div>
@@ -120,7 +120,7 @@
             </div>
             <div class="modal-body text-center">
                 <p>Êtes-vous certain de vouloir supprimer l'article suivant ?</p>
-                <p><b><?= $post['title'] ?></b></p>
+                <p><b><?= htmlspecialchars($post['title']) ?></b></p>
             </div>
             <div class="modal-footer">
                 <p class="btn" data-bs-dismiss="modal">Annuler</p>
@@ -130,4 +130,4 @@
     </div>
 </div>
 
-<?php include_once 'app/views/components/footer.php'; ?>
+<?php require_once 'app/views/components/footer.php'; ?>

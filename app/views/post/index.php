@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="assets/css/posts.css">
 <link rel="stylesheet" href="assets/css/card.css">
 
-<?php include_once('app/views/components/header.php'); ?>
+<?php require_once 'app/views/components/header.php'; ?>
 
 <div class="container">
     <div class="row posts">
@@ -16,8 +16,8 @@
                                     <img src="assets/img/post/<?= $post['image'] ?>" alt="">
                                 <?php endif; ?>
                                 <div class="card-infos <?= $post['image'] ? '' : 'no-image' ?>">
-                                    <h3><?= $post['title'] ?></h3>
-                                    <p><?= $post['headline'] ?></p>
+                                    <h3><?= htmlspecialchars($post['title']) ?></h3>
+                                    <p><?= htmlspecialchars($post['headline']) ?></p>
                                 </div>
                                 <div class="card-footer">
                                     <p><?= $this->formatDate($post['updated_at']) ?></p>
@@ -31,4 +31,4 @@
     </div>
 </div>
 
-<?php include_once('app/views/components/footer.php'); ?>
+<?php require_once 'app/views/components/footer.php'; ?>

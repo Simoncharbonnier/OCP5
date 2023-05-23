@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="assets/css/login.css">
 <script src="assets/js/login.js"></script>
 
-<?php include_once 'app/views/components/header.php'; ?>
+<?php require_once 'app/views/components/header.php'; ?>
 
 <div class="container login">
     <div class="row">
@@ -49,4 +49,4 @@
     </div>
 </div>
 
-<?php include_once 'app/views/components/footer.php';
+<?php require_once 'app/views/components/footer.php';

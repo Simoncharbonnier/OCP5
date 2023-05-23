@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="assets/css/user.css">
 <script src="assets/js/user.js"></script>
 
-<?php include_once 'app/views/components/header.php'; ?>
+<?php require_once 'app/views/components/header.php'; ?>
 
 <div class="container user">
     <div class="row">
@@ -14,15 +14,15 @@
             <h3 class="margin-bottom">Informations</h3>
             <div class="row margin-bottom">
                 <div class="col-6 <?= ($_SESSION['is_logged'] === true && $_SESSION['user_mail'] === $user['mail']) ? 'col-md-2' : 'col-md-3'; ?> flex-center input">
-                    <p><?= $user['first_name'] ?></p>
-                    <p><input type="text" name="first_name" value="<?= $user['first_name'] ?>" autocomplete="off" required></p>
+                    <p><?= htmlspecialchars($user['first_name']) ?></p>
+                    <p><input type="text" name="first_name" value="<?= htmlspecialchars($user['first_name']) ?>" autocomplete="off" required></p>
                 </div>
                 <div class="col-6 <?= ($_SESSION['is_logged'] === true && $_SESSION['user_mail'] === $user['mail']) ? 'col-md-2' : 'col-md-3'; ?> flex-center input">
-                    <p><?= $user['last_name'] ?></p>
-                    <p><input type="text" name="last_name" value="<?= $user['last_name'] ?>" autocomplete="off" required></p>
+                    <p><?= htmlspecialchars($user['last_name']) ?></p>
+                    <p><input type="text" name="last_name" value="<?= htmlspecialchars($user['last_name']) ?>" autocomplete="off" required></p>
                 </div>
                 <div class="<?= ($_SESSION['is_logged'] === true && $_SESSION['user_mail'] === $user['mail']) ? 'col-md-4' : 'col-md-3'; ?> flex-center">
-                    <p><?= $user['mail'] ?></p>
+                    <p><?= htmlspecialchars($user['mail']) ?></p>
                 </div>
                 <div class="<?= ($_SESSION['is_logged'] === true && $_SESSION['user_mail'] === $user['mail']) ? 'col-md-2' : 'col-md-3'; ?> flex-center">
                     <img id="avatar" class="avatar" src="assets/img/user/<?= $user['avatar'] ?>">
@@ -79,10 +79,10 @@
                             <?php foreach ($posts as $post) : ?>
                                 <div class="row margin-bottom">
                                     <div class="col-md-3 flex-center">
-                                        <a class="text-underline" href="?controller=post&action=detail&id=<?= $post['id'] ?>"><?= $post['title'] ?></a>
+                                        <a class="text-underline" href="?controller=post&action=detail&id=<?= $post['id'] ?>"><?= htmlspecialchars($post['title']) ?></a>
                                     </div>
                                     <div class="col-md-6 flex-center">
-                                        <p><?= $post['headline'] ?></p>
+                                        <p><?= htmlspecialchars($post['headline']) ?></p>
                                     </div>
                                     <div class="col-md-3 flex-center">
                                         <p><?= $this->formatDate($post['created_at']) ?></p>
@@ -117,7 +117,7 @@
                         <?php foreach ($comments as $comment) : ?>
                             <div class="row margin-bottom">
                                 <div class="col-md-3 flex-center">
-                                    <a class="text-underline" href="?controller=post&action=detail&id=<?= $comment['post_id'] ?>"><?= $comment['post_title'] ?></a>
+                                    <a class="text-underline" href="?controller=post&action=detail&id=<?= $comment['post_id'] ?>"><?= htmlspecialchars($comment['post_title']) ?></a>
                                 </div>
                                 <div class="col-md-6 flex-center">
                                     <p><?= htmlspecialchars($comment['message']) ?></p>
@@ -136,4 +136,4 @@
     </div>
 </div>
 
-<?php include_once 'app/views/components/footer.php';
+<?php require_once 'app/views/components/footer.php';

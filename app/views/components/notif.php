@@ -1,4 +1,4 @@
-<?php include_once 'app/config/notif_codes.php'; ?>
+<?php require_once 'app/config/notif_codes.php'; ?>
 
 <?php if (isset($_GET['success'])) : ?>
     <div class="col-md-12 notif success">
