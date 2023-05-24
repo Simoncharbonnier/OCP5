@@ -13,8 +13,8 @@ class Home extends Controller
 
     public function index() : void
     {
-        include_once 'app/models/Post_model.php';
-        $postModel = new Post_model();
+        include_once 'app/models/Post_Model.php';
+        $postModel = new Post_Model();
         $posts = $postModel->get3Lasts();
 
         include_once 'app/views/home/index.php';

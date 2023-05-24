@@ -2,8 +2,8 @@
 
 require_once 'app/controllers/Controller.php';
 
-require_once 'app/models/Comment_model.php';
-require_once 'app/models/Post_model.php';
+require_once 'app/models/Comment_Model.php';
+require_once 'app/models/Post_Model.php';
 
 class Comment extends Controller
 {
@@ -20,7 +20,7 @@ class Comment extends Controller
         try {
             $this->isAdmin();
 
-            $commentModel = new Comment_model();
+            $commentModel = new Comment_Model();
             $comments = $commentModel->getAll();
 
             if (empty($comments) === FALSE) {
@@ -50,20 +50,20 @@ class Comment extends Controller
 
             if (isset($_GET['id']) === TRUE) {
                 $postId = $_GET['id'];
-                $postModel = new Post_model();
+                $postModel = new Post_Model();
                 $post = $postModel->getById($postId);
 
                 if (empty($post) === FALSE) {
-                    $data = [];
+                    $datas = [];
 
                     if (empty($_POST) === FALSE && (isset($_POST['message']) === TRUE && empty($_POST['message']) === FALSE)) {
-                        $data['message'] = $_POST['message'];
-                        $data['user_id'] = $_SESSION['user_id'];
-                        $data['post_id'] = $postId;
-                        $data['created_at'] = date("Y-m-d");
+                        $datas['message'] = $_POST['message'];
+                        $datas['user_id'] = $_SESSION['user_id'];
+                        $datas['post_id'] = $postId;
+                        $datas['created_at'] = date("Y-m-d");
 
-                        $commentModel = new Comment_model();
-                        $commentModel->create($data);
+                        $commentModel = new Comment_Model();
+                        $commentModel->create($datas);
 
                         header("Location: ".PATH."?controller=post&action=detail&id=".$postId."&success=success_comment_add");
                         exit;
@@ -93,16 +93,16 @@ class Comment extends Controller
 
             if (isset($_GET['id']) === TRUE) {
                 $commentId = $_GET['id'];
-                $commentModel = new Comment_model();
+                $commentModel = new Comment_Model();
                 $comment = $commentModel->getById($commentId);
 
                 if (empty($comment) === FALSE) {
-                    $data = [];
+                    $datas = [];
 
-                    $data['valid'] = ($comment[0]['valid'] === 1) ? 0 : 1;
-                    $data['id'] = $commentId;
+                    $datas['valid'] = ($comment[0]['valid'] === 1) ? 0 : 1;
+                    $datas['id'] = $commentId;
 
-                    $commentModel->update($data);
+                    $commentModel->update($datas);
 
                     header("Location: ".PATH."?controller=comment&action=index&success=success_comment_edit");
                     exit;
@@ -134,7 +134,7 @@ class Comment extends Controller
             $commentId = $commentId !== NULL ? $commentId : $_GET['id'];
 
             if ($commentId !== NULL) {
-                $commentModel = new Comment_model();
+                $commentModel = new Comment_Model();
                 $comment = $commentModel->getById($commentId);
 
                 if (empty($comment) === FALSE) {

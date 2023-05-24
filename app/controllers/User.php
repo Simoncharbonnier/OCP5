@@ -4,9 +4,9 @@ require_once 'app/controllers/Controller.php';
 require_once 'app/controllers/Comment.php';
 require_once 'app/controllers/Post.php';
 
-require_once 'app/models/User_model.php';
-require_once 'app/models/Comment_model.php';
-require_once 'app/models/Post_model.php';
+require_once 'app/models/User_Model.php';
+require_once 'app/models/Comment_Model.php';
+require_once 'app/models/Post_Model.php';
 
 class User extends Controller
 {
@@ -24,17 +24,17 @@ class User extends Controller
             if (empty($_POST) === FALSE && (isset($_POST['first_name']) === TRUE && empty($_POST['first_name']) === FALSE) && (isset($_POST['last_name']) === TRUE && empty($_POST['last_name']) === FALSE) && (isset($_POST['mail']) === TRUE && empty($_POST['mail']) === FALSE) && (isset($_POST['password']) === TRUE && empty($_POST['password']) === FALSE)) {
                 if (isset($_POST['confirm']) === TRUE && $_POST['password'] === $_POST['confirm']) {
                     unset($_POST['confirm']);
-                    $userModel = new User_model();
+                    $userModel = new User_Model();
                     $user = $userModel->getByMail($_POST['mail']);
 
                     if (empty($user) === TRUE) {
                         $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
                         foreach ($_POST as $name => $value) {
-                            $data[$name] = $value;
+                            $datas[$name] = $value;
                         }
-                        $data['password'] = $passwordHash;
+                        $datas['password'] = $passwordHash;
 
-                        $userModel->create($data);
+                        $userModel->create($datas);
                         header("Location: ".PATH."?controller=user&action=login&form=login&success=success_user_add");
                         exit;
                     } else {
@@ -66,7 +66,7 @@ class User extends Controller
 
             if (isset($_POST['mail']) === TRUE && isset($_POST['password']) === TRUE) {
                 if (empty($_POST['mail']) === FALSE && empty($_POST['password']) === FALSE) {
-                    $userModel = new User_model();
+                    $userModel = new User_Model();
                     $user = $userModel->getByMail($_POST['mail']);
 
                     if (empty($user) === FALSE) {
@@ -135,7 +135,7 @@ class User extends Controller
         try {
             $this->isAdmin();
 
-            $userModel = new User_model();
+            $userModel = new User_Model();
             $users = $userModel->getAll();
 
             if (empty($users) === TRUE) {
@@ -160,23 +160,23 @@ class User extends Controller
     {
         try {
             if (isset($_GET['id']) === TRUE) {
-                $userModel = new User_model();
+                $userModel = new User_Model();
                 $result = $userModel->getById($_GET['id'], true);
 
                 if (empty($result) === FALSE) {
                     $user = $result[0];
 
                     if ($user['admin'] === 1) {
-                        $postModel = new Post_model();
+                        $postModel = new Post_Model();
                         $posts = $postModel->getByUser($user['id']);
                     }
 
-                    $commentModel = new Comment_model();
+                    $commentModel = new Comment_Model();
                     $result = $commentModel->getByUser($user['id']);
                     $comments = [];
                     foreach ($result as $comment) {
                         if ($comment['valid'] === 1) {
-                            $postModel = new Post_model();
+                            $postModel = new Post_Model();
                             $post = $postModel->getById($comment['post_id'])[0];
                             $comment['post_title'] = $post['title'];
                             $comment['post_id'] = $post['id'];
@@ -210,7 +210,7 @@ class User extends Controller
             $this->isLogged();
 
             if (isset($_GET['id']) === true) {
-                $userModel = new User_model();
+                $userModel = new User_Model();
                 $user = $userModel->getById($_GET['id']);
                 if (empty($user) === false) {
                     $user = $user[0];
@@ -222,29 +222,32 @@ class User extends Controller
 
                                 foreach ($_POST as $name => $value) {
                                     if ($name !== 'admin') {
-                                        $data[$name] = $value;
+                                        $datas[$name] = $value;
                                     }
                                 }
                                 $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
-                                $data['password'] = $passwordHash;
-                                $data['id'] = $user['id'];
+                                $datas['password'] = $passwordHash;
+                                $datas['id'] = $user['id'];
 
                                 if ($_POST['avatar'] !== $user['avatar']) {
                                     if ($_POST['avatar'] !== 'default.jpg') {
-                                        $allowed = ['image/png', 'image/jpeg'];
+                                        $allowed = [
+                                                    'image/png',
+                                                    'image/jpeg'
+                                                   ];
                                         $type = $_FILES['image']['type'];
-                                        if (in_array($type, $allowed)) {
+                                        if (in_array($type, $allowed) === TRUE) {
                                             $currentPath = $_FILES['image']['tmp_name'];
-                                            $data['avatar'] = $this->uploadAvatar($currentPath, 'user_'.$user['id'].'.jpg');
+                                            $datas['avatar'] = $this->uploadAvatar($currentPath, 'user_'.$user['id'].'.jpg');
                                         }
                                     } else {
                                         $this->deleteAvatar($user['avatar']);
                                     }
                                 }
 
-                                $userModel->update($data);
+                                $userModel->update($datas);
 
-                                $_SESSION['user_avatar'] = $data['avatar'];
+                                $_SESSION['user_avatar'] = $datas['avatar'];
 
                                 header("Location: ".PATH."?controller=user&action=detail&id=".$user['id']."&success=success_user_edit");
                                 exit;
@@ -284,21 +287,21 @@ class User extends Controller
     {
         try {
             if (isset($_GET['id']) === TRUE) {
-                $userModel = new User_model();
+                $userModel = new User_Model();
                 $result = $userModel->getById($_GET['id']);
 
                 if (empty($result) === FALSE) {
                     $user = $result[0];
                     if ($_SESSION['is_logged'] === true && ($_SESSION['user_admin'] === 1 || $_SESSION['user_mail'] === $user['mail'])) {
                         if ($user['admin'] === 0) {
-                            $commentModel = new Comment_model();
+                            $commentModel = new Comment_Model();
                             $comments = $commentModel->getByUser($_GET['id']);
 
                             foreach ($comments as $comment) {
                                 $commentModel->delete($comment['id']);
                             }
 
-                            $postModel = new Post_model();
+                            $postModel = new Post_Model();
                             $posts = $postModel->getByUser($_GET['id']);
 
                             foreach ($posts as $post) {
@@ -377,7 +380,7 @@ class User extends Controller
 
     /**
      * Delete post image
-     * @param string $filename filename
+     * @param string $fileName filename
      *
      * @return void
      */

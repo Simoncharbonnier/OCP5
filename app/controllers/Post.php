@@ -2,8 +2,8 @@
 
 require_once 'app/controllers/Controller.php';
 
-require_once 'app/models/Post_model.php';
-require_once 'app/models/Comment_model.php';
+require_once 'app/models/Post_Model.php';
+require_once 'app/models/Comment_Model.php';
 
 class Post extends Controller
 {
@@ -18,7 +18,7 @@ class Post extends Controller
     public function index() : void
     {
         try {
-            $postModel = new Post_model();
+            $postModel = new Post_Model();
             $posts = $postModel->getAll();
 
             if (empty($posts) === TRUE) {
@@ -44,7 +44,7 @@ class Post extends Controller
         try {
             if (isset($_GET['id']) === TRUE) {
                 $postId = $_GET['id'];
-                $postModel = new Post_model();
+                $postModel = new Post_Model();
                 $result = $postModel->getById($postId);
 
                 if (empty($result) === FALSE) {
@@ -100,35 +100,38 @@ class Post extends Controller
             $this->isAdmin();
 
             if (empty($_POST) === FALSE && (isset($_POST['title']) === TRUE && empty($_POST['title']) === FALSE) && (isset($_POST['headline']) === TRUE && empty($_POST['headline']) === FALSE) && (isset($_POST['content']) === TRUE && empty($_POST['content']) === FALSE)) {
-                $postModel = new Post_model();
+                $postModel = new Post_Model();
                 $sameTitle = $postModel->getByTitle($_POST['title']);
 
                 if (empty($sameTitle) === TRUE) {
-                    $data = [];
+                    $datas = [];
                     foreach ($_POST as $name => $value) {
-                        $data[$name] = $value;
+                        $datas[$name] = $value;
                     }
-                    $data['user_id'] = $_SESSION['user_id'];
-                    $data['created_at'] = date("Y-m-d");
-                    $data['updated_at'] = date("Y-m-d");
+                    $datas['user_id'] = $_SESSION['user_id'];
+                    $datas['created_at'] = date("Y-m-d");
+                    $datas['updated_at'] = date("Y-m-d");
 
                     if (empty($_FILES['image']['name']) === FALSE) {
-                        $allowed = ['image/jpeg', 'image/png'];
+                        $allowed = [
+                                    'image/jpeg',
+                                    'image/png'
+                                   ];
                         $type = $_FILES['image']['type'];
 
                         if (in_array($type, $allowed) === TRUE) {
                             $fileName = 'post_'.$_POST['title'].'.png';
                             $currentPath = $_FILES['image']['tmp_name'];
 
-                            $data['image'] = $this->uploadImage($currentPath, $fileName);
+                            $datas['image'] = $this->uploadImage($currentPath, $fileName);
                         } else {
-                            $data['image'] = NULL;
+                            $datas['image'] = NULL;
                         }
                     } else {
-                        $data['image'] = NULL;
+                        $datas['image'] = NULL;
                     }
 
-                    $postId = $postModel->create($data);
+                    $postId = $postModel->create($datas);
                     header("Location: ".PATH."?controller=post&action=detail&id=".$postId."&success=success_post_add");
                     exit;
                 } else {
@@ -157,25 +160,25 @@ class Post extends Controller
 
             if (isset($_GET['id']) === TRUE) {
                 $postId = $_GET['id'];
-                $postModel = new Post_model();
+                $postModel = new Post_Model();
                 $post = $postModel->getById($postId);
 
                 if (empty($post) === FALSE) {
                     $post = $post[0];
 
                     if (empty($_POST) === FALSE && (isset($_POST['title']) === TRUE && empty($_POST['title']) === FALSE) && (isset($_POST['headline']) === TRUE && empty($_POST['headline']) === FALSE) && (isset($_POST['content']) === TRUE && empty($_POST['content']) === FALSE)) {
-                        $postModel = new Post_model();
+                        $postModel = new Post_Model();
                         $sameTitle = $postModel->getByTitle($_POST['title'], $postId);
 
                         if (empty($sameTitle) === FALSE) {
-                            $data = [];
+                            $datas = [];
                             foreach ($_POST as $name => $value) {
                                 if ($name !== 'image-changed') {
-                                    $data[$name] = $value;
+                                    $datas[$name] = $value;
                                 }
                             }
-                            $data['updated_at'] = date("Y-m-d");
-                            $data['id'] = $postId;
+                            $datas['updated_at'] = date("Y-m-d");
+                            $datas['id'] = $postId;
 
                             $imgFileName = 'post_'.$_POST['title'].'.png';
 
@@ -185,24 +188,27 @@ class Post extends Controller
 
                             if (isset($_POST['image-changed']) === TRUE && $_POST['image-changed'] === 'true') {
                                 if (empty($_FILES['image']['name']) === FALSE) {
-                                    $allowed = ['image/png', 'image/jpeg'];
+                                    $allowed = [
+                                                'image/png',
+                                                'image/jpeg'
+                                               ];
                                     $type = $_FILES['image']['type'];
                                     if (in_array($type, $allowed) === TRUE) {
                                         $currentPath = $_FILES['image']['tmp_name'];
-                                        $data['image'] = $this->uploadImage($currentPath, $imgFileName);
+                                        $datas['image'] = $this->uploadImage($currentPath, $imgFileName);
                                     } else {
-                                        $data['image'] = NULL;
+                                        $datas['image'] = NULL;
                                         $this->deleteImage($imgFileName);
                                     }
                                 } else {
-                                    $data['image'] = NULL;
+                                    $datas['image'] = NULL;
                                     $this->deleteImage($imgFileName);
                                 }
                             } else {
-                                $data['image'] = $imgFileName;
+                                $datas['image'] = $imgFileName;
                             }
 
-                            $postModel->update($data);
+                            $postModel->update($datas);
                             header("Location: ".PATH."?controller=post&action=detail&id=".$postId."&success=success_post_edit");
                             exit;
                         } else {
@@ -239,13 +245,13 @@ class Post extends Controller
             $postId = $postId !== NULL ? $postId : $_GET['id'];
 
             if ($postId !== NULL) {
-                $postModel = new Post_model();
+                $postModel = new Post_Model();
                 $post = $postModel->getById($postId);
 
                 if (empty($post) === FALSE) {
                     $post = $post[0];
 
-                    $commentModel = new Comment_model();
+                    $commentModel = new Comment_Model();
                     $comments = $commentModel->getByPost($post['id']);
                     foreach ($comments as $comment) {
                         $commentModel->delete($comment['id']);
@@ -292,7 +298,7 @@ class Post extends Controller
 
     /**
      * Delete post image
-     * @param string $filename filename
+     * @param string $fileName filename
      *
      * @return void
      */

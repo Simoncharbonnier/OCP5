@@ -2,11 +2,13 @@
 
 require_once 'app/models/Model.php';
 
-class Post_model extends Model
+class Post_Model extends Model
 {
 
     /**
      * Get all posts
+     *
+     * @return array
      */
 
     public function getAll()
@@ -19,6 +21,8 @@ class Post_model extends Model
 
     /**
      * Get 3 lasts
+     *
+     * @return array
      */
 
     public function get3Lasts()
@@ -31,22 +35,28 @@ class Post_model extends Model
 
     /**
      * Get posts by user
+     * @param integer $userId user id
+     *
+     * @return array
      */
 
-    public function getByUser($id)
+    public function getByUser($userId)
     {
         $sql = "SELECT * FROM Post WHERE user_id = :user_id ORDER BY created_at DESC";
         $query = $this->database->prepare($sql);
-        $query->bindParam(':user_id', $id);
+        $query->bindParam(':user_id', $userId);
         $query->execute();
         return $query->fetchAll();
     }
 
     /**
      * Get a post by id with its comments and author
+     * @param integer $postId post id
+     *
+     * @return array
      */
 
-    public function getById($id)
+    public function getById($postId)
     {
         $sql = "SELECT Post.id, Post.title, Post.headline, Post.content, Post.image, Post.created_at, Post.updated_at,
                         User.id post_author_id, User.first_name post_author, User.avatar post_author_avatar,
@@ -58,59 +68,72 @@ class Post_model extends Model
                 LEFT JOIN User U ON U.id = Comment.user_id
                 WHERE Post.id = :post_id";
         $query = $this->database->prepare($sql);
-        $query->bindParam(':post_id', $id);
+        $query->bindParam(':post_id', $postId);
         $query->execute();
         return $query->fetchAll();
     }
 
     /**
      * Get a post by title
+     * @param string $title post title
+     * @param integer $postId post id
+     *
+     * @return array
      */
 
-    public function getByTitle($title, $id = 0)
+    public function getByTitle($title, $postId = 0)
     {
         $sql = "SELECT * FROM Post WHERE Post.title = :title AND Post.id != :id";
         $query = $this->database->prepare($sql);
         $query->bindParam(':title', $title);
-        $query->bindParam(':id', $id);
+        $query->bindParam(':id', $postId);
         $query->execute();
         return $query->fetchAll();
     }
 
     /**
      * Create a post
+     * @param array $datas post datas
+     *
+     * @return integer
      */
 
-    public function create(array $data)
+    public function create(array $datas)
     {
         $sql = "INSERT INTO Post (user_id, title, headline, content, image, created_at, updated_at)
                 VALUES (:user_id, :title, :headline, :content, :image, :created_at, :updated_at)";
         $query = $this->database->prepare($sql);
-        $query->execute($data);
+        $query->execute($datas);
         return $this->database->lastInsertId();
     }
 
     /**
      * Update a post
+     * @param array $datas post datas
+     *
+     * @return void
      */
 
-    public function update(array $data)
+    public function update(array $datas)
     {
         $sql = "UPDATE Post SET title = :title, headline = :headline, content = :content, image = :image, updated_at = :updated_at
                 WHERE id = :id";
         $query = $this->database->prepare($sql);
-        return $query->execute($data);
+        $query->execute($datas);
     }
 
     /**
      * Delete a post
+     * @param integer $postId post id
+     *
+     * @return void
      */
 
-    public function delete($id)
+    public function delete($postId)
     {
         $sql = "DELETE FROM Post WHERE id = :post_id";
         $query = $this->database->prepare($sql);
-        $query->bindParam(':post_id', $id);
-        return $query->execute();
+        $query->bindParam(':post_id', $postId);
+        $query->execute();
     }
 }
