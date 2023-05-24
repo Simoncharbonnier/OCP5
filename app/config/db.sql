@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 -- Structure de la table `Comment`
 --
 
-CREATE TABLE 'Comment' (
+CREATE TABLE Comment (
 	`id` int(11) NOT NULL,
 	`user_id` int(11) NOT NULL,
 	`post_id` int(11) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE 'Comment' (
 -- Déchargement des données de la table `Comment`
 --
 
-INSERT INTO 'Comment' (`id`, `user_id`, `post_id`, `message`, `created_at`, `valid`) VALUES
+INSERT INTO Comment (`id`, `user_id`, `post_id`, `message`, `created_at`, `valid`) VALUES
 (59, 2, 64, 'Je ne connaissais pas, ça à l\'air vraiment super ! Il faut certainement être bien motivé pour apprendre un domaine inconnu en si peu de temps !', '2023-05-12', 1),
 (61, 4, 67, 'Est-il possible d\'avoir un lien vers le site ?', '2023-05-12', 1),
 (62, 1, 67, 'Je suis désolé mais il n\'est plus en ligne.', '2023-05-12', 1),
@@ -52,7 +52,7 @@ INSERT INTO 'Comment' (`id`, `user_id`, `post_id`, `message`, `created_at`, `val
 -- Structure de la table `Post`
 --
 
-CREATE TABLE 'Post' (
+CREATE TABLE Post (
 	`id` int(11) NOT NULL,
 	`user_id` int(11) NOT NULL,
 	`title` varchar(128) NOT NULL,
@@ -67,7 +67,7 @@ CREATE TABLE 'Post' (
 -- Déchargement des données de la table `Post`
 --
 
-INSERT INTO 'Post' (`id`, `user_id`, `title`, `headline`, `content`, `image`, `created_at`, `updated_at`) VALUES
+INSERT INTO Post (`id`, `user_id`, `title`, `headline`, `content`, `image`, `created_at`, `updated_at`) VALUES
 (64, 1, 'Le Wagon Nantes', 'Le bootcamp de 9 semaines pour apprendre à coder !', 'Le Wagon est le bootcamp de code n°1 dans le monde pour vous reconvertir dans la tech, ou monter en compétences dans votre métier actuel.\r\nEn quelques semaines, on y apprend les compétences fondamentales d\'un.e Développeur.se Web. J\'ai tenté l\'expérience de Janvier à Mars 2022, c\'était formidable. <br>\r\n<br>\r\nChaque jour se déroulait de la manière suivante : <br>\r\n- 9h00-10h30: conférence du matin par l\'enseignant principal avec de nombreuses démonstrations en direct pour nous aider à comprendre les concepts à l\'aide d\'exemples pratiques. <br>\r\n- 10h30-12h30: session de programmation en binôme, travaillez sur les défis et poussez vos solutions sur Kitt. <br>\r\n- 14h00-17h30: terminez vos défis de la journée avec votre binôme. <br>\r\n- 17h30-19h00: session de code en direct, l\'enseignant présente un nouveau défi devant la classe et le résout à partir de zéro avec l\'aide de la classe. <br>\r\nIl y a 5 à 10 défis journaliers, différents avec leur propre suite de tests, et des défis optionnels supplémentaires pour les étudiants les plus rapides. <br>\r\n<br>\r\nGrâce à cette formation, j\'ai pu apprendre les bases du développement web en un temps record ! Je suis maintenant apte à utiliser Ruby, Rails, HTML, CSS, Bootstrap, Javascript, Stimulus, SQL, PostgreSQL, APIs, Github, Heroku, Figma... et évidemment apte à travailler en équipe sur toutes sortes de projets !\r\nOn nous accompagne même pour continuer notre carrière dans le domaine avec la career week qui suit la formation !', 'post_Le Wagon Nantes.png', '2022-05-25', '2022-05-25'),
 (65, 1, 'Plan your trip', 'Une app qui facilite l\'organisation d\'un groupe pour partir en voyage !', 'Cette application est mon projet final de formation du Wagon Nantes (cf. précédent article). <br>\r\nEn groupe de 4, nous avons décidé de concevoir, réaliser et produire une application permettant de faciliter l\'organisation d\'un groupe de personne souhaitant partir en voyage ensemble.<br>\r\n<br>\r\nLe fonctionnement est le suivant, une de ces personnes va créer un voyage sur l\'application, elle va inviter ses partenaires, chacun va renseigner ses disponibilités et ses souhaits concernant la destination, tout ça de manière ludique. <br>\r\nUne fois que chaque personne aura renseigner ses informations, le créateur du voyage va pouvoir confirmer les dates en prenant compte des disponibilités de chacun grâce à une superbe interface. Si aucune des destinations proposées ne sort du lot, un vote va alors s\'effectuer avec les destinations les plus populaires, des informations complémentaires sur les destinations vont être données aux utilisateurs pour les aider à choisir.<br>\r\nUne fois le vote terminé, tout le monde peut découvrir la destination et place à l\'organisation ! Ils ont maintenant accès à un tableau de bord contenant un tchat, une to-do list personnalisable et des propositions d\'activités !', 'post_Plan your trip.png', '2022-08-17', '2022-08-17'),
 (66, 1, 'Webnews', 'Une plateforme pour partager et réagir à des articles réalisée en 8h !', 'Webnews, c\'est une application que j\'ai développé seul lors de la certification du Wagon, nous avions 8 heures pour la réaliser. <br>\r\nVoici la consigne : <br>\r\n\"Vous devez créer une plateforme pour publier, commenter ou réagir à un contenu trouvé sur Internet.\" <br>\r\nVous pourrez trouver les contraintes de ce projet sur Github. <br>\r\nPS : Le jury m\'a accordé ma certification !', 'post_Webnews.png', '2022-10-12', '2022-10-12'),
@@ -80,7 +80,7 @@ INSERT INTO 'Post' (`id`, `user_id`, `title`, `headline`, `content`, `image`, `c
 -- Structure de la table `User`
 --
 
-CREATE TABLE 'User' (
+CREATE TABLE User (
 	`id` int(11) NOT NULL,
 	`first_name` varchar(128) NOT NULL,
 	`last_name` varchar(128) NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE 'User' (
 -- Déchargement des données de la table `User`
 --
 
-INSERT INTO 'User' (`id`, `first_name`, `last_name`, `mail`, `password`, `admin`, `avatar`) VALUES
+INSERT INTO User (`id`, `first_name`, `last_name`, `mail`, `password`, `admin`, `avatar`) VALUES
 (1, 'Simon', 'Charbonnier', 'simoncharbonnier@orange.fr', '$2y$10$RcAyVqdQwuErl4hEErUuKO8wWD7qsyvleAcGDAWnxKZ5neZ4Gw9R2', 1, 'user_1.jpg'),
 (2, 'Charlie', 'Hartman', 'charliehartman@gmail.com', '$2y$10$jpImrFJdjQV7L69Q6.3V7eqM.g2VTCmbEu0bOV4bkLjt9ywubb/K2', 0, 'user_2.jpg'),
 (3, 'Jane', 'Doe', 'janedoe@gmail.com', '$2y$10$VEm.fPiOBJXkXItmUIRLhetbqYLssSQLHcbAxs9ZrFPa2pHhFp1qy', 0, 'default.jpg'),
@@ -108,7 +108,7 @@ INSERT INTO 'User' (`id`, `first_name`, `last_name`, `mail`, `password`, `admin`
 --
 -- Index pour la table `Comment`
 --
-ALTER TABLE 'Comment'
+ALTER TABLE Comment
 	ADD PRIMARY KEY (`id`),
 	ADD KEY `user_id` (`user_id`),
 	ADD KEY `post_id` (`post_id`);
@@ -116,14 +116,14 @@ ALTER TABLE 'Comment'
 --
 -- Index pour la table `Post`
 --
-ALTER TABLE 'Post'
+ALTER TABLE Post
 	ADD PRIMARY KEY (`id`),
 	ADD KEY `user_id` (`user_id`);
 
 --
 -- Index pour la table `User`
 --
-ALTER TABLE 'User'
+ALTER TABLE User
 	ADD PRIMARY KEY (`id`);
 
 --
