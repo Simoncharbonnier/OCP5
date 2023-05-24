@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const imgInput = document.getElementById("image-input");
 	const imgChangedInput = document.getElementById("image-changed-input");
 
-	document.getElementById("btn-edit-post").addEventListener("click", function(e) {
+	document.getElementById("btn-edit-post").addEventListener("click", function() {
 		post.classList.add("editing");
 		if (imgSaved) {
 			btnImgDelete.classList.remove("d-none");
@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 
-	document.getElementById("btn-edit-post-cancel").addEventListener("click", function(e) {
+	document.getElementById("btn-edit-post-cancel").addEventListener("click", function() {
 		post.classList.remove("editing");
 		btnImgAdd.classList.add("d-none");
 		btnImgDelete.classList.add("d-none");
@@ -40,11 +40,11 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 
-	btnImgAdd.addEventListener("click", function(e) {
+	btnImgAdd.addEventListener("click", function() {
 		click(imgInput);
 	});
 
-	btnImgDelete.addEventListener("click", function(e) {
+	btnImgDelete.addEventListener("click", function() {
 		img.src = "";
 		btnImgDelete.classList.add("d-none");
 		btnImgAdd.classList.remove("d-none");
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		imgChangedInput.setAttribute("value", "true");
 	});
 
-	btnImgCancel.addEventListener("click", function(e) {
+	btnImgCancel.addEventListener("click", function() {
 		img.src = imgSaved;
 		btnImgCancel.classList.add("d-none");
 		if (imgSaved) {
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		imgChangedInput.setAttribute("value", "false");
 	});
 
-	imgInput.addEventListener("change", function(e) {
+	imgInput.addEventListener("change", function() {
 		const file = imgInput.files[0];
 		const reader = new FileReader();
 		reader.readAsDataURL(file);

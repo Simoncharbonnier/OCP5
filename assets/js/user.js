@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	const avatarInputSaved = avatarInput.value;
 	const fileInput = document.getElementById("file-input");
 
-	btnEdit.addEventListener("click", function(e) {
+	btnEdit.addEventListener("click", function() {
 		formUser.classList.add("editing");
 		btnEdit.classList.add("d-none");
 		btnCancel.classList.remove("d-none");
@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		}
 	});
 
-	btnCancel.addEventListener("click", function(e) {
+	btnCancel.addEventListener("click", function() {
 		formUser.classList.remove("editing");
 		btnEdit.classList.remove("d-none");
 		btnCancel.classList.add("d-none");
@@ -33,13 +33,13 @@ document.addEventListener("DOMContentLoaded", () => {
 		avatarInput.setAttribute("value", avatarInputSaved);
 	});
 
-	avatar.addEventListener("click", function(e) {
+	avatar.addEventListener("click", function() {
 		if (formUser.classList.contains("editing")) {
 			click(fileInput);
 		}
 	});
 
-	fileInput.addEventListener("change", function(e) {
+	fileInput.addEventListener("change", function() {
 		const file = fileInput.files[0];
 		const reader = new FileReader();
 		reader.readAsDataURL(file);
@@ -52,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		btnDeleteAvatar.classList.remove("d-none");
 	});
 
-	btnDeleteAvatar.addEventListener("click", function(e) {
+	btnDeleteAvatar.addEventListener("click", function() {
 		avatar.src = "assets/img/user/default.jpg";
 		avatarInput.setAttribute("value", "default.jpg");
 

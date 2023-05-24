@@ -3,7 +3,9 @@
 class Model
 {
 
-    // Database
+    /**
+     * Database
+     */
     protected PDO $database;
 
     /**
