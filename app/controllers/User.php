@@ -221,6 +221,7 @@ class User extends Controller
                             if ($_POST['password'] === $_POST['confirm']) {
                                 unset($_POST['confirm']);
 
+                                $datas = [];
                                 foreach ($_POST as $name => $value) {
                                     if ($name !== 'admin') {
                                         $datas[$name] = $value;
