@@ -7,7 +7,7 @@
     </div>
 <?php elseif (isset($_GET['error']) === TRUE) : ?>
     <div class="col-md-12 notif error">
-        <?= isset($notifCodes[$_GET['error']]) ? $notifCodes[$_GET['error']] : $notifCodes['internal_error'] ; ?>
+        <?= isset($notifCodes[$_GET['error']]) === TRUE ? $notifCodes[$_GET['error']] : $notifCodes['internal_error'] ; ?>
         <img id="notif-cross" class="icon-cross" src="assets/img/icons/cross.svg">
     </div>
 <?php endif;

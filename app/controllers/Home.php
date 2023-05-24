@@ -36,9 +36,9 @@ class Home extends Controller
 
                 $message = file_get_contents('app/views/mail/index.html');
                 $replace = [
-                            'first_name' => $_POST['first_name'],
-                            'last_name' => $_POST['last_name'],
-                            'mail' => $_POST['mail'],
+                            'first_name'  => $_POST['first_name'],
+                            'last_name'   => $_POST['last_name'],
+                            'mail'        => $_POST['mail'],
                             'messageHere' => $_POST['message'],
                            ];
 

@@ -131,7 +131,7 @@ class Comment extends Controller
         try {
             $this->isAdmin();
 
-            $commentId = $commentId ? $commentId : $_GET['id'];
+            $commentId = $commentId !== NULL ? $commentId : $_GET['id'];
 
             if ($commentId !== NULL) {
                 $commentModel = new Comment_model();

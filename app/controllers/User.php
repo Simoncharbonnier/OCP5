@@ -78,7 +78,7 @@ class User extends Controller
                             $_SESSION['user_mail'] = $user['mail'];
                             $_SESSION['user_avatar'] = $user['avatar'];
                             $_SESSION['user_admin'] = $user['admin'];
-                            header("Location: " . PATH . "?controller=home&action=index");
+                            header("Location: ".PATH."?controller=home&action=index");
                             exit;
                         } else {
                             throw new Exception("password_inval");
@@ -231,7 +231,7 @@ class User extends Controller
 
                                 if ($_POST['avatar'] !== $user['avatar']) {
                                     if ($_POST['avatar'] !== 'default.jpg') {
-                                        $allowed = array('image/png', 'image/jpeg');
+                                        $allowed = ['image/png', 'image/jpeg'];
                                         $type = $_FILES['image']['type'];
                                         if (in_array($type, $allowed)) {
                                             $currentPath = $_FILES['image']['tmp_name'];
@@ -264,7 +264,11 @@ class User extends Controller
                 throw new Exception("inval");
             }
         } catch (Exception $e) {
-            header("Location: ".PATH."?controller=user&action=detail&id=".$_GET['id']."&error=".$e->getMessage());
+            if (isset($_GET['id']) === TRUE) {
+                header("Location: ".PATH."?controller=user&action=detail&id=".$_GET['id']."&error=".$e->getMessage());
+            } else {
+                header("Location: ".PATH."?controller=home&action=index&error=".$e->getMessage());
+            }
             exit;
         }
     }
@@ -335,18 +339,30 @@ class User extends Controller
         }
     }
 
-    private function uploadAvatar($currentPath, $newFileName)
+    /**
+     * Upload user avatar and return filename
+     *
+     * @return string
+     */
+
+    private function uploadAvatar($currentPath, $newFileName) : string
     {
         $newPath = IMAGE_PATH."user/".$newFileName;
 
-        if (move_uploaded_file($currentPath, $newPath)) {
+        if (move_uploaded_file($currentPath, $newPath) === TRUE) {
             return $newFileName;
         }
 
         return 'default.jpg';
     }
 
-    private function deleteAvatar($fileName)
+    /**
+     * Delete user avatar
+     *
+     * @return void
+     */
+
+    private function deleteAvatar($fileName) : void
     {
         $path = IMAGE_PATH."user/".$fileName;
 
@@ -355,7 +371,14 @@ class User extends Controller
         }
     }
 
-    private function deleteImage($fileName)
+
+    /**
+     * Delete post image
+     *
+     * @return void
+     */
+
+    private function deleteImage($fileName) : void
     {
         $path = IMAGE_PATH."post/".$fileName;
 
