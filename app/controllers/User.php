@@ -341,6 +341,8 @@ class User extends Controller
 
     /**
      * Upload user avatar and return filename
+     * @param string $currentPath current path
+     * @param string $newFileName new filename
      *
      * @return string
      */
@@ -358,6 +360,7 @@ class User extends Controller
 
     /**
      * Delete user avatar
+     * @param string $fileName filename
      *
      * @return void
      */
@@ -366,7 +369,7 @@ class User extends Controller
     {
         $path = IMAGE_PATH."user/".$fileName;
 
-        if (file_exists($path)) {
+        if (file_exists($path) === TRUE) {
             unlink($path);
         }
     }
@@ -374,6 +377,7 @@ class User extends Controller
 
     /**
      * Delete post image
+     * @param string $filename filename
      *
      * @return void
      */
@@ -382,7 +386,7 @@ class User extends Controller
     {
         $path = IMAGE_PATH."post/".$fileName;
 
-        if (file_exists($path)) {
+        if (file_exists($path) === TRUE) {
             unlink($path);
         }
     }

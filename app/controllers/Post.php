@@ -113,11 +113,11 @@ class Post extends Controller
                     $data['updated_at'] = date("Y-m-d");
 
                     if (empty($_FILES['image']['name']) === FALSE) {
-                        $allowed = array('image/jpeg', 'image/png');
+                        $allowed = ['image/jpeg', 'image/png'];
                         $type = $_FILES['image']['type'];
 
                         if (in_array($type, $allowed) === TRUE) {
-                            $fileName = 'post_' . $_POST['title'] . '.png';
+                            $fileName = 'post_'.$_POST['title'].'.png';
                             $currentPath = $_FILES['image']['tmp_name'];
 
                             $data['image'] = $this->uploadImage($currentPath, $fileName);
@@ -177,14 +177,14 @@ class Post extends Controller
                             $data['updated_at'] = date("Y-m-d");
                             $data['id'] = $postId;
 
-                            $imgFileName = 'post_' . $_POST['title'] . '.png';
+                            $imgFileName = 'post_'.$_POST['title'].'.png';
 
-                            if ($post['title'] !== $_POST['title'] && $post['image']) {
+                            if ($post['title'] !== $_POST['title'] && isset($post['image']) === TRUE) {
                                 $this->renameImage($post['image'], $imgFileName);
                             }
 
-                            if ($_POST['image-changed'] === 'true') {
-                                if (!empty($_FILES['image']['name'])) {
+                            if (isset($_POST['image-changed']) === TRUE && $_POST['image-changed'] === 'true') {
+                                if (empty($_FILES['image']['name']) === FALSE) {
                                     $allowed = ['image/png', 'image/jpeg'];
                                     $type = $_FILES['image']['type'];
                                     if (in_array($type, $allowed) === TRUE) {
@@ -225,6 +225,7 @@ class Post extends Controller
 
     /**
      * Delete a post by its id and redirect to post index as an admin
+     * @param ?integer $postId post id
      *
      * @return void
      * @throws Exception
@@ -235,7 +236,7 @@ class Post extends Controller
         try {
             $this->isAdmin();
 
-            $postId = $postId ? $postId : $_GET['id'];
+            $postId = $postId !== NULL ? $postId : $_GET['id'];
 
             if ($postId !== NULL) {
                 $postModel = new Post_model();
@@ -271,6 +272,8 @@ class Post extends Controller
 
     /**
      * Upload post image and return filename
+     * @param string $currentPath current path
+     * @param string $newFileName new filename
      *
      * @return ?string
      */
@@ -289,6 +292,7 @@ class Post extends Controller
 
     /**
      * Delete post image
+     * @param string $filename filename
      *
      * @return void
      */
@@ -297,20 +301,22 @@ class Post extends Controller
     {
         $path = IMAGE_PATH."post/".$fileName;
 
-        if (file_exists($path)) {
+        if (file_exists($path) === TRUE) {
             unlink($path);
         }
     }
 
     /**
      * Rename image
+     * @param string $oldFileName old filename
+     * @param string $newFileName new filename
      *
      * @return void
      */
 
     private function renameImage($oldFileName, $newFileName) : void
     {
-        if (file_exists(IMAGE_PATH."post/".$oldFileName)) {
+        if (file_exists(IMAGE_PATH."post/".$oldFileName) === TRUE) {
             rename(IMAGE_PATH."post/".$oldFileName, IMAGE_PATH."post/".$newFileName);
         }
     }
