@@ -4,7 +4,7 @@ class Model
 {
 
     /**
-     * Database
+     * @var PDO $database database
      */
     protected PDO $database;
 

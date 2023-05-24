@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		imgChangedInput.setAttribute("value", "false");
 	});
 
-	img.addEventListener("click", function(e) {
+	img.addEventListener("click", function() {
 		if (post.classList.contains("editing")) {
 			click(imgInput);
 		}

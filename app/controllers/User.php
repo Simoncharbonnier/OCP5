@@ -29,12 +29,13 @@ class User extends Controller
 
                     if (empty($user) === TRUE) {
                         $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
+                        $datas = [];
                         foreach ($_POST as $name => $value) {
-                            $newUser[$name] = $value;
+                            $datas[$name] = $value;
                         }
-                        $newUser['password'] = $passwordHash;
+                        $datas['password'] = $passwordHash;
 
-                        $userModel->create($newUser);
+                        $userModel->create($datas);
                         header("Location: ".PATH."?controller=user&action=login&form=login&success=success_user_add");
                         exit;
                     } else {
@@ -222,12 +223,12 @@ class User extends Controller
 
                                 foreach ($_POST as $name => $value) {
                                     if ($name !== 'admin') {
-                                        $updateUser[$name] = $value;
+                                        $datas[$name] = $value;
                                     }
                                 }
                                 $passwordHash = password_hash($_POST['password'], CRYPT_BLOWFISH);
-                                $updateUser['password'] = $passwordHash;
-                                $updateUser['id'] = $user['id'];
+                                $datas['password'] = $passwordHash;
+                                $datas['id'] = $user['id'];
 
                                 if ($_POST['avatar'] !== $user['avatar']) {
                                     if ($_POST['avatar'] !== 'default.jpg') {
@@ -238,16 +239,16 @@ class User extends Controller
                                         $type = $_FILES['image']['type'];
                                         if (in_array($type, $allowed) === TRUE) {
                                             $currentPath = $_FILES['image']['tmp_name'];
-                                            $updateUser['avatar'] = $this->uploadAvatar($currentPath, 'user_'.$user['id'].'.jpg');
+                                            $datas['avatar'] = $this->uploadAvatar($currentPath, 'user_'.$user['id'].'.jpg');
                                         }
                                     } else {
                                         $this->deleteAvatar($user['avatar']);
                                     }
                                 }
 
-                                $userModel->update($updateUser);
+                                $userModel->update($datas);
 
-                                $_SESSION['user_avatar'] = $updateUser['avatar'];
+                                $_SESSION['user_avatar'] = $datas['avatar'];
 
                                 header("Location: ".PATH."?controller=user&action=detail&id=".$user['id']."&success=success_user_edit");
                                 exit;

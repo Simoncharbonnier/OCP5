@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-
 	const formUser = document.getElementById("form-edit-user");
 
 	const btnEdit = document.getElementById("btn-edit-user");
