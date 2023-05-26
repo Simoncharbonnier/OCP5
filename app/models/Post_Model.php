@@ -66,7 +66,8 @@ class Post_Model extends Model
                 JOIN User ON User.id = Post.user_id
                 LEFT JOIN Comment ON Comment.post_id = Post.id AND Comment.valid = 1
                 LEFT JOIN User U ON U.id = Comment.user_id
-                WHERE Post.id = :post_id";
+                WHERE Post.id = :post_id
+                ORDER BY Comment.id DESC";
         $query = $this->database->prepare($sql);
         $query->bindParam(':post_id', $postId);
         $query->execute();
