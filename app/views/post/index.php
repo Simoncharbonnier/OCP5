@@ -12,10 +12,8 @@
                     <div class="col-10 col-md-4">
                         <a href="?controller=post&action=detail&id=<?= $post['id'] ?>">
                             <div class="card">
-                                <?php if ($post['image'] !== null) : ?>
-                                    <img src="assets/img/post/<?= htmlspecialchars($post['image']) ?>" alt="">
-                                <?php endif; ?>
-                                <div class="card-infos <?= $post['image'] !== null ? '' : 'no-image' ?>">
+                                <img src="assets/img/post/<?= $post['image'] !== null ? htmlspecialchars($post['image']) : 'default.png' ?>" alt="">
+                                <div class="card-infos">
                                     <h3><?= htmlspecialchars($post['title']) ?></h3>
                                     <p><?= htmlspecialchars($post['headline']) ?></p>
                                 </div>

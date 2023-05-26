@@ -170,7 +170,7 @@ class Post extends Controller
                         $postModel = new Post_Model();
                         $sameTitle = $postModel->getByTitle($_POST['title'], $postId);
 
-                        if (empty($sameTitle) === FALSE) {
+                        if (empty($sameTitle) === TRUE) {
                             $datas = [];
                             foreach ($_POST as $name => $value) {
                                 if ($name !== 'image-changed') {
@@ -182,7 +182,7 @@ class Post extends Controller
 
                             $imgFileName = 'post_'.$_POST['title'].'.png';
 
-                            if ($post['title'] !== $_POST['title'] && isset($post['image']) === TRUE) {
+                            if ($post['title'] !== $_POST['title'] && $post['image'] !== NULL) {
                                 $this->renameImage($post['image'], $imgFileName);
                             }
 
@@ -205,7 +205,7 @@ class Post extends Controller
                                     $this->deleteImage($imgFileName);
                                 }
                             } else {
-                                $datas['image'] = $imgFileName;
+                                $datas['image'] = $post['image'];
                             }
 
                             $postModel->update($datas);
