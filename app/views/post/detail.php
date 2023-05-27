@@ -45,8 +45,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="post-content">
-                            <p><?= htmlspecialchars($post['content']) ?></p>
-                            <p><textarea name="content" rows="7" required><?= htmlspecialchars($post['content']) ?></textarea></p>
+                            <p><?= $post['content'] ?></p>
+                            <p><textarea name="content" rows="7" required><?= $post['content'] ?></textarea></p>
                         </div>
                     </div>
                 </div>
