@@ -243,3 +243,20 @@ form .no-border-bottom {
 .footer a:hover {
 	opacity: 1;
 }
+
+#error-container .row {
+    min-height: 60vh;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+#error-container h1,
+#error-container p,
+#error-container .btn {
+    margin: 1rem 0;
+}
+
+#error-container img {
+    max-width: 90%;
+}

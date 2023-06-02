@@ -5,7 +5,7 @@ require_once 'app/config/config.php';
 if (isset($_GET['controller']) === TRUE && empty($_GET['controller']) === FALSE) {
     $controller = $_GET['controller'];
 } else {
-    $controller = 'Home';
+    $controller = 'Erreur';
 }
 
 $controllerClassName = ucfirst($controller);
